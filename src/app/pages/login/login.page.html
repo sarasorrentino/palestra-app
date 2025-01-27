@@ -1,0 +1,41 @@
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" class="ion-align-content-center">
+        <ion-avatar class="ion-margin-top ion-margin-bottom" style="width: 100px; height: 100px;">
+          <img alt="Silhouette of a person's head" src="../../../assets/shapes.svg"/>
+        </ion-avatar>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-top">
+      <ion-title size="large">Login</ion-title>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-input
+        type="email"
+        fill="solid"
+        label="Email"
+        labelPlacement="floating"
+        helperText="Enter your email"
+        errorText="Invalid email"
+        ngModel
+        email
+      ></ion-input>
+      <ion-input
+        type="password"
+        fill="solid"
+        label="Password"
+        labelPlacement="floating"
+        helperText="Enter your password"
+        ngModel
+        password
+      ></ion-input>
+      <ion-button expand="block" class="ion-margin-top">Sign In</ion-button>
+      <ion-button expand="block" fill="clear">Forgot password?</ion-button>
+    </ion-card-content>
+  </ion-card>
+  <ion-button expand="block" fill="clear">Do not have an account yet? Register.</ion-button>
+</ion-content>
