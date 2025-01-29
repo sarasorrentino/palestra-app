@@ -1,6 +1,10 @@
 ion-header {
     position: absolute;
-    margin: none;
+    margin-top: none;
+    margin-left: none;
+    margin-right: none;
+    margin-bottom: 100px;
+    flex-direction: column;
 }
 
 ion-toolbar {
@@ -8,11 +12,28 @@ ion-toolbar {
     --opacity: 0;
 }
 
+ion-content {
+    position: relative;
+    height: 100%;
+}
+
 ion-card {
     --ion--background-color: transparent;
+    background: transparent;
     box-shadow: none !important;
     padding: 0;
     margin: 0;
+
+    position: absolute;
+    bottom: 100px; /* Distanza dal fondo */
+    left: 50%;
+    transform: translateX(-50%); /* Centra orizzontalmente */
+    width: 90%; /* Imposta la larghezza della card */
+    max-width: 400px; /* Imposta una larghezza massima */
+}
+
+ion-card-header {
+    margin-top: 50px;
 }
 
 ion-card-content {
@@ -21,26 +42,45 @@ ion-card-content {
 
 ion-card-title {
     margin-top: 30px;
-    font-size: xx-large;
+    font-size: 36px;
     text-align: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: var(--ion-color-primary);
 }
 
 ion-card-subtitle {
     padding-top: 15px;
-    color: var(--ion-color-medium);
-    font-size: medium;
+    color: #ffffff;
+    font-size: 14px;
     text-align: center;
-    font-weight: 200;
+    font-weight: 400;
 }
 
 ion-button {
     margin-bottom: 10px;
-    font-weight: 600;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 16px;
 }
-
 
 .signin-btns {
     margin-top: 25px;
     text-align: center;
     align-items: center;
+}
+
+.loginbtn, .signupbtn {
+    border-radius: 40px;
+}
+
+.signupbtn {
+    color: var(--ion-color-primary);
+}
+
+.background-image {
+    --background: none;
+    background-image: url('../../../assets/images/background-image-darker.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
 }

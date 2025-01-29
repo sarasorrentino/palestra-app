@@ -1,9 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { LoginPageForm } from './login.page.form';
 import { Router } from '@angular/router';
 
 import { StorageService } from '../../services/app-storage.service'
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +12,70 @@ import { StorageService } from '../../services/app-storage.service'
 })
 export class LoginPage implements OnInit {
 
-  form!: FormGroup;
+  constructor(private router: Router, private storageService: StorageService, private localStorage: LocalStorageService) { }
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private storageService: StorageService) { }
+  ngOnInit() { }
 
-  ngOnInit() {
-    this.form = new LoginPageForm(this.formBuilder).createForm();
+  user = {
+    email: "",
+    password: ""
+  };
+
+  errorMessage: string = "";
+
+  async verifyCredentials() {
+    const user = await this.localStorage.getUser(this.user.email);
+    if (user && user.password === this.user.password) {
+      console.log("Login riuscito!");
+      this.router.navigate(['/home']);
+    } 
+    else {
+      this.emailError = '';
+      this.passwordError = '';
+      this.passwordError = "Incorrect Email or password";
+    }
+  }
+
+  emailError: string = "";
+  passwordError: string = "";
+  emailValid: boolean = false;
+  passwordValid: boolean = false;
+
+  validateEmail() {
+    this.emailError = '';
+    this.emailValid = false;
+
+    if (!this.user.email) {
+      this.emailError = 'Email is required';
+    } else if (!this.isValidEmail(this.user.email)) {
+      this.emailError = 'Invalid email';
+    }
+    else {
+      this.emailValid = true;
+    }
+    //console.log('Email: ' + this.emailValid);
+    //console.log('Password: ' + this.passwordValid);
+    //console.log(!this.emailValid && !this.passwordValid);
+  }
+
+  validatePassword() {
+    this.passwordError = '';
+    this.passwordValid = false;
+
+    if (!this.user.password) {
+      this.passwordError = 'Password is required';
+    } 
+    else {
+      this.passwordValid = true;
+    }
+    //console.log('Email: ' + this.emailValid);
+    //console.log('Password: ' + this.passwordValid);
+    //console.log(!this.emailValid && !this.passwordValid);
+  }
+
+  isValidEmail(email: string): boolean {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(email);
   }
 
   login() {
@@ -27,11 +84,6 @@ export class LoginPage implements OnInit {
 
   register(){
     this.router.navigate(['register']);
-  }
-  
-  async saveCredentials() {
-    await this.storageService.set('name', 'Sara');
-    this.login();
   }
 
 }

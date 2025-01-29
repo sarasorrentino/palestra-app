@@ -6,6 +6,10 @@ const routes: Routes = [
     path: '', redirectTo: 'welcome', pathMatch: 'full'
   },
   {
+    path: 'welcome',
+    loadChildren: () => import('./pages/welcome/welcome.module').then( m => m.WelcomePageModule)
+  },
+  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
@@ -14,16 +18,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'register-data',
-    loadChildren: () => import('./pages/register-data/register-data.module').then( m => m.RegisterDataPageModule)
-  },
-  {
     path: 'home',
     loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule)
-  },
-  {
-    path: 'welcome',
-    loadChildren: () => import('./pages/welcome/welcome.module').then( m => m.WelcomePageModule)
   },
   {
     path: 'profile-data',

@@ -1,20 +1,16 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
+<ion-content class="background-image">
   <ion-card>
-    <ion-img src="../../../assets/images/login_header.png"></ion-img>
     <ion-card-header>
-      <ion-card-title>Welcome</ion-card-title>
-      <ion-card-subtitle class="transform-initial">Track your gym progress and plan your activities with precision and ease.</ion-card-subtitle>
+      <div>
+        <ion-card-title>Gym App</ion-card-title>
+        <ion-card-subtitle class="transform-initial">Track your gym progress and plan your activities with precision and ease.</ion-card-subtitle>
+      </div>
     </ion-card-header>
 
     <ion-card-content>
       <div class="sigin-btns">
-        <ion-button size="block" fill="solid" class="loginbtn" (click)="login()">Login</ion-button>
-        <ion-button size="block" fill="outline" (click)="register()">Sign Up</ion-button>
+        <ion-button size="block" fill="solid" class="loginbtn" (click)="login()">LOGIN</ion-button>
+        <ion-button size="block" fill="solid" class="signupbtn" color="light" (click)="register()">SIGN UP</ion-button>
       </div>
     </ion-card-content>
   </ion-card>
