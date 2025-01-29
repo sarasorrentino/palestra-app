@@ -1,3 +1,52 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-img src="../../../assets/images/login_header.png"></ion-img>
+    <ion-card-header>
+      <ion-card-title>Login</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form>
+        <ion-item>
+          <ion-icon name="mail-outline"></ion-icon>
+          <ion-input 
+            type="text"
+            name="email"
+            label="Email"
+            labelPlacement="floating"
+            ngmodel
+            email
+            required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <ion-input
+            type="password"
+            fill="solid"
+            label="Password"
+            labelPlacement="floating"
+            ngModel
+            required
+          ></ion-input>
+        </ion-item>
+        <ion-button class="clear_button" size="block" fill="clear">Forgot password?</ion-button>
+      </form>
+
+      <div class="sigin-btns">
+        <ion-button size="block" fill="solid" class="loginbtn" (click)="saveCredentials()">Login</ion-button>
+        <ion-button class="clear_button" size="block" fill="clear" (click)="register()">Not registered yet? Sign up.</ion-button>
+      </div>
+      
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<!--
 <ion-content>
   <ion-grid>
     <ion-row class="ion-justify-content-center">
@@ -12,30 +61,36 @@
     </ion-row>
   </ion-grid>
 
-  <ion-card>
-    <ion-card-content>
-      <ion-input
-        type="email"
-        fill="solid"
-        label="Email"
-        labelPlacement="floating"
-        helperText="Enter your email"
-        errorText="Invalid email"
-        ngModel
-        email
-      ></ion-input>
-      <ion-input
-        type="password"
-        fill="solid"
-        label="Password"
-        labelPlacement="floating"
-        helperText="Enter your password"
-        ngModel
-        password
-      ></ion-input>
-      <ion-button expand="block" class="ion-margin-top">Sign In</ion-button>
-      <ion-button expand="block" fill="clear">Forgot password?</ion-button>
-    </ion-card-content>
-  </ion-card>
-  <ion-button expand="block" fill="clear">Do not have an account yet? Register.</ion-button>
+  <form [formGroup]="form">
+    <ion-card>
+      <ion-card-content>
+        <ion-input
+          formControlName="email"
+          type="email"
+          fill="solid"
+          label="Email"
+          labelPlacement="floating"
+          ngModel
+          email
+        ></ion-input>
+        <app-error-message [field]="form.get('email')" error="required" message="Email is mandatory"></app-error-message>
+        <app-error-message [field]="form.get('email')" error="email" message="Email is invalid"></app-error-message>
+        <ion-input
+          formControlName="password"
+          type="password"
+          fill="solid"
+          label="Password"
+          labelPlacement="floating"
+          ngModel
+          password
+        ></ion-input>
+        <app-error-message [field]="form.get('password')" error="required" message="Password is mandatory"></app-error-message>
+
+        <ion-button expand="block" class="ion-margin-top" [disabled]="!form.valid" (click)="saveCredentials()" (click)="login()">Sign In</ion-button>
+        <ion-button expand="block" fill="clear" class="transform-initial">Forgot password?</ion-button>
+      </ion-card-content>
+    </ion-card>
+    <ion-button expand="block" fill="clear" class="transform-initial" (click)="register()">Do not have an account yet? Register.</ion-button>
+  </form>
 </ion-content>
+-->

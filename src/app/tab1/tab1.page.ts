@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { StorageService } from '../services/app-storage.service'
 
 @Component({
   selector: 'app-tab1',
@@ -8,6 +9,12 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  @Input() name: any = '';
+
+  constructor(private storageService: StorageService) {}
+
+  async ngOnInit() {
+    this.name = await this.storageService.get('name');
+  }
 
 }

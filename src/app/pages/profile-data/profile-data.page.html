@@ -1,0 +1,80 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-img src="../../../assets/images/login_header.png"></ion-img>
+    <ion-card-header>
+      <ion-card-title>Tell us more about yourself</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form>
+        <ion-item>
+          <ion-input 
+            type="text"
+            name="name"
+            label="Name"
+            labelPlacement="floating"
+            placeholder="Enter your name"
+            ngmodel
+            required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            type="text"
+            name="name"
+            label="Surname"
+            labelPlacement="floating"
+            placeholder="Enter your surname"
+            ngModel
+            required
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Birth date</ion-label>
+          <ion-datetime-button datetime="datetime" preferWheel="true"></ion-datetime-button>
+
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime id="datetime" presentation="date"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Weight</ion-label>
+          <ion-picker>
+            <ion-picker-column [value]="1">
+              <ion-picker-column-option *ngFor="let num of numbers" [value]="num">{{ num }}</ion-picker-column-option>
+              <div slot="suffix">kg</div>
+            </ion-picker-column>
+          </ion-picker>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label>Goals</ion-label>
+          <ion-list>
+            <ion-item>
+              <ion-select aria-label="Goals" placeholder="Select all your goals" [multiple]="true">
+                <ion-select-option value="apples">Mass gain</ion-select-option>
+                <ion-select-option value="oranges">Toning</ion-select-option>
+                <ion-select-option value="bananas">Weight loss</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+        </ion-item>
+
+      </form>
+
+      <div class="sigin-btns">
+        <ion-button size="block" fill="solid" class="loginbtn" (click)="register()">Next</ion-button>
+        <ion-button class="clear_button" size="block" fill="clear" (click)="back()">Back</ion-button>
+      </div>
+      
+    </ion-card-content>
+  </ion-card>
+</ion-content>

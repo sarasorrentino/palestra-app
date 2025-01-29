@@ -1,0 +1,106 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-img src="../../../assets/images/login_header.png"></ion-img>
+    <ion-card-header>
+      <ion-card-title>Tell us more about yourself</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form>
+        <ion-item>
+          <ion-input 
+            type="text"
+            name="name"
+            label="Name"
+            labelPlacement="floating"
+            placeholder="Enter your name"
+            ngmodel
+            required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            type="text"
+            name="name"
+            label="Surname"
+            labelPlacement="floating"
+            placeholder="Enter your surname"
+            ngModel
+            required
+          ></ion-input>
+        </ion-item>
+        <ion-datetime display-format="MM/DD/YYYY" picker-format="YYYY DD MM" type="date" formControlName="dateExpired"
+          type="text">
+        </ion-datetime>
+        <ion-item>
+          <ion-input 
+            label="Weight" 
+            type="number" 
+            labelPlacement="floating"
+            placeholder="Enter your weight in kg"
+            min="0"
+          ></ion-input>
+        </ion-item>
+      </form>
+
+      <div class="sigin-btns">
+        <ion-button size="block" fill="solid" class="loginbtn" (click)="register()">Next</ion-button>
+        <ion-button class="clear_button" size="block" fill="clear" (click)="back()">Back</ion-button>
+      </div>
+      
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<!---
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button title=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-margin-bottom">
+    <ion-row class="ion-margin-top">
+      <ion-title size="large">Tell us about yourself</ion-title>
+    </ion-row>
+  </ion-grid>
+  
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-input label="Name"  aria-label="Name" labelPlacement="floating" placeholder="Enter your name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Surname"  aria-label="Surname" labelPlacement="floating" placeholder="Enter your surname"></ion-input>
+      </ion-item>
+      <ion-datetime min="1925-01-01T00:00:00"></ion-datetime>
+      <ion-input
+        type="text"
+        fill="solid"
+        label="Surname"
+        labelPlacement="floating"
+        ngModel
+      ></ion-input>
+      <ion-list>
+        <ion-item>
+          <ion-select label="Select your goals" aria-label="Select your goals" label-placement="floating" placeholder="Your goals" [multiple]="true">
+            <ion-select-option value="injury">Injury recovery</ion-select-option>
+            <ion-select-option value="gain">Muscle gain</ion-select-option>
+            <ion-select-option value="athlete">Professional athlete</ion-select-option>
+            <ion-select-option value="toning">Toning</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="block" class="ion-margin-top">Register</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+-->
