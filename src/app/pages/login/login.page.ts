@@ -24,7 +24,7 @@ export class LoginPage implements OnInit {
   errorMessage: string = "";
 
   async verifyCredentials() {
-    const user = await this.localStorage.getUser(this.user.email);
+    const user = await this.localStorage.getUser(this.user);
     if (user && user.password === this.user.password) {
       console.log("Login riuscito!");
       this.router.navigate(['/home']);

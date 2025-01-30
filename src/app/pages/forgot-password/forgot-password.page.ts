@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class ForgotPasswordPage implements OnInit {
 
-  constructor(private router: Router, private localStorage: LocalStorageService) { }
+  constructor(private router: Router, private localStorage: LocalStorageService, private alertController: AlertController) { }
 
   ngOnInit() {
   }
@@ -48,13 +49,21 @@ export class ForgotPasswordPage implements OnInit {
   errorMessage: string = "";
 
   async verifyCredentials() {
-    const user = await this.localStorage.getUser(this.user.email);
+    const user = await this.localStorage.getUser(this.user);
     if (user) {
+      console.log("Utente trovato!");
+      const alert = await this.alertController.create({
+        header: 'Email sent',
+        message: 'An email with the instructions for passwrd recovery have been sent to your address.',
+        buttons: ['Close'],
+      });
+  
+      await alert.present();
       this.send();
     } 
     else {
       this.emailError = '';
-      this.emailError = "Email not found";
+      this.emailError = "Email not found"
     }
   }
 
