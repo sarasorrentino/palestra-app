@@ -8,13 +8,14 @@ import { ProfileDataPageRoutingModule } from './profile-data-routing.module';
 
 import { ProfileDataPage } from './profile-data.page';
 
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    ProfileDataPageRoutingModule
+    ProfileDataPageRoutingModule,
   ],
   declarations: [ProfileDataPage]
 })

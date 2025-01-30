@@ -32,6 +32,7 @@
           name="password"
           label="Password"
           labelPlacement="floating"
+          [clearOnEdit]="true"
           [(ngModel)] = "user.password"
           (ngModelChange)="validatePassword()"
           required
@@ -42,8 +43,7 @@
           <p>{{ passwordError }}</p>
         </ion-text>
       </div>
-      <ion-button class="clear_button" size="block" fill="clear">Forgot password?</ion-button>
-
+      <ion-button class="clear_button" size="block" fill="clear" (click)="forgotPassword()">Forgot password?</ion-button>
       <div class="sigin-btns">
         <ion-button size="block" fill="solid" class="loginbtn" [disabled]="!emailValid || !passwordValid" (click)="verifyCredentials()">Login</ion-button>
         <ion-button class="clear_button" size="block" fill="clear" (click)="register()">Not registered yet? Sign up.</ion-button>

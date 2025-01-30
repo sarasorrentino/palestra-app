@@ -24,6 +24,10 @@ const routes: Routes = [
   {
     path: 'profile-data',
     loadChildren: () => import('./pages/profile-data/profile-data.module').then( m => m.ProfileDataPageModule)
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./pages/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   }
 ];
 @NgModule({

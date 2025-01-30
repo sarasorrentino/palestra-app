@@ -25,15 +25,17 @@ export class RegisterPage implements OnInit {
   emailValid: boolean = false;
   passwordValid: boolean = false;
 
-  async saveCredentials() {
-    const existingUser = await this.localStorage.getUser(this.user.email);
+  async chackCredentials() {
+    const existingUser = await this.localStorage.getUser(this.user);
     if (existingUser) {
       this.passwordError = "Email already in use";
       return;
     }
 
-    const newUser = { username: this.user.email, password: this.user.password };
-    this.localStorage.setUser(newUser);
+    //const newUser = { username: this.user.email, password: this.user.password };
+    //this.localStorage.setUser(newUser);
+    this.localStorage.user.email = this.user.email;
+    this.localStorage.user.password = this.user.password;
     this.router.navigate(['profile-data']);
   }
 

@@ -5,25 +5,30 @@ import { Injectable } from '@angular/core';
 })
 export class LocalStorageService {
 
-  constructor() { }
+  constructor() {}
 
-  //users: any[] = [];
-  
-  /*
-  setUser(user: any) {
-    this.users.push(user);
-    localStorage.setItem('users', this.users);
-  }*/
+  public user = {
+    email: "",
+    password: "",
+    name: "",
+    surname: "",
+    weight: "",
+    birthDate: "",
+    goal: ""
+  };
 
-  setUser(user: any) {
+  users: any[] = [];
+
+  setUser() {
     let users = JSON.parse(localStorage.getItem('users') || '[]');
-    users.push(user);
+    users.push(this.user);
     localStorage.setItem('users', JSON.stringify(users));
   }
 
-  getUser(username: string): any | null {
+  getUser(checkUser: any): any | null {
     const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find((x: any) => x.username === username);
+    const user = users.find((x: any) => x.email === checkUser.email);
     return user || null;
   }
+  
 }

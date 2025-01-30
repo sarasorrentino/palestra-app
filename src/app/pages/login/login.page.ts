@@ -58,13 +58,20 @@ export class LoginPage implements OnInit {
     //console.log(!this.emailValid && !this.passwordValid);
   }
 
+  isValidEmail(email: string): boolean {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(email);
+  }
+  
   validatePassword() {
     this.passwordError = '';
     this.passwordValid = false;
 
     if (!this.user.password) {
-      this.passwordError = 'Password is required';
-    } 
+      this.passwordError = 'Password is required.';
+    } else if (this.user.password.length < 6) {
+      this.passwordError = 'Password must be at least 6 characters long';
+    }
     else {
       this.passwordValid = true;
     }
@@ -73,17 +80,16 @@ export class LoginPage implements OnInit {
     //console.log(!this.emailValid && !this.passwordValid);
   }
 
-  isValidEmail(email: string): boolean {
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    return emailPattern.test(email);
-  }
-
   login() {
     this.router.navigate(['home']);
   }
 
   register(){
     this.router.navigate(['register']);
+  }
+
+  forgotPassword(){
+    this.router.navigate(['forgot-password']);
   }
 
 }
