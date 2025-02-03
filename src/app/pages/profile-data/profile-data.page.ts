@@ -61,7 +61,7 @@ export class ProfileDataPage implements OnInit {
     this.localStorage.user.goal = this.user.goal;
 
     this.localStorage.setUser();
-    this.router.navigate(['home']);
+    this.router.navigate(['tabs/home']);
   }
 
   back () {

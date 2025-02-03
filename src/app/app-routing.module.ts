@@ -18,18 +18,19 @@ const routes: Routes = [
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'home',
-    loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule)
-  },
-  {
     path: 'profile-data',
     loadChildren: () => import('./pages/profile-data/profile-data.module').then( m => m.ProfileDataPageModule)
   },
   {
     path: 'forgot-password',
     loadChildren: () => import('./pages/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
-  }
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
 ];
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })

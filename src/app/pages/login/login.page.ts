@@ -27,7 +27,8 @@ export class LoginPage implements OnInit {
     const user = await this.localStorage.getUser(this.user);
     if (user && user.password === this.user.password) {
       console.log("Login riuscito!");
-      this.router.navigate(['/home']);
+      localStorage.setItem('currentUser', user.name);
+      this.router.navigate(['tabs/home']);
     } 
     else {
       this.emailError = '';
@@ -78,10 +79,6 @@ export class LoginPage implements OnInit {
     //console.log('Email: ' + this.emailValid);
     //console.log('Password: ' + this.passwordValid);
     //console.log(!this.emailValid && !this.passwordValid);
-  }
-
-  login() {
-    this.router.navigate(['home']);
   }
 
   register(){
