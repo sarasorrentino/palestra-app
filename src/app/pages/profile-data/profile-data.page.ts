@@ -29,6 +29,7 @@ export class ProfileDataPage implements OnInit {
     password: "",
     name: "",
     surname: "",
+    gender: "",
     weight: "",
     birthDate: "",
     goal: ""
@@ -54,6 +55,7 @@ export class ProfileDataPage implements OnInit {
   register() {
     this.localStorage.user.name = this.user.name;
     this.localStorage.user.surname = this.user.surname;
+    this.localStorage.user.gender = this.user.gender;
     this.localStorage.user.birthDate = this.user.birthDate;
     this.localStorage.user.weight = this.user.weight;
     this.localStorage.user.goal = this.user.goal;
@@ -65,12 +67,6 @@ export class ProfileDataPage implements OnInit {
   back () {
     this.router.navigate(['register']);
   }
-
-  customAlertOptions = {
-    header: 'Select your goals',
-    subHeader: 'Min. 1',
-    translucent: true,
-  };
   
   updateBirthDate(event: any) {
     this.user.birthDate = event.detail.value;
@@ -82,6 +78,7 @@ export class ProfileDataPage implements OnInit {
     return !!(
       this.user.name &&
       this.user.surname &&
+      this.user.gender &&
       this.user.birthDate &&
       this.user.weight &&
       this.user.goal

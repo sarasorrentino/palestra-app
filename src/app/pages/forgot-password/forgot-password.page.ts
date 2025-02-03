@@ -74,8 +74,8 @@ export class ForgotPasswordPage implements OnInit {
     console.log("Email sent");
   }
 
-
   back(){
     this.router.navigate(['login']);
   }
+  
 }

@@ -46,3 +46,57 @@
 .transform-initial {
     text-transform: initial;
 }
+
+.full-height {
+    height: 100%;
+}
+
+.background-image {
+    --background: none;
+    background-image: url('/../../assets/images/background-image-darker.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+ion-button {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 18px;
+    padding-top: 10px;
+}
+
+// Links ----------------------------------------------------
+.right-link {
+    display: block;
+    text-align: right;
+    font-size: 14px;
+    text-decoration: underline;
+    margin-bottom: 5%;
+}
+
+.centered-link {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    text-decoration: underline;
+    margin-top: 10%;
+}
+// ----------------------------------------------------------
+
+// Input ----------------------------------------------------
+ion-item {
+    border-radius: 5px;
+    opacity: 80%;
+    margin-bottom: 5px;
+}
+
+ion-icon {
+    margin-right: 10px;
+}
+
+.errorMessage {
+    padding-left: 15px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}

@@ -1,17 +1,25 @@
-<ion-content class="background-image">
-  <ion-card>
-    <ion-card-header>
-      <div>
-        <ion-card-title>Gym App</ion-card-title>
-        <ion-card-subtitle class="transform-initial">Track your gym progress and plan your activities with precision and ease.</ion-card-subtitle>
-      </div>
-    </ion-card-header>
+<ion-content class="background-image full-height">
+  <ion-grid class="full-height">
+    <ion-row class="ion-justify-content-center ion-align-items-center full-height">
+      <ion-col size="12" size-md="6" size-lg="4">
+        <ion-card>
 
-    <ion-card-content>
-      <div class="sigin-btns">
-        <ion-button size="block" fill="solid" class="loginbtn" (click)="login()">LOGIN</ion-button>
-        <ion-button size="block" fill="solid" class="signupbtn" color="light" (click)="register()">SIGN UP</ion-button>
-      </div>
-    </ion-card-content>
-  </ion-card>
+          <ion-card-header>
+            <div>
+              <ion-card-title>Gym App</ion-card-title>
+              <ion-card-subtitle class="transform-initial">
+                Track your gym progress and plan your activities with precision and ease.
+              </ion-card-subtitle>
+            </div>
+          </ion-card-header>
+
+          <ion-card-content>
+              <ion-button size="block" fill="solid" (click)="login()">Login</ion-button>
+              <ion-button size="block" fill="solid" color="light" (click)="register()">Sign Up</ion-button>
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

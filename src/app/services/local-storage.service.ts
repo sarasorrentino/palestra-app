@@ -12,6 +12,7 @@ export class LocalStorageService {
     password: "",
     name: "",
     surname: "",
+    gender: "",
     weight: "",
     birthDate: "",
     goal: ""

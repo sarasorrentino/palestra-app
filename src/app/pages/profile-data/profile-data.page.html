@@ -1,78 +1,106 @@
-<ion-header>
-  <ion-title>About You</ion-title>
-</ion-header>
+<ion-content class="background-image full-height">
+  <ion-grid class="full-height">
+    <ion-row class="ion-justify-content-center ion-align-items-center full-height">
+      <ion-col size="12" size-md="6" size-lg="4">
+        <ion-card>
 
-<ion-content class="background-image">
-  <ion-card>
-    <ion-card-content>
-      <ion-item>
-        <ion-input 
-          type="text"
-          name="name"
-          label="Name"
-          labelPlacement="fixed"
-          placeholder="Enter your name"
-          [(ngModel)] = "user.name"
-          required
-        ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input
-          type="text"
-          name="surname"
-          label="Surname"
-          labelPlacement="fixed"
-          placeholder="Enter your surname"
-          [(ngModel)] = "user.surname"
-          required
-        ></ion-input>
-      </ion-item>
+          <ion-card-header>
+            <ion-card-title>About You</ion-card-title>
+            <ion-card-subtitle class="transform-initial">
+              Tell us more about yourself and your goals. You can always edit them later.
+            </ion-card-subtitle>
+          </ion-card-header>
 
-      <ion-item>
-        <ion-label>Birth date</ion-label>
-        <ion-datetime-button datetime="datetime" preferWheel="true"></ion-datetime-button>
-        <ion-modal [keepContentsMounted]="true">
-          <ng-template>
-            <ion-datetime id="datetime" presentation="date" (ionChange)="updateBirthDate($event)"></ion-datetime>
-          </ng-template>
-        </ion-modal>
-      </ion-item>
+          <ion-card-content>
+            <div>
+              <ion-item>
+                <ion-input 
+                  type="text"
+                  name="name"
+                  label="Name"
+                  labelPlacement="fixed"
+                  placeholder="Enter your name"
+                  [(ngModel)] = "user.name"
+                  required
+                ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input
+                  type="text"
+                  name="surname"
+                  label="Surname"
+                  labelPlacement="fixed"
+                  placeholder="Enter your surname"
+                  [(ngModel)] = "user.surname"
+                  required
+                ></ion-input>
+              </ion-item>
+              
+              <ion-item>
+                <ion-label>Gender</ion-label>
+                <ion-radio-group [(ngModel)]="user.gender" name="gender" required>
+                  <ion-list>
+                    <ion-item>
+                      <ion-radio value="Male" labelPlacement="fixed">Male</ion-radio>
+                    </ion-item>
+                    <ion-item>
+                      <ion-radio value="Female" labelPlacement="fixed">Female</ion-radio>
+                    </ion-item>
+                  </ion-list>
+                </ion-radio-group>
+              </ion-item>
 
-      <ion-item>
-        <ion-label>Weight</ion-label>
-          <ion-input
-            class="rtl-input"
-            type="number"
-            name="weight"
-            [(ngModel)]="user.weight"
-            required
-            text-right
-          ></ion-input>
-          <ion-label style="padding-left: 10px; padding-right: 5px;">kg</ion-label>
-      </ion-item>
-      
-      <ion-item>
-        <ion-label>Goal</ion-label>
-        <ion-radio-group [(ngModel)]="user.goal" name="goal" required>
-          <ion-list>
-            <ion-item>
-              <ion-radio value="Mass gain" labelPlacement="fixed">Mass gain</ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-radio value="Tone" labelPlacement="fixed">Tone</ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-radio value="Weight loss" labelPlacement="fixed">Weight loss</ion-radio>
-            </ion-item>
-          </ion-list>
-        </ion-radio-group>
-      </ion-item>
+              <ion-item>
+                <ion-label>Birth date</ion-label>
+                <ion-datetime-button datetime="datetime" preferWheel="true"></ion-datetime-button>
+                <ion-modal [keepContentsMounted]="true">
+                  <ng-template>
+                    <ion-datetime id="datetime" presentation="date" (ionChange)="updateBirthDate($event)"></ion-datetime>
+                  </ng-template>
+                </ion-modal>
+              </ion-item>
+  
+              <ion-item>
+                <ion-label>Weight</ion-label>
+                  <ion-input
+                    class="rtl-input"
+                    type="number"
+                    name="weight"
+                    placeholder="Enter your weight"
+                    [(ngModel)]="user.weight"
+                    required
+                    text-right
+                  ></ion-input>
+                  <ion-label style="padding-left: 10px; padding-right: 5px;">kg</ion-label>
+              </ion-item>
+              
+              <ion-item>
+                <ion-label>Goal</ion-label>
+                <ion-radio-group [(ngModel)]="user.goal" name="goal" required>
+                  <ion-list>
+                    <ion-item>
+                      <ion-radio value="Mass gain" labelPlacement="fixed">Mass gain</ion-radio>
+                    </ion-item>
+                    <ion-item>
+                      <ion-radio value="Tone" labelPlacement="fixed">Tone</ion-radio>
+                    </ion-item>
+                    <ion-item>
+                      <ion-radio value="Weight loss" labelPlacement="fixed">Weight loss</ion-radio>
+                    </ion-item>
+                  </ion-list>
+                </ion-radio-group>
+              </ion-item>
+            </div>
 
-      <div class="spaceBtns">
-        <ion-button size="block" fill="solid" class="loginbtn" [disabled]="!isFormValid()" (click)="register()">SIGN UP</ion-button>
-        <ion-button size="block" fill="solid" color="light" (click)="back()">Back</ion-button>
-      </div>
-      
-    </ion-card-content>
-  </ion-card>
+            <div>
+              <ion-button size="block" fill="solid" class="loginbtn" [disabled]="!isFormValid()" (click)="register()">Sign Up</ion-button>
+              <ion-button size="block" fill="solid" color="light" (click)="back()">Back</ion-button>
+            </div>
+            
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
