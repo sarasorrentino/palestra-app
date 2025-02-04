@@ -7,7 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
-import { HeaderComponent } from 'src/app/components/header/header.component';
+import { NameHeaderComponent } from 'src/app/components/name-header/name-header.component';
+import { IconButtonComponent } from 'src/app/components/icon-button/icon-button.component';
 
 @NgModule({
   imports: [
@@ -15,8 +16,15 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    HeaderComponent
+    NameHeaderComponent,
+    IconButtonComponent
   ],
   declarations: [HomePage]
 })
-export class HomePageModule {}
+export class HomePageModule {
+
+  print(){
+    console.log("Plans");
+  }
+
+}

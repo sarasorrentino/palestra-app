@@ -19,6 +19,7 @@ export class LocalStorageService {
   };
 
   users: any[] = [];
+  favorites: any[] = [];
 
   setUser() {
     let users = JSON.parse(localStorage.getItem('users') || '[]');
@@ -31,5 +32,5 @@ export class LocalStorageService {
     const user = users.find((x: any) => x.email === checkUser.email);
     return user || null;
   }
-  
+
 }

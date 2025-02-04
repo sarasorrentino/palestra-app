@@ -1,0 +1,25 @@
+ion-icon {
+    padding: 0;
+    margin: 0;
+}
+
+ion-card {
+    --background: #323232;
+    --color: var(--ion-color-light);
+}
+
+ion-segment {
+    --color: var(--ion-color-primary);
+}
+
+ion-card-title {
+    --color: var(--ion-color-primary);
+}
+
+ion-card-subtitle {
+    --color: var(--ion-color-primary);
+}
+
+ion-list {
+    --background: none;
+}

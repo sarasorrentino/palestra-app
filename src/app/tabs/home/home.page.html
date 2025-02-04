@@ -1,5 +1,21 @@
-<app-header></app-header>
+<app-name-header></app-name-header>
 
-<ion-content [fullscreen]="true">
-  
+<ion-content [fullscreen]="true" class="ion-padding">
+
+    <ion-grid>
+        <ion-row></ion-row>
+        <ion-row>
+            <ion-col>
+                <app-icon-button icon="add" label="New Workout Plan" [action]="createProgram"></app-icon-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <app-icon-button fill="outline" icon="barbell-outline" label="Your Plans" [action]="navToPlans"></app-icon-button>
+            </ion-col>
+            <ion-col>
+                <app-icon-button fill="outline" icon="Heart" label="Exercises" [action]="navToManual"></app-icon-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

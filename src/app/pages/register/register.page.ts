@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { StorageService } from 'src/app/services/app-storage.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
@@ -11,7 +10,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class RegisterPage implements OnInit {
 
-  constructor(private router: Router, private storageService: StorageService, private localStorage: LocalStorageService) { }
+  constructor(private router: Router, private localStorage: LocalStorageService) { }
 
   ngOnInit() { }
 

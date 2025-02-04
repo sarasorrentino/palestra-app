@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+
+    <ion-title> {{ title }} </ion-title>
+
+    <ion-buttons id="settings-button" [collapse]="true" slot="end">
+      <ion-icon name="cog" size="large"></ion-icon>
+    </ion-buttons>
+    <ion-popover trigger="settings-button" [dismissOnSelect]="true" [backdropDismiss]="true">
+      <ng-template>
+        <ion-content class="ion-padding">
+          <div (click)="logout()">
+            <ion-icon name="log-out-outline" size="large"></ion-icon>
+            <ion-label>Logout</ion-label>
+          </div>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+
+  </ion-toolbar>
+</ion-header>

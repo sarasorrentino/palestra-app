@@ -32,9 +32,9 @@
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
-@import "@ionic/angular/css/palettes/dark.always.css";
+/*@import "@ionic/angular/css/palettes/dark.always.css";
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-/*@import "@ionic/angular/css/palettes/dark.system.css"; */
+@import "@ionic/angular/css/palettes/dark.system.css";
 
 .flex-center {
     display: flex;
@@ -89,6 +89,7 @@ ion-item {
     border-radius: 5px;
     opacity: 80%;
     margin-bottom: 5px;
+    background-color: white;
 }
 
 ion-icon {

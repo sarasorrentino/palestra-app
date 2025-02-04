@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { StorageService } from '../../services/app-storage.service'
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
@@ -12,7 +10,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private router: Router, private storageService: StorageService, private localStorage: LocalStorageService) { }
+  constructor(private router: Router, private localStorage: LocalStorageService) { }
 
   ngOnInit() { }
 

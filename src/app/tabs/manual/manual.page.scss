@@ -1,0 +1,30 @@
+ion-card {
+    --background: #323232;
+    --color: var(--ion-color-light);
+}
+
+ion-segment {
+    --color: var(--ion-color-primary);
+}
+
+ion-card-title {
+    --color: var(--ion-color-primary);
+}
+
+ion-card-subtitle {
+    --color: var(--ion-color-primary);
+}
+
+ion-icon {
+    margin: 0;
+    padding: 0;
+}
+
+.favorite-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: red;
+    cursor: pointer;
+}

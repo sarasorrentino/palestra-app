@@ -1,17 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { OverlayEventDetail } from '@ionic/core/components';
-import {
-  IonButton,
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonInput,
-  IonItem,
-  IonModal,
-  IonTitle,
-  IonToolbar,
-} from '@ionic/angular/standalone';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
@@ -61,6 +49,7 @@ export class ProfileDataPage implements OnInit {
     this.localStorage.user.goal = this.user.goal;
 
     this.localStorage.setUser();
+    localStorage.setItem('currentUser', this.user.name);
     this.router.navigate(['tabs/home']);
   }
 

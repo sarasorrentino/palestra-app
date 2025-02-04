@@ -1,0 +1,10 @@
+ion-button {
+    --background: #323232;
+    --border-width: 3px;
+    --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+}
+
+.solid-button {
+    --background: var(--ion-color-primary); /* Cambia colore di sfondo */
+    --color: #1e1e1e; /* Cambia colore del testo */
+}
