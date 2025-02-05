@@ -1,0 +1,43 @@
+<app-plan-header title="New Plan"></app-plan-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <ion-item>
+    <ion-input 
+      type="text"
+      name="title"
+      label="Title"
+      labelPlacement="fixed"
+      placeholder="Enter plan title"
+      [(ngModel)] = "plan.title"
+      required
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input
+      type="text"
+      name="description"
+      label="Description"
+      labelPlacement="fixed"
+      placeholder="Enter plan description"
+      [(ngModel)] = "plan.description"
+      required
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input
+      type="number"
+      name="days"
+      label="N° Days"
+      labelPlacement="fixed"
+      placeholder="Enter plan days"
+      [(ngModel)] = "plan.n_days"
+      required
+    ></ion-input>
+  </ion-item>
+
+  <div>
+    <ion-button size="block" fill="solid" class="loginbtn" [disabled]="!isFormValid()" (click)="savePlan()">Save</ion-button>
+    <ion-button size="block" fill="solid" color="light" (click)="back()">Cancel</ion-button>
+  </div>
+</ion-content>

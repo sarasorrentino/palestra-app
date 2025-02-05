@@ -2,11 +2,43 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
     <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-        <ion-fab-button>
+        <ion-fab-button (click)="newPlan()">
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
 
+    <ion-list lines="none">
+      <ion-item-sliding *ngFor="let plan of plans" #slidingItem>
+        <ion-item>
+          <ion-card>
+            <ion-icon 
+              *ngIf="plan.isCurrent" 
+              name="bookmark" 
+              class="current-icon"
+            ></ion-icon>
+            <ion-card-header>
+              <ion-card-title> {{ plan.title }} </ion-card-title>
+              <ion-card-subtitle> {{ plan.n_days }} DAYS </ion-card-subtitle>
+            </ion-card-header>
+          
+            <ion-card-content>
+              {{ plan.description }}
+            </ion-card-content>
+          </ion-card>
+        </ion-item>
+    
+        <ion-item-options side="end">
+          <ion-item-option (click)="toggleCurrent(plan, slidingItem)">
+            <ion-icon slot="icon-only" name="bookmark"></ion-icon>
+          </ion-item-option>
+          <ion-item-option *ngIf="!plan.isCurrent" color="danger" (click)="deletePlan(plan, slidingItem)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <!--
     <ion-list>
         <ion-card>
             <ion-card-header>
@@ -39,5 +71,5 @@
             </ion-card-content>
         </ion-card>
     </ion-list>
-
+  -->
 </ion-content>

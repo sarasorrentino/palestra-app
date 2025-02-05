@@ -1,27 +1,25 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
-  selector: 'app-profile-data',
-  templateUrl: './profile-data.page.html',
-  styleUrls: ['./profile-data.page.scss'],
-  standalone: false,
+  selector: 'app-profile-input',
+  templateUrl: './profile-input.component.html',
+  styleUrls: ['./profile-input.component.scss'],
+  standalone: true,
+  imports: [
+    IonicModule, 
+    ReactiveFormsModule,
+    FormsModule
+  ]
 })
-export class ProfileDataPage implements OnInit {
+export class ProfileInputComponent  implements OnInit {
 
   constructor(private router: Router, private localStorage: LocalStorageService) { }
 
-  user = {
-    email: "",
-    password: "",
-    name: "",
-    surname: "",
-    gender: "",
-    weight: "",
-    birthDate: "",
-    goal: ""
-  };
+  user = this.localStorage.getCurrentUser();
 
   start = 30;
   end = 250;
@@ -49,7 +47,7 @@ export class ProfileDataPage implements OnInit {
     this.localStorage.user.goal = this.user.goal;
 
     this.localStorage.setUser();
-    localStorage.setItem('currentUsername', this.user.name);
+    localStorage.setItem('currentUser', this.user.name);
     this.router.navigate(['tabs/home']);
   }
 
@@ -73,4 +71,9 @@ export class ProfileDataPage implements OnInit {
       this.user.goal
     );
   }
+
+  save() {
+    console.log("Update users");
+  }
+
 }

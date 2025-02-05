@@ -25,7 +25,8 @@ export class LoginPage implements OnInit {
     const user = await this.localStorage.getUser(this.user);
     if (user && user.password === this.user.password) {
       console.log("Login riuscito!");
-      localStorage.setItem('currentUser', user.name);
+      localStorage.setItem('currentUsername', user.name); // Implementa metodo in localStorageService
+      localStorage.setItem('currentUser', JSON.stringify(user)); // Implementa metodo in localStorageService
       this.router.navigate(['tabs/home']);
     } 
     else {

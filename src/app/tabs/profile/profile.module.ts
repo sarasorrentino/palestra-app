@@ -8,6 +8,7 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
 import { GenericHeaderComponent } from 'src/app/components/generic-header/generic-header.component';
+import { ProfileInputComponent } from 'src/app/components/profile-input/profile-input.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { GenericHeaderComponent } from 'src/app/components/generic-header/generi
     FormsModule,
     IonicModule,
     ProfilePageRoutingModule,
-    GenericHeaderComponent
+    GenericHeaderComponent,
+    ProfileInputComponent
   ],
   declarations: [ProfilePage]
 })

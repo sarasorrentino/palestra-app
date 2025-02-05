@@ -14,12 +14,12 @@ export class NameHeaderComponent implements OnInit {
 
   constructor(private router: Router, private alertController: AlertController){}
 
-  @Input() currentUser: string = '';
+  @Input() currentUsername: string = '';
 
   ngOnInit() {
-    const name = localStorage.getItem('currentUser');
-    if (name) {
-      this.currentUser = name;
+    const user = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    if (user) {
+      this.currentUsername = user.name;
     }
   }
 

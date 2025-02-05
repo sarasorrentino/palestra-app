@@ -18,7 +18,17 @@ const routes: Routes = [
       },
       {
         path: 'plans',
-        loadChildren: () => import('./plans/plans.module').then( m => m.PlansPageModule)
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('./plans/plans.module').then( m => m.PlansPageModule)
+          },
+          {
+            path: 'new-plan',
+            loadChildren: () => import('./new-plan/new-plan.module').then( m => m.NewPlanPageModule)
+          },
+        ]
+        
       },
       {
         path: 'stats',
@@ -31,9 +41,10 @@ const routes: Routes = [
       {
         path: 'profile',
         loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
-      }
+      },
     ]
   },
+  
 ];
 
 @NgModule({
