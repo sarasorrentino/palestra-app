@@ -12,17 +12,26 @@ export class RegisterPage implements OnInit {
 
   constructor(private router: Router, private localStorage: LocalStorageService) { }
 
-  ngOnInit() { }
+  ngOnInit() {}
+
+  /*----------------------------------------------------------------------------------------------------
+    Local variables
+  ----------------------------------------------------------------------------------------------------*/
+
+  emailError: string = "";
+  emailValid: boolean = false;
+
+  passwordError: string = "";
+  passwordValid: boolean = false;
 
   user = {
     email: "",
     password: ""
   };
 
-  emailError: string = "";
-  passwordError: string = "";
-  emailValid: boolean = false;
-  passwordValid: boolean = false;
+  /*----------------------------------------------------------------------------------------------------
+    Credentials verification
+  ----------------------------------------------------------------------------------------------------*/
 
   async chackCredentials() {
     const existingUser = await this.localStorage.getUser(this.user);
@@ -31,12 +40,14 @@ export class RegisterPage implements OnInit {
       return;
     }
 
-    //const newUser = { username: this.user.email, password: this.user.password };
-    //this.localStorage.setUser(newUser);
-    this.localStorage.user.email = this.user.email;
-    this.localStorage.user.password = this.user.password;
+    this.localStorage.user.email = this.user.email; // Temporary save credentials before saving in profile-data page
+    this.localStorage.user.password = this.user.password; // Temporary save credentials before saving in profile-data page
     this.router.navigate(['profile-data']);
   }
+
+  /*----------------------------------------------------------------------------------------------------
+    Input validation
+  ----------------------------------------------------------------------------------------------------*/
 
   validateEmail() {
     this.emailError = '';
@@ -50,9 +61,6 @@ export class RegisterPage implements OnInit {
     else {
       this.emailValid = true;
     }
-    //console.log('Email: ' + this.emailValid);
-    //console.log('Password: ' + this.passwordValid);
-    //console.log(!this.emailValid && !this.passwordValid);
   }
 
   validatePassword() {
@@ -67,15 +75,16 @@ export class RegisterPage implements OnInit {
     else {
       this.passwordValid = true;
     }
-    //console.log('Email: ' + this.emailValid);
-    //console.log('Password: ' + this.passwordValid);
-    //console.log(!this.emailValid && !this.passwordValid);
   }
 
   isValidEmail(email: string): boolean {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailPattern.test(email);
   }
+
+  /*----------------------------------------------------------------------------------------------------
+    Navigation
+  ----------------------------------------------------------------------------------------------------*/
 
   login(){
     this.router.navigate(['login']);

@@ -12,9 +12,14 @@ export class ProfileDataPage implements OnInit {
 
   constructor(private router: Router, private localStorage: LocalStorageService) { }
 
+  ngOnInit() {}
+
+  /*----------------------------------------------------------------------------------------------------
+    Local variables
+  ----------------------------------------------------------------------------------------------------*/
   user = {
-    email: "",
-    password: "",
+    email: this.localStorage.user.email,
+    password:  this.localStorage.user.password,
     name: "",
     surname: "",
     gender: "",
@@ -23,45 +28,11 @@ export class ProfileDataPage implements OnInit {
     goal: ""
   };
 
-  start = 30;
-  end = 250;
-  @Input() numbers: any = Array.from({ length: this.end - this.start + 1 }, (_, i) => i + this.start);
-
   currentValue = '';
 
-  onIonChange(event: CustomEvent) {
-    this.currentValue = event.detail.value;
-  }
-
-  onDidDismiss(event: CustomEvent) {
-    console.log('didDismiss', JSON.stringify(event.detail));
-  }
-
-  ngOnInit() {
-  }
-
-  register() {
-    this.localStorage.user.name = this.user.name;
-    this.localStorage.user.surname = this.user.surname;
-    this.localStorage.user.gender = this.user.gender;
-    this.localStorage.user.birthDate = this.user.birthDate;
-    this.localStorage.user.weight = this.user.weight;
-    this.localStorage.user.goal = this.user.goal;
-
-    this.localStorage.setUser();
-    localStorage.setItem('currentUsername', this.user.name);
-    this.router.navigate(['tabs/home']);
-  }
-
-  back () {
-    this.router.navigate(['register']);
-  }
-  
-  updateBirthDate(event: any) {
-    this.user.birthDate = event.detail.value;
-    console.log('Selected birth date:', this.user.birthDate);
-  }
-
+  /*----------------------------------------------------------------------------------------------------
+    Input validation
+  ----------------------------------------------------------------------------------------------------*/
   isFormValid(): boolean {
     console.log(this.user);
     return !!(
@@ -73,4 +44,34 @@ export class ProfileDataPage implements OnInit {
       this.user.goal
     );
   }
+
+  /*----------------------------------------------------------------------------------------------------
+    Registration
+  ----------------------------------------------------------------------------------------------------*/
+
+  register() {
+    this.localStorage.user.name = this.user.name;
+    this.localStorage.user.surname = this.user.surname;
+    this.localStorage.user.gender = this.user.gender;
+    this.localStorage.user.birthDate = this.user.birthDate;
+    this.localStorage.user.weight = this.user.weight;
+    this.localStorage.user.goal = this.user.goal;
+
+    this.localStorage.setUser(); // Add user to the users list
+    this.localStorage.setCurrentUser(this.user.email); // Update current user
+    this.login();
+  }
+
+  /*----------------------------------------------------------------------------------------------------
+    Navigation
+  ----------------------------------------------------------------------------------------------------*/
+
+  back () {
+    this.router.navigate(['register']);
+  }
+
+  login () {
+    this.router.navigate(['tabs/home']);
+  }
+
 }

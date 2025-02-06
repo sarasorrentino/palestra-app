@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-home',
@@ -9,10 +10,26 @@ import { Router } from '@angular/router';
 })
 export class HomePage implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private localStorage: LocalStorageService) { }
 
   ngOnInit() {
   }
+
+  /*----------------------------------------------------------------------------------------------------
+    Local variables
+  ----------------------------------------------------------------------------------------------------*/
+
+  plan = this.localStorage.getCurrentPlan();
+
+  /*----------------------------------------------------------------------------------------------------
+    Plan management
+  ----------------------------------------------------------------------------------------------------*/
+
+
+
+  /*----------------------------------------------------------------------------------------------------
+    Navigation
+  ----------------------------------------------------------------------------------------------------*/
 
   navToPlans() {
     this.router.navigate(['/tabs/plans']);
@@ -24,6 +41,10 @@ export class HomePage implements OnInit {
 
   createProgram() {
     console.log("Create program");
+  }
+
+  navToPlan() {
+    this.router.navigate(['/tabs/plans/plan']);
   }
 
 }

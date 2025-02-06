@@ -27,8 +27,11 @@ const routes: Routes = [
             path: 'new-plan',
             loadChildren: () => import('./new-plan/new-plan.module').then( m => m.NewPlanPageModule)
           },
+          {
+            path: 'plan',
+            loadChildren: () => import('./plan/plan.module').then( m => m.PlanPageModule)
+          }
         ]
-        
       },
       {
         path: 'stats',
@@ -43,8 +46,7 @@ const routes: Routes = [
         loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
       },
     ]
-  },
-  
+  }
 ];
 
 @NgModule({

@@ -3,7 +3,19 @@
 <ion-content [fullscreen]="true" class="ion-padding">
 
     <ion-grid>
-        <ion-row></ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-card (click)="navToPlan()">
+                    <ion-card-header>
+                      <ion-card-title> {{ plan.title }} </ion-card-title>
+                      <ion-card-subtitle> {{ plan.n_days }} DAYS </ion-card-subtitle>
+                    </ion-card-header>
+                    <ion-card-content>
+                      {{ plan.description }}
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
         <ion-row>
             <ion-col>
                 <app-icon-button icon="add" label="New Workout Plan" [action]="createProgram"></app-icon-button>

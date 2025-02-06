@@ -12,34 +12,26 @@ export class LoginPage implements OnInit {
 
   constructor(private router: Router, private localStorage: LocalStorageService) { }
 
-  ngOnInit() { }
+  ngOnInit() {}
+
+  /*----------------------------------------------------------------------------------------------------
+    Local variables
+  ----------------------------------------------------------------------------------------------------*/
+
+  emailError: string = "";
+  emailValid: boolean = false;
+
+  passwordError: string = "";
+  passwordValid: boolean = false;
 
   user = {
     email: "",
     password: ""
   };
-
-  errorMessage: string = "";
-
-  async verifyCredentials() {
-    const user = await this.localStorage.getUser(this.user);
-    if (user && user.password === this.user.password) {
-      console.log("Login riuscito!");
-      localStorage.setItem('currentUsername', user.name); // Implementa metodo in localStorageService
-      localStorage.setItem('currentUser', JSON.stringify(user)); // Implementa metodo in localStorageService
-      this.router.navigate(['tabs/home']);
-    } 
-    else {
-      this.emailError = '';
-      this.passwordError = '';
-      this.passwordError = "Incorrect Email or password";
-    }
-  }
-
-  emailError: string = "";
-  passwordError: string = "";
-  emailValid: boolean = false;
-  passwordValid: boolean = false;
+  
+  /*----------------------------------------------------------------------------------------------------
+    Input validation
+  ----------------------------------------------------------------------------------------------------*/
 
   validateEmail() {
     this.emailError = '';
@@ -53,16 +45,13 @@ export class LoginPage implements OnInit {
     else {
       this.emailValid = true;
     }
-    //console.log('Email: ' + this.emailValid);
-    //console.log('Password: ' + this.passwordValid);
-    //console.log(!this.emailValid && !this.passwordValid);
   }
 
   isValidEmail(email: string): boolean {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailPattern.test(email);
   }
-  
+
   validatePassword() {
     this.passwordError = '';
     this.passwordValid = false;
@@ -75,10 +64,29 @@ export class LoginPage implements OnInit {
     else {
       this.passwordValid = true;
     }
-    //console.log('Email: ' + this.emailValid);
-    //console.log('Password: ' + this.passwordValid);
-    //console.log(!this.emailValid && !this.passwordValid);
   }
+
+  /*----------------------------------------------------------------------------------------------------
+    Credentials verification
+  ----------------------------------------------------------------------------------------------------*/
+
+  async verifyCredentials() {
+    const user = await this.localStorage.getUser(this.user);
+    if (user && user.password === this.user.password) {
+      console.log("Login riuscito!");
+      this.localStorage.setCurrentUser(this.user.email); // Update current user
+      this.router.navigate(['tabs/home']);
+    } 
+    else {
+      this.emailError = '';
+      this.passwordError = '';
+      this.passwordError = "Incorrect Email or password";
+    }
+  }
+
+  /*----------------------------------------------------------------------------------------------------
+    Navigation
+  ----------------------------------------------------------------------------------------------------*/
 
   register(){
     this.router.navigate(['register']);

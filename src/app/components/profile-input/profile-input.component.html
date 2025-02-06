@@ -1,24 +1,24 @@
 <div>
   <ion-item>
+    <ion-label>Name</ion-label>
     <ion-input 
       type="text"
       name="name"
-      label="Name"
-      labelPlacement="fixed"
       placeholder="Enter your name"
       [(ngModel)] = "user.name"
       required
+      class="rtl-input"
     ></ion-input>
   </ion-item>
   <ion-item>
+    <ion-label>Surname</ion-label>
     <ion-input
       type="text"
       name="surname"
-      label="Surname"
-      labelPlacement="fixed"
       placeholder="Enter your surname"
       [(ngModel)] = "user.surname"
       required
+      class="rtl-input"
     ></ion-input>
   </ion-item>
   
@@ -27,23 +27,24 @@
     <ion-radio-group [(ngModel)]="user.gender" name="gender" required>
       <ion-list>
         <ion-item>
-          <ion-radio value="Male" labelPlacement="fixed">Male</ion-radio>
+          <ion-radio value="Male" labelPlacement="start">Male</ion-radio>
         </ion-item>
         <ion-item>
-          <ion-radio value="Female" labelPlacement="fixed">Female</ion-radio>
+          <ion-radio value="Female" labelPlacement="start">Female</ion-radio>
         </ion-item>
       </ion-list>
     </ion-radio-group>
   </ion-item>
 
   <ion-item>
-    <ion-label>Birth date</ion-label>
-    <ion-datetime-button datetime="datetime" preferWheel="true"></ion-datetime-button>
-    <ion-modal [keepContentsMounted]="true">
-      <ng-template>
-        <ion-datetime id="datetime" presentation="date" (ionChange)="updateBirthDate($event)"></ion-datetime>
-      </ng-template>
-    </ion-modal>
+    <ion-label>Birthdate</ion-label>
+    <ion-input 
+      type="date"
+      labelPlacement="fixed"
+      name="birthDate"
+      class="rtl-input"
+      [(ngModel)]="user.birthDate" 
+    ></ion-input>
   </ion-item>
 
   <ion-item>
@@ -57,7 +58,7 @@
         required
         text-right
       ></ion-input>
-      <ion-label style="padding-left: 10px; padding-right: 5px;">kg</ion-label>
+      <ion-label style="padding-left: 10px;">kg</ion-label>
   </ion-item>
   
   <ion-item>
@@ -65,13 +66,13 @@
     <ion-radio-group [(ngModel)]="user.goal" name="goal" required>
       <ion-list>
         <ion-item>
-          <ion-radio value="Mass gain" labelPlacement="fixed">Mass gain</ion-radio>
+          <ion-radio value="Mass gain" labelPlacement="start">Mass gain</ion-radio>
         </ion-item>
         <ion-item>
-          <ion-radio value="Tone" labelPlacement="fixed">Tone</ion-radio>
+          <ion-radio value="Tone" labelPlacement="start">Tone</ion-radio>
         </ion-item>
         <ion-item>
-          <ion-radio value="Weight loss" labelPlacement="fixed">Weight loss</ion-radio>
+          <ion-radio value="Weight loss" labelPlacement="start">Weight loss</ion-radio>
         </ion-item>
       </ion-list>
     </ion-radio-group>
@@ -79,6 +80,6 @@
 </div>
 
 <div>
-  <ion-button size="block" fill="solid" class="loginbtn" [disabled]="!isFormValid()" (click)="save()">Save</ion-button>
+  <ion-button size="block" fill="solid" class="loginbtn" [disabled]="!isFormChanged()" (click)="save()">Save</ion-button>
   <ion-button size="block" fill="solid" color="light">Cancel</ion-button>
 </div>

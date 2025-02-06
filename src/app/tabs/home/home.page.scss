@@ -1,0 +1,16 @@
+ion-card {
+    --background: #323232;
+    --color: var(--ion-color-light);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+ion-card-title {
+    --color: var(--ion-color-primary);
+}
+
+ion-card-subtitle {
+    --color: var(--ion-color-primary);
+}

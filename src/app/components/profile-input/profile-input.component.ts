@@ -20,6 +20,7 @@ export class ProfileInputComponent  implements OnInit {
   constructor(private router: Router, private localStorage: LocalStorageService) { }
 
   user = this.localStorage.getCurrentUser();
+  changedUsed = this.localStorage.getCurrentUser();
 
   start = 30;
   end = 250;
@@ -61,7 +62,7 @@ export class ProfileInputComponent  implements OnInit {
   }
 
   isFormValid(): boolean {
-    console.log(this.user);
+    //console.log(this.user);
     return !!(
       this.user.name &&
       this.user.surname &&
@@ -70,6 +71,11 @@ export class ProfileInputComponent  implements OnInit {
       this.user.weight &&
       this.user.goal
     );
+  }
+
+  isFormChanged(): boolean {
+    console.log(this.user);
+    return JSON.stringify(this.user) !== JSON.stringify(this.changedUsed);
   }
 
   save() {

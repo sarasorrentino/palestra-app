@@ -7,6 +7,10 @@ export class LocalStorageService {
 
   constructor() {}
 
+  /*----------------------------------------------------------------------------------------------------
+    Local variables
+  ----------------------------------------------------------------------------------------------------*/
+
   public user = {
     email: "",
     password: "",
@@ -17,9 +21,9 @@ export class LocalStorageService {
     birthDate: "",
     goal: ""
   };
+  users: any[] = []; // Temporary users list
 
-  users: any[] = [];
-  favorites: any[] = [];
+  favorites: any[] = []; // Temporary favorites exercises list
 
   public plan = {
     isCurrent: false,
@@ -37,6 +41,10 @@ export class LocalStorageService {
     days: [],
   }
 
+  /*----------------------------------------------------------------------------------------------------
+    User management
+  ----------------------------------------------------------------------------------------------------*/
+
   setUser() {
     let users = JSON.parse(localStorage.getItem('users') || '[]');
     users.push(this.user);
@@ -49,9 +57,27 @@ export class LocalStorageService {
     return user || null;
   }
 
+  /*----------------------------------------------------------------------------------------------------
+    Current user management
+  ----------------------------------------------------------------------------------------------------*/
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('currentUser') || '[]');
   }
+
+  setCurrentUser(userEmail: string) {
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const user = users.find((x: any) => x.email === userEmail);
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    return JSON.stringify(user);
+  }
+
+  resetCurrentUser() {
+    localStorage.setItem('currentUser', '[]');
+  }
+
+  /*----------------------------------------------------------------------------------------------------
+    Plans management
+  ----------------------------------------------------------------------------------------------------*/
 
   getPlans() {
     return JSON.parse(localStorage.getItem('plans') || '[]');
@@ -62,8 +88,18 @@ export class LocalStorageService {
     return this.currentPlan;
   }
 
+  setCurrentPlan() {
+    this.currentPlan = JSON.parse(localStorage.getItem('currentPlan') || '[]');
+    return this.currentPlan;
+  }
+
+
+
   setPlan() {
     let plans = JSON.parse(localStorage.getItem('plans') || '[]');
+    if (plans.length === 0) // If the plans list is empty, the first plan inserted is also the current one
+      this.plan.isCurrent = true;
+
     plans.push(this.plan);
     localStorage.setItem('plans', JSON.stringify(plans));
     console.log("New plan added to the list");

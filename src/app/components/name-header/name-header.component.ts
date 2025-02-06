@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-name-header',
@@ -12,16 +13,16 @@ import { AlertController } from '@ionic/angular';
 })
 export class NameHeaderComponent implements OnInit {
 
-  constructor(private router: Router, private alertController: AlertController){}
-
-  @Input() currentUsername: string = '';
+  constructor(private router: Router, private alertController: AlertController, private localStorage: LocalStorageService){}
 
   ngOnInit() {
-    const user = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    const user = this.localStorage.getCurrentUser();
     if (user) {
       this.currentUsername = user.name;
     }
   }
+
+  @Input() currentUsername: string = '';
 
   async logout() {
     const alert = await this.alertController.create({
@@ -36,6 +37,7 @@ export class NameHeaderComponent implements OnInit {
         {
           text: 'Confirm',
           handler: () => {
+            this.localStorage.resetCurrentUser();
             this.router.navigate(['welcome']);
             console.log('Logged out');
           }

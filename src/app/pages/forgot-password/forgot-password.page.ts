@@ -13,9 +13,11 @@ export class ForgotPasswordPage implements OnInit {
 
   constructor(private router: Router, private localStorage: LocalStorageService, private alertController: AlertController) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
+  /*----------------------------------------------------------------------------------------------------
+    Local variables
+  ----------------------------------------------------------------------------------------------------*/
   user = {
     email: "",
     password: ""
@@ -23,6 +25,10 @@ export class ForgotPasswordPage implements OnInit {
 
   emailError: string = "";
   emailValid: boolean = false;
+
+  /*----------------------------------------------------------------------------------------------------
+    Input validation
+  ----------------------------------------------------------------------------------------------------*/  
 
   validateEmail() {
     this.emailError = '';
@@ -36,9 +42,6 @@ export class ForgotPasswordPage implements OnInit {
     else {
       this.emailValid = true;
     }
-    //console.log('Email: ' + this.emailValid);
-    //console.log('Password: ' + this.passwordValid);
-    //console.log(!this.emailValid && !this.passwordValid);
   }
 
   isValidEmail(email: string): boolean {
@@ -46,8 +49,10 @@ export class ForgotPasswordPage implements OnInit {
     return emailPattern.test(email);
   }
 
-  errorMessage: string = "";
-
+  /*----------------------------------------------------------------------------------------------------
+    Credentials verification
+  ----------------------------------------------------------------------------------------------------*/
+  
   async verifyCredentials() {
     const user = await this.localStorage.getUser(this.user);
     if (user) {
@@ -67,7 +72,9 @@ export class ForgotPasswordPage implements OnInit {
     }
   }
 
-  alertButtons = ['Close'];
+  /*----------------------------------------------------------------------------------------------------
+    Navigation
+  ----------------------------------------------------------------------------------------------------*/
 
   send() {
     this.router.navigate(['login']);
