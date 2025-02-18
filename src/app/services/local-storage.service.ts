@@ -57,6 +57,20 @@ export class LocalStorageService {
     return user || null;
   }
 
+  updateUser(updatedUser: any){
+    
+    let users = JSON.parse(localStorage.getItem('users') || '[]'); // List of all users
+    const userIndex = users.findIndex((user: any) => user.email === updatedUser.email);
+
+    if (userIndex !== -1) {
+      
+      users[userIndex] = { ...users[userIndex], ...updatedUser }; // Update user
+      localStorage.setItem('users', JSON.stringify(users)); // Update users list
+    } else {
+      console.warn('Utente non trovato');
+    }
+  }
+
   /*----------------------------------------------------------------------------------------------------
     Current user management
   ----------------------------------------------------------------------------------------------------*/
@@ -93,8 +107,6 @@ export class LocalStorageService {
     return this.currentPlan;
   }
 
-
-
   setPlan() {
     let plans = JSON.parse(localStorage.getItem('plans') || '[]');
     if (plans.length === 0) // If the plans list is empty, the first plan inserted is also the current one
@@ -109,5 +121,10 @@ export class LocalStorageService {
     localStorage.setItem('plans', JSON.stringify(plans));
     console.log("Plans updated");
   }
+
+  /*----------------------------------------------------------------------------------------------------
+    Exercises management
+  ----------------------------------------------------------------------------------------------------*/
+
 
 }

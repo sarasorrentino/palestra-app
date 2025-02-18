@@ -1,17 +1,69 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
-    </ion-buttons>
-    <ion-title>Add Exercise</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-<ion-content class="ion-padding">
-  <ion-item>
-    <ion-input labelPlacement="stacked" label="Enter your name" [(ngModel)]="name" placeholder="Your name"></ion-input>
-  </ion-item>
+<ng-container [ngSwitch]="currentStep">
+  <ion-header>
+    <ion-toolbar *ngSwitchCase="1">
+      <ion-buttons slot="start">
+        <ion-button (click)="cancel()">Cancel</ion-button>
+      </ion-buttons>
+      <ion-title>Add Exercise</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="goNext()" [strong]="true" [disabled]="!selectedExercise">Next</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar *ngSwitchCase="2">
+      <ion-buttons slot="start">
+        <ion-button (click)="goBack()">Back</ion-button>
+      </ion-buttons>
+      <ion-title>Add Exercise</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="add()" [strong]="true" [disabled]="!selectedExercise">Add</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content *ngSwitchCase="1" class="ion-padding">
+      <ion-item *ngFor="let exercise of exercises" (click)="selectExercise(exercise)" [ngClass]="{'selected': exercise === selectedExercise}">
+        <ion-thumbnail slot="start">
+          <img [src]="exercise.image" alt="{{ exercise.name }}"/>
+        </ion-thumbnail>
+        <ion-label>{{ exercise.name }}</ion-label>
+        <ion-label>{{ exercise.muscleGroup }}</ion-label>
+      </ion-item>
+  </ion-content>
+
+  <ion-content *ngSwitchCase="2" class="ion-padding">
+    <div class="top-margin">
+      <div class="center">
+        <ion-text class="bold-text">N° Series</ion-text>
+        <ion-text class="small-text">Descrizione di cosa sono le serie</ion-text>
+        <div class="counter__section">
+          <ion-button (click)="decrementSeries()">-</ion-button>
+          <p>{{series}}</p>
+          <ion-button (click)="incrementSeries()">+</ion-button>
+        </div>
+      </div>
+      
+      <div class="center">
+        <ion-text class="bold-text">N° Repeats</ion-text>
+        <ion-text class="small-text">Descrizione di cosa sono le ripetizioni</ion-text>
+        <div class="counter__section">
+          <ion-button (click)="decrementRepeats()">-</ion-button>
+          <p>{{repeats}}</p>
+          <ion-button (click)="incrementRepeats()">+</ion-button>
+        </div>
+      </div>
   
-</ion-content>
+      <div class="center">
+        <ion-text class="bold-text">Rest Time</ion-text>
+        <ion-text class="small-text">Descrizione di cosa è il rest time</ion-text>
+        <div class="counter__section">
+          <ion-button (click)="decrementRestTime()">-</ion-button>
+          <p>{{rest_time}} sec</p>
+          <ion-button (click)="incrementRestTime()">+</ion-button>
+        </div>
+      </div>
+    </div>
+    
+    
+  </ion-content>
+  
+</ng-container>

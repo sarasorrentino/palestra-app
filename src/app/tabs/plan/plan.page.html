@@ -19,10 +19,16 @@
 <ion-content [fullscreen]="true" class="ion-padding">
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-      <ion-fab-button (click)="addExercise()">
+      <ion-fab-button id="open-modal">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
   </ion-fab>
+
+  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)" [initialBreakpoint]="0.60">
+    <ng-template>
+      <app-add-exercise></app-add-exercise>
+    </ng-template>
+  </ion-modal>
 
   <ion-segment [(ngModel)]="selectedDay">
     <ion-segment-button *ngFor="let i of getArray(plan.n_days)" [value]="i">

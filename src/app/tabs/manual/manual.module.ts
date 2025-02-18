@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ManualPageRoutingModule } from './manual-routing.module';
 
 import { ManualPage } from './manual.page';
-import { GenericHeaderComponent } from 'src/app/components/generic-header/generic-header.component';
+import { HeaderComponent } from 'src/app/components/header/header.component';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { GenericHeaderComponent } from 'src/app/components/generic-header/generi
     FormsModule,
     IonicModule,
     ManualPageRoutingModule,
-    GenericHeaderComponent
+    HeaderComponent
   ],
   declarations: [ManualPage]
 })

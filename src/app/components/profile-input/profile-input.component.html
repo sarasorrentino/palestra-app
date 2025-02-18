@@ -80,6 +80,6 @@
 </div>
 
 <div>
-  <ion-button size="block" fill="solid" class="loginbtn" [disabled]="!isFormChanged()" (click)="save()">Save</ion-button>
-  <ion-button size="block" fill="solid" color="light">Cancel</ion-button>
+  <ion-button size="block" fill="solid" class="loginbtn" [disabled]="!isFormChanged()" (click)="updateUser()">Save</ion-button>
+  <ion-button size="block" fill="solid" color="light" (click)="reset()">Cancel</ion-button>
 </div>

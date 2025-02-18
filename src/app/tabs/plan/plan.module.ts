@@ -7,7 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { PlanPageRoutingModule } from './plan-routing.module';
 
 import { PlanPage } from './plan.page';
-import { GenericHeaderComponent } from 'src/app/components/generic-header/generic-header.component';
+import { HeaderComponent } from 'src/app/components/header/header.component';
+import { AddExerciseComponent } from 'src/app/components/add-exercise/add-exercise.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { GenericHeaderComponent } from 'src/app/components/generic-header/generi
     FormsModule,
     IonicModule,
     PlanPageRoutingModule,
-    GenericHeaderComponent
+    HeaderComponent,
+    AddExerciseComponent
   ],
   declarations: [PlanPage]
 })

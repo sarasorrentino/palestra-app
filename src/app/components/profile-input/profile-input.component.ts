@@ -20,11 +20,7 @@ export class ProfileInputComponent  implements OnInit {
   constructor(private router: Router, private localStorage: LocalStorageService) { }
 
   user = this.localStorage.getCurrentUser();
-  changedUsed = this.localStorage.getCurrentUser();
-
-  start = 30;
-  end = 250;
-  @Input() numbers: any = Array.from({ length: this.end - this.start + 1 }, (_, i) => i + this.start);
+  changedUser = this.localStorage.getCurrentUser();
 
   currentValue = '';
 
@@ -36,29 +32,10 @@ export class ProfileInputComponent  implements OnInit {
     console.log('didDismiss', JSON.stringify(event.detail));
   }
 
-  ngOnInit() {
-  }
-
-  register() {
-    this.localStorage.user.name = this.user.name;
-    this.localStorage.user.surname = this.user.surname;
-    this.localStorage.user.gender = this.user.gender;
-    this.localStorage.user.birthDate = this.user.birthDate;
-    this.localStorage.user.weight = this.user.weight;
-    this.localStorage.user.goal = this.user.goal;
-
-    this.localStorage.setUser();
-    localStorage.setItem('currentUser', this.user.name);
-    this.router.navigate(['tabs/home']);
-  }
+  ngOnInit() {}
 
   back () {
     this.router.navigate(['register']);
-  }
-  
-  updateBirthDate(event: any) {
-    this.user.birthDate = event.detail.value;
-    console.log('Selected birth date:', this.user.birthDate);
   }
 
   isFormValid(): boolean {
@@ -75,11 +52,22 @@ export class ProfileInputComponent  implements OnInit {
 
   isFormChanged(): boolean {
     console.log(this.user);
-    return JSON.stringify(this.user) !== JSON.stringify(this.changedUsed);
+    return JSON.stringify(this.user) !== JSON.stringify(this.changedUser);
   }
 
-  save() {
-    console.log("Update users");
+  updateUser() {
+
+    // Update users list
+    this.localStorage.updateUser(this.user);
+
+    // Update current user
+    this.localStorage.setCurrentUser(this.user.email);
+
+    console.log("Updated user");
+  }
+
+  reset() {
+    this.user = this.localStorage.getCurrentUser();
   }
 
 }

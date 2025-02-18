@@ -26,6 +26,11 @@ ion-title {
     margin: 0;
 }
 
+ion-fab-button {
+    --background: none;
+    --color: black;
+}
+
 ion-icon {
     color: var(--ion-color-primary);
     margin: 0;

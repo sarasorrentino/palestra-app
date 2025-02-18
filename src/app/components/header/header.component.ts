@@ -1,19 +1,27 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonicModule } from '@ionic/angular';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { addIcons } from 'ionicons';
+import { logOutOutline, cogOutline } from 'ionicons/icons';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-name-header',
-  templateUrl: './name-header.component.html',
-  styleUrls: ['./name-header.component.scss'],
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [IonicModule]
+  imports: [IonicModule, CommonModule]
 })
-export class NameHeaderComponent implements OnInit {
+export class HeaderComponent  implements OnInit {
 
-  constructor(private router: Router, private alertController: AlertController, private localStorage: LocalStorageService){}
+  constructor(private router: Router, private alertController: AlertController, private localStorage: LocalStorageService) {
+    addIcons({ logOutOutline, cogOutline });
+  }
+
+  @Input() currentUsername: string = '';
+  @Input() title: string = '';
+  @Input() showIcon: boolean = true;
 
   ngOnInit() {
     const user = this.localStorage.getCurrentUser();
@@ -21,8 +29,6 @@ export class NameHeaderComponent implements OnInit {
       this.currentUsername = user.name;
     }
   }
-
-  @Input() currentUsername: string = '';
 
   async logout() {
     const alert = await this.alertController.create({
@@ -32,12 +38,12 @@ export class NameHeaderComponent implements OnInit {
         {
           text: 'Cancel',
           role: 'cancel',
-          cssClass: 'secondary'
         },
         {
           text: 'Confirm',
+          role: 'destructive',
+          cssClass: 'secondary',
           handler: () => {
-            this.localStorage.resetCurrentUser();
             this.router.navigate(['welcome']);
             console.log('Logged out');
           }

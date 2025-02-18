@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
-import { GenericHeaderComponent } from 'src/app/components/generic-header/generic-header.component';
+import { HeaderComponent } from 'src/app/components/header/header.component';
 import { ProfileInputComponent } from 'src/app/components/profile-input/profile-input.component';
 
 @NgModule({
@@ -16,7 +16,7 @@ import { ProfileInputComponent } from 'src/app/components/profile-input/profile-
     FormsModule,
     IonicModule,
     ProfilePageRoutingModule,
-    GenericHeaderComponent,
+    HeaderComponent,
     ProfileInputComponent
   ],
   declarations: [ProfilePage]
