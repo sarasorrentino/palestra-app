@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonItemSliding } from '@ionic/angular';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { PlansStorageService } from 'src/app/services/plans-storage.service';
 import { PlansUpdateService } from 'src/app/services/plans-update.service';
+import { UserStorageService } from 'src/app/services/user-storage.service';
 
 @Component({
   selector: 'app-plans',
@@ -15,11 +17,13 @@ export class PlansPage implements OnInit {
   plans: any[] = [];
   currentPlan: any[] = [];
 
-  constructor(private router: Router, private localStorage: LocalStorageService, private planService: PlansUpdateService, private alertController: AlertController) { }
+  constructor(private router: Router, private planStorage: PlansStorageService, private userStorage: UserStorageService, private alertController: AlertController) { }
 
   ngOnInit() {
-    this.planService.plans$.subscribe(plans => {
+    this.planStorage.plans$.subscribe(plans => {
       this.plans = plans;
+      this.plans = plans.filter((plan: any) => plan.ownerID === this.userStorage.getCurrentUserId());
+      console.log(this.plans);
     });
   }
 
@@ -28,31 +32,14 @@ export class PlansPage implements OnInit {
   }
 
   toggleCurrent(plan: any, slidingItem: IonItemSliding) {
-    //console.log("Plan in entrata: " + plan.title);
-    const current = this.localStorage.getCurrentPlan();
-    //console.log("Corrente: " + current.title);
-    if(current.title !== plan.title){
-      plan.isCurrent = true;
-      localStorage.setItem('currentPlan', JSON.stringify(plan));
-      //console.log("Current plan updated: " + plan);
-      this.updateCurrentPlan(plan);
+    const current = this.planStorage.getCurrentPlanID();
+    if(current !== plan.uid){
+      this.planStorage.setCurrentPlan(plan.uid);
     }
     slidingItem.close();
   }
 
-  updateCurrentPlan(currentPlan: any) {
-    this.plans = this.localStorage.getPlans(); // Get current plan list
-    this.plans = this.plans.map(plan => ({
-      ...plan,
-      isCurrent: plan.title === currentPlan.title // Update the list with the new current plan
-    }));
-    //console.log(this.plans);
-  
-    this.localStorage.updatePlans(this.plans); // Save the new plan list
-    //console.log("Lista aggiornata");
-  }
-
-  async deletePlan(planToDelete: any, slidingItem: IonItemSliding) {
+  async deletePlan(plan: any, slidingItem: IonItemSliding) {
     const alert = await this.alertController.create({
       header: 'Do you want to delete this plan?',
       message: 'This action is irreversible and you will loose your plan',
@@ -61,9 +48,7 @@ export class PlansPage implements OnInit {
           text: 'Delete',
           role: 'destructive',
           handler: () => {
-            this.plans = this.localStorage.getPlans(); // Get current plan list
-            this.plans = this.plans.filter(plan => plan.title !== planToDelete.title); // Update list removing the selected plan
-            this.localStorage.updatePlans(this.plans);
+            this.planStorage.removePlan(plan.uid);
           }
         },
         {

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Location } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -12,8 +13,11 @@ export class PlanHeaderComponent  implements OnInit {
 
   @Input() title: string = '';
 
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit() {}
 
+  goBack() {
+    this.location.back(); // Torna alla pagina precedente
+  }
 }

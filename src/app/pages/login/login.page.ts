@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { UserStorageService } from 'src/app/services/user-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private router: Router, private localStorage: LocalStorageService) { }
+  constructor(private router: Router, private userStorage: UserStorageService) { }
 
   ngOnInit() {}
 
@@ -71,10 +71,10 @@ export class LoginPage implements OnInit {
   ----------------------------------------------------------------------------------------------------*/
 
   async verifyCredentials() {
-    const user = await this.localStorage.getUser(this.user);
+    const user = await this.userStorage.getUser(this.user);
     if (user && user.password === this.user.password) {
       console.log("Login riuscito!");
-      this.localStorage.setCurrentUser(this.user.email); // Update current user
+      this.userStorage.updateCurrentUser(this.user.email); // Update current user
       this.router.navigate(['tabs/home']);
     } 
     else {

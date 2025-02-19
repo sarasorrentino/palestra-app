@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { PlansStorageService } from 'src/app/services/plans-storage.service';
 
 @Component({
   selector: 'app-home',
@@ -10,22 +11,16 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class HomePage implements OnInit {
 
-  constructor(private router: Router, private localStorage: LocalStorageService) { }
+  constructor(private router: Router, private localStorage: LocalStorageService, private planStorage: PlansStorageService) { }
 
+  currentPlan: any;
+  
   ngOnInit() {
+    this.planStorage.currentPlan$.subscribe(plan => {
+      if(plan)
+        this.currentPlan = plan;
+    });
   }
-
-  /*----------------------------------------------------------------------------------------------------
-    Local variables
-  ----------------------------------------------------------------------------------------------------*/
-
-  plan = this.localStorage.getCurrentPlan();
-
-  /*----------------------------------------------------------------------------------------------------
-    Plan management
-  ----------------------------------------------------------------------------------------------------*/
-
-
 
   /*----------------------------------------------------------------------------------------------------
     Navigation
@@ -40,7 +35,7 @@ export class HomePage implements OnInit {
   }
 
   createProgram() {
-    console.log("Create program");
+    this.router.navigate(["/tabs/plans/new-plan"]);
   }
 
   navToPlan() {

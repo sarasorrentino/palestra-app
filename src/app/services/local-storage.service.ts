@@ -11,18 +11,6 @@ export class LocalStorageService {
     Local variables
   ----------------------------------------------------------------------------------------------------*/
 
-  public user = {
-    email: "",
-    password: "",
-    name: "",
-    surname: "",
-    gender: "",
-    weight: "",
-    birthDate: "",
-    goal: ""
-  };
-  users: any[] = []; // Temporary users list
-
   favorites: any[] = []; // Temporary favorites exercises list
 
   public plan = {
@@ -39,54 +27,6 @@ export class LocalStorageService {
     description: "",
     n_days: 3,
     days: [],
-  }
-
-  /*----------------------------------------------------------------------------------------------------
-    User management
-  ----------------------------------------------------------------------------------------------------*/
-
-  setUser() {
-    let users = JSON.parse(localStorage.getItem('users') || '[]');
-    users.push(this.user);
-    localStorage.setItem('users', JSON.stringify(users));
-  }
-
-  getUser(checkUser: any): any | null {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find((x: any) => x.email === checkUser.email);
-    return user || null;
-  }
-
-  updateUser(updatedUser: any){
-    
-    let users = JSON.parse(localStorage.getItem('users') || '[]'); // List of all users
-    const userIndex = users.findIndex((user: any) => user.email === updatedUser.email);
-
-    if (userIndex !== -1) {
-      
-      users[userIndex] = { ...users[userIndex], ...updatedUser }; // Update user
-      localStorage.setItem('users', JSON.stringify(users)); // Update users list
-    } else {
-      console.warn('Utente non trovato');
-    }
-  }
-
-  /*----------------------------------------------------------------------------------------------------
-    Current user management
-  ----------------------------------------------------------------------------------------------------*/
-  getCurrentUser() {
-    return JSON.parse(localStorage.getItem('currentUser') || '[]');
-  }
-
-  setCurrentUser(userEmail: string) {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find((x: any) => x.email === userEmail);
-    localStorage.setItem('currentUser', JSON.stringify(user));
-    return JSON.stringify(user);
-  }
-
-  resetCurrentUser() {
-    localStorage.setItem('currentUser', '[]');
   }
 
   /*----------------------------------------------------------------------------------------------------

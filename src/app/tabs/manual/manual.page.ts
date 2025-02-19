@@ -13,7 +13,7 @@ export class ManualPage implements OnInit {
   exercises: any[] = [];
   favoriteExercises: any[] = [];
 
-  constructor(private http: HttpClient, private localStorage: LocalStorageService) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.http.get<any[]>('/assets/database/exercises_db.json').subscribe(data => {

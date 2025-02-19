@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { UserStorageService } from 'src/app/services/user-storage.service';
 
 @Component({
   selector: 'app-profile-data',
@@ -10,7 +11,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class ProfileDataPage implements OnInit {
 
-  constructor(private router: Router, private localStorage: LocalStorageService) { }
+  constructor(private router: Router, private userStorage: UserStorageService) { }
 
   ngOnInit() {}
 
@@ -18,8 +19,9 @@ export class ProfileDataPage implements OnInit {
     Local variables
   ----------------------------------------------------------------------------------------------------*/
   user = {
-    email: this.localStorage.user.email,
-    password:  this.localStorage.user.password,
+    uid: this.userStorage.user.uid,
+    email: this.userStorage.user.email,
+    password:  this.userStorage.user.password,
     name: "",
     surname: "",
     gender: "",
@@ -50,15 +52,8 @@ export class ProfileDataPage implements OnInit {
   ----------------------------------------------------------------------------------------------------*/
 
   register() {
-    this.localStorage.user.name = this.user.name;
-    this.localStorage.user.surname = this.user.surname;
-    this.localStorage.user.gender = this.user.gender;
-    this.localStorage.user.birthDate = this.user.birthDate;
-    this.localStorage.user.weight = this.user.weight;
-    this.localStorage.user.goal = this.user.goal;
-
-    this.localStorage.setUser(); // Add user to the users list
-    this.localStorage.setCurrentUser(this.user.email); // Update current user
+    this.userStorage.addUser(this.user); // Add user to the users list
+    this.userStorage.setCurrentUser(this.user.uid); // Update current user
     this.login();
   }
 

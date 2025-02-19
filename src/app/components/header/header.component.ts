@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonicModule } from '@ionic/angular';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { addIcons } from 'ionicons';
 import { logOutOutline, cogOutline } from 'ionicons/icons';
 import { CommonModule } from '@angular/common';
+import { UserStorageService } from 'src/app/services/user-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent  implements OnInit {
 
-  constructor(private router: Router, private alertController: AlertController, private localStorage: LocalStorageService) {
+  constructor(private router: Router, private alertController: AlertController, private userStorage: UserStorageService) {
     addIcons({ logOutOutline, cogOutline });
   }
 
@@ -24,7 +24,7 @@ export class HeaderComponent  implements OnInit {
   @Input() showIcon: boolean = true;
 
   ngOnInit() {
-    const user = this.localStorage.getCurrentUser();
+    const user = this.userStorage.getCurrentUser();
     if (user) {
       this.currentUsername = user.name;
     }

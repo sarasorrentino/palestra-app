@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { UserStorageService } from 'src/app/services/user-storage.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -11,7 +12,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class ForgotPasswordPage implements OnInit {
 
-  constructor(private router: Router, private localStorage: LocalStorageService, private alertController: AlertController) { }
+  constructor(private router: Router, private userStorage: UserStorageService,private alertController: AlertController) { }
 
   ngOnInit() {}
 
@@ -54,7 +55,7 @@ export class ForgotPasswordPage implements OnInit {
   ----------------------------------------------------------------------------------------------------*/
   
   async verifyCredentials() {
-    const user = await this.localStorage.getUser(this.user);
+    const user = await this.userStorage.getUser(this.user);
     if (user) {
       console.log("Utente trovato!");
       const alert = await this.alertController.create({

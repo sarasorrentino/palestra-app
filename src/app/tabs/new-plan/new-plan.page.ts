@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { PlansStorageService } from 'src/app/services/plans-storage.service';
+import { UserStorageService } from 'src/app/services/user-storage.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-new-plan',
@@ -10,12 +12,14 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class NewPlanPage implements OnInit {
 
-  constructor(private router: Router, private localStorage: LocalStorageService) { }
+  constructor(private router: Router, private planStorage: PlansStorageService, private userStorage: UserStorageService, private location: Location) { }
 
   ngOnInit() {
   }
 
   plan = {
+    uid: 0,
+    ownerID: 0,
     isCurrent: false,
     title: "",
     description: "",
@@ -24,7 +28,8 @@ export class NewPlanPage implements OnInit {
   }
 
   back () {
-    this.router.navigate(['/tabs/plans']);
+    //this.router.navigate(['/tabs/plans']);
+    this.location.back();
   }
 
   next () {
@@ -41,12 +46,9 @@ export class NewPlanPage implements OnInit {
   }
 
   savePlan() {
-    this.localStorage.plan.title = this.plan.title;
-    this.localStorage.plan.description = this.plan.description;
-    this.localStorage.plan.n_days = this.plan.n_days;
-    this.localStorage.plan.isCurrent = this.plan.isCurrent;
-
-    this.localStorage.setPlan();
+    this.plan.uid = this.planStorage.generateHash(this.plan.title+this.plan.ownerID);
+    this.plan.ownerID = this.userStorage.getCurrentUserId();
+    this.planStorage.setPlan(this.plan);
     this.router.navigate(['tabs/plans']);
   }
 }

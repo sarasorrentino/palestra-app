@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { UserStorageService } from 'src/app/services/user-storage.service';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class RegisterPage implements OnInit {
 
-  constructor(private router: Router, private localStorage: LocalStorageService) { }
+  constructor(private router: Router, private userStorage: UserStorageService) { }
 
   ngOnInit() {}
 
@@ -34,14 +35,15 @@ export class RegisterPage implements OnInit {
   ----------------------------------------------------------------------------------------------------*/
 
   async chackCredentials() {
-    const existingUser = await this.localStorage.getUser(this.user);
+    const existingUser = await this.userStorage.checkExistingUser(this.user.email);
     if (existingUser) {
       this.passwordError = "Email already in use";
       return;
     }
 
-    this.localStorage.user.email = this.user.email; // Temporary save credentials before saving in profile-data page
-    this.localStorage.user.password = this.user.password; // Temporary save credentials before saving in profile-data page
+    this.userStorage.user.uid = this.userStorage.generateHash(this.user.email); // Temporary save UID before saving in profile-data page
+    this.userStorage.user.email = this.user.email; // Temporary save email before saving in profile-data page
+    this.userStorage.user.password = this.user.password; // Temporary save password before saving in profile-data page
     this.router.navigate(['profile-data']);
   }
 

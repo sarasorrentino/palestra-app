@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { IonModal, ModalController } from '@ionic/angular';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { PlansStorageService } from 'src/app/services/plans-storage.service';
 
 @Component({
   selector: 'app-plan',
@@ -11,11 +12,12 @@ import { OverlayEventDetail } from '@ionic/core/components';
 })
 export class PlanPage implements OnInit {
 
-  constructor(private localStorage: LocalStorageService, private modalCtrl: ModalController) { }
+  constructor(private localStorage: LocalStorageService, private planStorage: PlansStorageService) { }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
-  plan = this.localStorage.getCurrentPlan();
+  plan = this.planStorage.getCurrentPlan();
+  
 
   /*----------------------------------------------------------------------------------------------------
     Segments management

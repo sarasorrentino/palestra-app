@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { UserStorageService } from 'src/app/services/user-storage.service';
 
 @Component({
   selector: 'app-profile-input',
@@ -17,10 +18,10 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class ProfileInputComponent  implements OnInit {
 
-  constructor(private router: Router, private localStorage: LocalStorageService) { }
+  constructor(private router: Router, private userStorage: UserStorageService) { }
 
-  user = this.localStorage.getCurrentUser();
-  changedUser = this.localStorage.getCurrentUser();
+  user = this.userStorage.getCurrentUser();
+  changedUser = this.userStorage.getCurrentUser();
 
   currentValue = '';
 
@@ -51,23 +52,19 @@ export class ProfileInputComponent  implements OnInit {
   }
 
   isFormChanged(): boolean {
-    console.log(this.user);
+    //console.log(this.user);
     return JSON.stringify(this.user) !== JSON.stringify(this.changedUser);
   }
 
   updateUser() {
-
-    // Update users list
-    this.localStorage.updateUser(this.user);
-
-    // Update current user
-    this.localStorage.setCurrentUser(this.user.email);
+    this.userStorage.updateUser(this.user); // Update users list
+    this.userStorage.setCurrentUser(this.user.uid); // Update current user
 
     console.log("Updated user");
   }
 
   reset() {
-    this.user = this.localStorage.getCurrentUser();
+    this.user = this.userStorage.getCurrentUser();
   }
 
 }
