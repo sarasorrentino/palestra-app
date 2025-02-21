@@ -52,4 +52,9 @@ export class HeaderComponent  implements OnInit {
     });
     await alert.present();
   }
+
+  navToProfile() {
+    console.log("ciao");
+    this.router.navigate(['/tabs/profile']);
+  }
 }

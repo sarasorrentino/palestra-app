@@ -22,6 +22,13 @@ export class PlansStorageService {
     this.currentPlanSubject.next(newPlan);
   }
 
+  private selectedPlanSubject = new BehaviorSubject<any[]>(this.getSelectedPlan());
+  selectedPlan$ = this.selectedPlanSubject.asObservable();
+
+  updateSelectedPlan(newPlan: any) {
+    this.selectedPlanSubject.next(newPlan);
+  }
+
   constructor() { }
 
   public plan = {
@@ -93,9 +100,25 @@ export class PlansStorageService {
     return plan;
   }
 
+  setSelectedPlan(planID: number) {
+    localStorage.setItem('selectedPlan', JSON.stringify(planID));
+    this.updateSelectedPlan(this.getSelectedPlan());
+  }
+
+  getSelectedPlan() {
+    const selectedPlanID = JSON.parse(localStorage.getItem('selectedPlan') || '[]');
+    const plans = JSON.parse(localStorage.getItem('plans') || '[]');
+    const plan = plans.find((x: any) => x.uid === selectedPlanID);
+    return plan;
+  }
+
+  getSelectedDay() {
+    return JSON.parse(localStorage.getItem('selectedDay') || '[]');
+  }
+
   addExerciseToDay(planId: number, dayIndex: number, exercise: any) {
     let plans = JSON.parse(localStorage.getItem('plans') || '[]');
-    let plan = plans.find((p: any) => p.id === planId);
+    let plan = plans.find((p: any) => p.uid === planId);
 
     if (plan) {
       let day = plan.days.find((d: any) => d.dayIndex === dayIndex);

@@ -1,0 +1,37 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Countdown Timer</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <h2>{{ seconds }} seconds remaining</h2>
+
+    <!-- Progress bar circolare -->
+    <div class="circle-container">
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <!-- Cerchio di sfondo -->
+        <circle cx="60" cy="60" r="55" stroke="#ddd" stroke-width="10" fill="none"/>
+        
+        <!-- Cerchio che mostra il progresso -->
+        <circle 
+          cx="60" cy="60" r="55" 
+          stroke="var(--ion-color-primary)" 
+          stroke-width="10" 
+          fill="none"
+          stroke-dasharray="345" 
+          [attr.stroke-dashoffset]="345 - (getProgress() / 100) * 345"
+          transform="rotate(-90 60 60)">
+        </circle>
+
+        <!-- Secondi al centro del cerchio -->
+        <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-size="20" fill="var(--ion-text-color)">
+          {{ seconds }}
+        </text>
+      </svg>
+    </div>
+
+    <!-- Controlli -->
+    <ion-button (click)="startTimer()">Start</ion-button>
+    <ion-button (click)="stopTimer()">Stop</ion-button>
+    <ion-button color="danger" (click)="restartTimer()">Reset</ion-button>
+  </ion-card-content>
+</ion-card>

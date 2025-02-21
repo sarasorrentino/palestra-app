@@ -10,7 +10,7 @@
     <ion-list lines="none">
       <ion-item-sliding *ngFor="let plan of plans" #slidingItem>
         <ion-item>
-          <ion-card>
+          <ion-card (click)="selectPlan(plan.uid)">
             <ion-icon 
               *ngIf="plan.isCurrent" 
               name="bookmark" 

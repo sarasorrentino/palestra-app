@@ -29,6 +29,10 @@ const routes: Routes = [
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
+  {
+    path: 'workout',
+    loadChildren: () => import('./tabs/workout/workout.module').then( m => m.WorkoutPageModule)
+  }
 ];
 
 @NgModule({

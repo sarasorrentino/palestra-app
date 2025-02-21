@@ -39,7 +39,17 @@ export class HomePage implements OnInit {
   }
 
   navToPlan() {
+    this.planStorage.setSelectedPlan(this.planStorage.getCurrentPlanID());
+    console.log(this.planStorage.getSelectedPlan().uid);
     this.router.navigate(['/tabs/plans/plan']);
+  }
+
+  navToProfile() {
+    this.router.navigate(['/tabs/profile']);
+  }
+
+  navToWorkout() {
+    console.log("Workout");
   }
 
 }

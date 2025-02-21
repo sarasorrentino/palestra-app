@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonButton, IonContent, IonHeader, IonicModule, IonTitle, IonToolbar, ModalController } from '@ionic/angular';
+import { PlansStorageService } from 'src/app/services/plans-storage.service';
 import { ManualPage } from 'src/app/tabs/manual/manual.page';
 
 @Component({
@@ -17,6 +18,15 @@ export class AddExerciseComponent  implements OnInit {
 
   exercises: any[] = [];
 
+  newExercise = {
+    uid: 0,
+    index: 0,
+    planID: 0,
+    series: 0,
+    repeats: 0,
+    restTime: 0,
+  }
+
   ngOnInit() {
     this.http.get<any[]>('/assets/database/exercises_db.json').subscribe(data => {
       this.exercises = data;
@@ -26,14 +36,19 @@ export class AddExerciseComponent  implements OnInit {
   name!: string;
   currentStep = 1;
 
-  constructor(private modalCtrl: ModalController, private http: HttpClient) {}
+  constructor(private modalCtrl: ModalController, private http: HttpClient, private planStorage: PlansStorageService) {}
 
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
   add() {
-    console.log("Exercise added!");
+    this.newExercise.index = this.exercises.length;
+    this.newExercise.planID = this.planStorage.getSelectedPlan().uid;
+    console.log("chiamata");
+    this.planStorage.addExerciseToDay(this.newExercise.planID, this.planStorage.getSelectedDay(), this.newExercise);
+    console.log(this.newExercise);
+    console.log("Day: " + this.planStorage.getSelectedDay());
     return this.modalCtrl.dismiss(null, 'confirm');
   }
 
@@ -51,38 +66,35 @@ export class AddExerciseComponent  implements OnInit {
     console.log(this.currentStep);
   }
 
-  series = 0;
-  repeats = 0;
-  rest_time = 0;
-
   incrementSeries() {
-    this.series++;
+    this.newExercise.series++;
   }
 
   decrementSeries() {
-    this.series--;
+    this.newExercise.series--;
   }
 
   incrementRepeats() {
-    this.repeats++;
+    this.newExercise.repeats++;
   }
 
   decrementRepeats() {
-    this.repeats--;
+    this.newExercise.repeats--;
   }
 
   incrementRestTime() {
-    this.rest_time+=30;
+    this.newExercise.restTime+=30;
   }
 
   decrementRestTime() {
-    this.rest_time-=30;
+    this.newExercise.restTime-=30;
   }
 
-  selectedExercise: string | null = null;
+  selectedExercise: number | null = null;
 
-  selectExercise(exercise: string) {
-    this.selectedExercise = exercise;
-    localStorage.setItem('selectedExercise', JSON.stringify(exercise));
+  selectExercise(exerciseCode: number) {
+    this.newExercise.uid = exerciseCode;
+    this.selectedExercise = exerciseCode;
+    //localStorage.setItem('selectedExercise', JSON.stringify(exercise));
   }
 }

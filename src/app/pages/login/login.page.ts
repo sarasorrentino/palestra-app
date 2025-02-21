@@ -71,7 +71,7 @@ export class LoginPage implements OnInit {
   ----------------------------------------------------------------------------------------------------*/
 
   async verifyCredentials() {
-    const user = await this.userStorage.getUser(this.user);
+    const user = await this.userStorage.getUserByEmail(this.user.email);
     if (user && user.password === this.user.password) {
       console.log("Login riuscito!");
       this.userStorage.updateCurrentUser(this.user.email); // Update current user

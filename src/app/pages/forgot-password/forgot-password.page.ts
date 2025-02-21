@@ -55,7 +55,7 @@ export class ForgotPasswordPage implements OnInit {
   ----------------------------------------------------------------------------------------------------*/
   
   async verifyCredentials() {
-    const user = await this.userStorage.getUser(this.user);
+    const user = await this.userStorage.getUserByEmail(this.user.email);
     if (user) {
       console.log("Utente trovato!");
       const alert = await this.alertController.create({

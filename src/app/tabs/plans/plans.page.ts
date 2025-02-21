@@ -15,7 +15,6 @@ import { UserStorageService } from 'src/app/services/user-storage.service';
 export class PlansPage implements OnInit {
 
   plans: any[] = [];
-  currentPlan: any[] = [];
 
   constructor(private router: Router, private planStorage: PlansStorageService, private userStorage: UserStorageService, private alertController: AlertController) { }
 
@@ -37,6 +36,11 @@ export class PlansPage implements OnInit {
       this.planStorage.setCurrentPlan(plan.uid);
     }
     slidingItem.close();
+  }
+
+  selectPlan(planID: number){
+    this.planStorage.setSelectedPlan(planID);
+    this.router.navigate(['/tabs/plans/plan']);
   }
 
   async deletePlan(plan: any, slidingItem: IonItemSliding) {

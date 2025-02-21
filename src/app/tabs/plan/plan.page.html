@@ -4,12 +4,12 @@
       <ion-row class="ion-align-items-center">
         <ion-col>
           <ion-icon name="arrow-back-outline" size="large" color="primary"></ion-icon>
-          <ion-title> {{ [plan.title] }} </ion-title>
+          <ion-title> {{ [selectedPlan.title] }} </ion-title>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col class="ion-justify-items-center">
-          <span class="subtitle"> {{ [plan.description] }} </span>
+          <span class="subtitle"> {{ [selectedPlan.description] }} </span>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -30,8 +30,8 @@
     </ng-template>
   </ion-modal>
 
-  <ion-segment [(ngModel)]="selectedDay">
-    <ion-segment-button *ngFor="let i of getArray(plan.n_days)" [value]="i">
+  <ion-segment [(ngModel)]="selectedDay" (click)="setSelectedDay()">
+    <ion-segment-button *ngFor="let i of getArray(selectedPlan.n_days)" [value]="i">
       Giorno {{ i + 1 }}
     </ion-segment-button>
   </ion-segment>
@@ -40,34 +40,44 @@
   <div *ngIf="selectedDay !== null">
     <p>Hai selezionato il giorno {{ selectedDay + 1 }}</p>
 
-    <ion-card>
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img src="../../../assets/images/exercises/bench-press.jpg" alt="Bench Press">
-        </ion-thumbnail>
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <ion-label>
-                <p>CHEST</p>
-                <h1>Bench Press</h1>
-              </ion-label>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <div class="chips">
-                <ion-chip>
-                  <!--<ion-icon class="chip-icon" name="barbell-outline" color="primary"></ion-icon>-->
-                  <ion-label>3 series x 12 repeats</ion-label>
-                </ion-chip>
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-      
-    </ion-card>
+    <ion-list lines="none">
+      <ion-item-sliding *ngFor="let exercise of exercises" #slidingItem>
+        <ion-item>
+          <ion-card>
+            <ion-item>
+              <ion-thumbnail slot="start">
+                <img [src]="getExerciseX(exercise.uid, 3)" [alt]="getExerciseX(exercise.uid, 0)">
+              </ion-thumbnail>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <ion-label>
+                      <p> {{ getExerciseX(exercise.uid, 2) }} </p>
+                      <h1> {{ getExerciseX(exercise.uid, 0) }} </h1>
+                    </ion-label>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <div class="chips">
+                      <ion-chip>
+                        <!--<ion-icon class="chip-icon" name="barbell-outline" color="primary"></ion-icon>-->
+                        <ion-label>{{exercise.series}} series x {{exercise.repeats}} repeats</ion-label>
+                      </ion-chip>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+          </ion-card>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="danger">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
 
   </div>
   

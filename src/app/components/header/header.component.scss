@@ -54,3 +54,19 @@ div {
     align-items: center;
     gap: 10px;
 }
+
+.round-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+  
+.avatar-container {
+display: flex;
+align-items: center;
+justify-content: right;
+width: 100px;
+height: 60px;
+cursor: pointer;
+}

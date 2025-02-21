@@ -31,9 +31,14 @@ export class UserStorageService {
     localStorage.setItem('users', JSON.stringify(users));
   }
 
-  getUser(uid: any) {
+  getUser(uid: number) {
     const users = JSON.parse(localStorage.getItem('users') || '[]');
     return users.find((x: any) => x.uid === uid) || null;
+  }
+
+  getUserByEmail(email: string) {
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    return users.find((x: any) => x.email === email) || null;
   }
 
   checkExistingUser(checkEmail: string) {

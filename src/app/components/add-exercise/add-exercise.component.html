@@ -21,7 +21,7 @@
   </ion-header>
 
   <ion-content *ngSwitchCase="1" class="ion-padding">
-      <ion-item *ngFor="let exercise of exercises" (click)="selectExercise(exercise)" [ngClass]="{'selected': exercise === selectedExercise}">
+      <ion-item *ngFor="let exercise of exercises" (click)="selectExercise(exercise.id)" [ngClass]="{'selected': exercise.id === selectedExercise}">
         <ion-thumbnail slot="start">
           <img [src]="exercise.image" alt="{{ exercise.name }}"/>
         </ion-thumbnail>
@@ -37,7 +37,7 @@
         <ion-text class="small-text">Descrizione di cosa sono le serie</ion-text>
         <div class="counter__section">
           <ion-button (click)="decrementSeries()">-</ion-button>
-          <p>{{series}}</p>
+          <p>{{newExercise.series}}</p>
           <ion-button (click)="incrementSeries()">+</ion-button>
         </div>
       </div>
@@ -47,7 +47,7 @@
         <ion-text class="small-text">Descrizione di cosa sono le ripetizioni</ion-text>
         <div class="counter__section">
           <ion-button (click)="decrementRepeats()">-</ion-button>
-          <p>{{repeats}}</p>
+          <p>{{newExercise.repeats}}</p>
           <ion-button (click)="incrementRepeats()">+</ion-button>
         </div>
       </div>
@@ -57,7 +57,7 @@
         <ion-text class="small-text">Descrizione di cosa è il rest time</ion-text>
         <div class="counter__section">
           <ion-button (click)="decrementRestTime()">-</ion-button>
-          <p>{{rest_time}} sec</p>
+          <p>{{newExercise.restTime}} sec</p>
           <ion-button (click)="incrementRestTime()">+</ion-button>
         </div>
       </div>
