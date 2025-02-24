@@ -4,10 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { WorkoutPageRoutingModule } from './workout-routing.module';
+import { CountdownPageRoutingModule } from './countdown-routing.module';
 
-import { WorkoutPage } from './workout.page';
-import { TimerComponent } from 'src/app/components/timer/timer.component';
+import { CountdownPage } from './countdown.page';
 import { CountdownComponent } from 'src/app/components/countdown/countdown.component';
 
 @NgModule({
@@ -15,10 +14,9 @@ import { CountdownComponent } from 'src/app/components/countdown/countdown.compo
     CommonModule,
     FormsModule,
     IonicModule,
-    WorkoutPageRoutingModule,
-    TimerComponent,
+    CountdownPageRoutingModule,
     CountdownComponent
   ],
-  declarations: [WorkoutPage]
+  declarations: [CountdownPage]
 })
-export class WorkoutPageModule {}
+export class CountdownPageModule {}

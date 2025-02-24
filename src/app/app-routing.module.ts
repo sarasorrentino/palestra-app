@@ -30,8 +30,16 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
+    path: 'countdown',
+    loadChildren: () => import('./tabs/workout/countdown/countdown.module').then( m => m.CountdownPageModule)
+  },
+  {
     path: 'workout',
     loadChildren: () => import('./tabs/workout/workout.module').then( m => m.WorkoutPageModule)
+  },
+  {
+    path: 'summary',
+    loadChildren: () => import('./tabs/workout/summary/summary.module').then( m => m.SummaryPageModule)
   }
 ];
 

@@ -49,7 +49,7 @@ export class HomePage implements OnInit {
   }
 
   navToWorkout() {
-    console.log("Workout");
+    this.router.navigate(['/countdown']);
   }
 
 }

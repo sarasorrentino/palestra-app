@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PlanPage implements OnInit {
 
-  constructor(private localStorage: LocalStorageService, private planStorage: PlansStorageService, private http: HttpClient) { }
+  constructor(private planStorage: PlansStorageService, private http: HttpClient) { }
 
   selectedPlan: any;
   days: any;
@@ -56,7 +56,7 @@ export class PlanPage implements OnInit {
     localStorage.setItem('selectedDay', JSON.stringify(this.selectedDay));
   }
 
-  getExerciseName(exerciseID: number) {
+  getExerciseName(exerciseID: number): string {
     const findEx = this.exerciseDB.find((ex: any) => ex.uid === exerciseID);
     return findEx.name;
   }

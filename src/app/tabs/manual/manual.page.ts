@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-manual',

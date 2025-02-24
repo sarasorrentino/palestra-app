@@ -1,0 +1,7 @@
+<ion-card>
+  <ion-card-content>
+    <div class="countdown-container" *ngIf="isRunning">
+      <div class="countdown-number" [ngClass]="animateClass">{{ showNumber }}</div>
+    </div>
+  </ion-card-content>
+</ion-card>

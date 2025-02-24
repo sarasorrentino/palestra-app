@@ -1,0 +1,10 @@
+<ion-content [fullscreen]="true">
+
+  <h1>Workout Complete 🎉</h1>
+  <h3> {{ selectedPlan.title }}</h3>
+  <h4> Day {{ selectedDay }}</h4>
+  <h3> {{ getFormattedTime() }} </h3>
+
+  <ion-button expand="block" (click)="navToHome()"> Done </ion-button>
+
+</ion-content>

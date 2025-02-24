@@ -1,14 +1,31 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>workout</ion-title>
+    <ion-title> {{ selectedPlan.title }} - Day {{ selectedDay + 1 }} </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">workout</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <app-timer></app-timer>
+  <div class="timer-container">
+    <h2>Duration</h2>
+    <div class="timer-display">{{ getFormattedTime() }}</div>
+    <ion-button (click)="pauseResumeTimer()">
+      {{ isPaused ? 'Resume' : 'Pause' }}
+    </ion-button>
+  </div>
+
+  <div class="exercise-card" *ngIf="currentExercise">
+    <h3>{{ currentExercise.muscleGroup }}</h3>
+    <h1>{{ currentExercise.name }}</h1>
+    <ion-chip>
+      <!--<ion-icon class="chip-icon" name="barbell-outline" color="primary"></ion-icon>-->
+      <ion-label>{{currentExercise.series}} series x {{currentExercise.repeats}} repeats</ion-label>
+    </ion-chip>
+    <ion-chip>
+      <!--<ion-icon class="chip-icon" name="barbell-outline" color="primary"></ion-icon>-->
+      <ion-label>{{currentExercise.restTime}} sec</ion-label>
+    </ion-chip>
+    <img [src]="currentExercise.image" [alt]="currentExercise.name" class="exercise-image"/>
+  
+    <ion-button expand="block" (click)="nextExercise()"> {{ this.currentExerciseIndex < this.exercises.length - 1 ? 'Next' : 'Done' }} </ion-button>
+  </div>
 </ion-content>

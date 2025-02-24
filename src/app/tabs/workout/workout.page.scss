@@ -1,0 +1,24 @@
+.workout-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: #f4f5f8;
+  }
+  
+  .exercise-card {
+    text-align: center;
+    background: #000000;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+  }
+  
+  .exercise-image {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 15px;
+    margin: 20px 0;
+  }
+  
