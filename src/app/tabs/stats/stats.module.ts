@@ -8,6 +8,7 @@ import { StatsPageRoutingModule } from './stats-routing.module';
 
 import { StatsPage } from './stats.page';
 import { HeaderComponent } from 'src/app/components/header/header.component';
+import { ExerciseLoadChartComponent } from 'src/app/components/exercise-load-chart/exercise-load-chart.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
     FormsModule,
     IonicModule,
     StatsPageRoutingModule,
-    HeaderComponent
+    HeaderComponent,
+    ExerciseLoadChartComponent
   ],
   declarations: [StatsPage]
 })

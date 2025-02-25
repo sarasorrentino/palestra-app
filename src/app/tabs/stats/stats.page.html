@@ -1,9 +1,11 @@
 <app-header title="Your Stats"></app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-    <h2>Workout Duration Over Time</h2>
+    <h2>Workout History</h2>
     <div class="chart-container">
-        <canvas #workoutChart class="chart-scrollable"></canvas>
-      </div>
+        <canvas #workoutHistoryChart class="chart-scrollable"></canvas>
+    </div>
+
+    <app-exercise-load-chart></app-exercise-load-chart>
       
 </ion-content>      

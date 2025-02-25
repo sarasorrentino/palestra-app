@@ -18,14 +18,14 @@
     <h1>{{ currentExercise.name }}</h1>
     <ion-chip>
       <!--<ion-icon class="chip-icon" name="barbell-outline" color="primary"></ion-icon>-->
-      <ion-label>{{currentExercise.series}} series x {{currentExercise.repeats}} repeats</ion-label>
+      <ion-label> {{completedSeries}}/{{currentExercise.series}} series x {{currentExercise.repeats}} repeats</ion-label>
     </ion-chip>
     <ion-chip>
       <!--<ion-icon class="chip-icon" name="barbell-outline" color="primary"></ion-icon>-->
       <ion-label>{{currentExercise.restTime}} sec</ion-label>
     </ion-chip>
-    <img [src]="currentExercise.image" [alt]="currentExercise.name" class="exercise-image"/>
-  
+    <img [src]="currentExercise.image" [alt]="currentExercise.name" class="exercise-image"/>    
+    <app-rest-time></app-rest-time>
     <ion-button expand="block" (click)="nextExercise()"> {{ this.currentExerciseIndex < this.exercises.length - 1 ? 'Next' : 'Done' }} </ion-button>
   </div>
 </ion-content>

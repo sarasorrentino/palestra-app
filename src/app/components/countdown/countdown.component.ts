@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
@@ -9,7 +9,7 @@ import { IonicModule } from '@ionic/angular';
   styleUrls: ['./countdown.component.scss'],
   imports: [IonicModule, CommonModule]
 })
-export class CountdownComponent {
+export class CountdownComponent implements OnDestroy{
   countdownNumbers = ['', '3', '2', '1', 'Go!'];
   currentIndex = 0;
   showNumber = '';
@@ -41,6 +41,13 @@ export class CountdownComponent {
     } else {
       this.isRunning = false;
       this.router.navigate(['/workout']);
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.currentIndex) {
+      clearTimeout(this.currentIndex);
+      console.log('Timer cancellato!');
     }
   }
 }

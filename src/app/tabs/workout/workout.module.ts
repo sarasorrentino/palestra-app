@@ -9,6 +9,7 @@ import { WorkoutPageRoutingModule } from './workout-routing.module';
 import { WorkoutPage } from './workout.page';
 import { TimerComponent } from 'src/app/components/timer/timer.component';
 import { CountdownComponent } from 'src/app/components/countdown/countdown.component';
+import { RestTimeComponent } from 'src/app/components/rest-time/rest-time.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { CountdownComponent } from 'src/app/components/countdown/countdown.compo
     IonicModule,
     WorkoutPageRoutingModule,
     TimerComponent,
-    CountdownComponent
+    CountdownComponent,
+    RestTimeComponent
   ],
   declarations: [WorkoutPage]
 })

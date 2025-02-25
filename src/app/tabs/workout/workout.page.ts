@@ -27,7 +27,8 @@ export class WorkoutPage implements OnInit {
 
   currentExerciseIndex = 0;
   currentExercise: any;
-
+  completedSeries = 0;
+  
   ngOnInit() {
     this.currentExerciseIndex = 0; // Reset currentExerciseIndex
 
