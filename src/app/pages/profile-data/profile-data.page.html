@@ -1,107 +1,97 @@
 <ion-content class="background-image full-height">
-  <ion-grid class="full-height">
-    <ion-row class="ion-justify-content-center ion-align-items-center full-height">
-      <ion-col size="12" size-md="6" size-lg="4">
-        <ion-card>
+  <img class="logo" src="assets/Logo.svg" alt="Logo"/>
 
-          <ion-card-header>
-            <ion-card-title>About You</ion-card-title>
-            <ion-card-subtitle class="transform-initial">
-              Tell us more about yourself and your goals. You can always edit them later.
-            </ion-card-subtitle>
-          </ion-card-header>
+  <ion-card class="bottom-content">
 
-          <ion-card-content>
-            <div>
-              <ion-item>
-                <ion-label>Name</ion-label>
-                <ion-input 
-                  type="text"
-                  name="name"
-                  placeholder="Enter your name"
-                  [(ngModel)] = "user.name"
-                  required
-                  class="rtl-input"
-                ></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label>Surname</ion-label>
-                <ion-input
-                  type="text"
-                  name="surname"
-                  placeholder="Enter your surname"
-                  [(ngModel)] = "user.surname"
-                  required
-                  class="rtl-input"
-                ></ion-input>
-              </ion-item>
-              
-              <ion-item>
-                <ion-label>Gender</ion-label>
-                <ion-radio-group [(ngModel)]="user.gender" name="gender" required>
-                  <ion-list>
-                    <ion-item>
-                      <ion-radio value="Male" labelPlacement="end">Male</ion-radio>
-                    </ion-item>
-                    <ion-item>
-                      <ion-radio value="Female" labelPlacement="end">Female</ion-radio>
-                    </ion-item>
-                  </ion-list>
-                </ion-radio-group>
-              </ion-item>
-            
-              <ion-item>
-                <ion-label>Birthdate</ion-label>
-                <ion-input 
-                  type="date"
-                  labelPlacement="fixed"
-                  name="birthDate"
-                  class="rtl-input"
-                  [(ngModel)]="user.birthDate" 
-                ></ion-input>
-              </ion-item>
-  
-              <ion-item>
-                <ion-label>Weight</ion-label>
-                  <ion-input
-                    class="rtl-input"
-                    type="number"
-                    name="weight"
-                    placeholder="Enter your weight"
-                    [(ngModel)]="user.weight"
-                    required
-                    text-right
-                  ></ion-input>
-                  <ion-label style="padding-left: 10px; padding-right: 5px;">kg</ion-label>
-              </ion-item>
-              
-              <ion-item>
-                <ion-label>Goal</ion-label>
-                <ion-radio-group [(ngModel)]="user.goal" name="goal" required>
-                  <ion-list>
-                    <ion-item>
-                      <ion-radio value="Mass gain" labelPlacement="end">Mass gain</ion-radio>
-                    </ion-item>
-                    <ion-item>
-                      <ion-radio value="Tone" labelPlacement="end">Tone</ion-radio>
-                    </ion-item>
-                    <ion-item>
-                      <ion-radio value="Weight loss" labelPlacement="end">Weight loss</ion-radio>
-                    </ion-item>
-                  </ion-list>
-                </ion-radio-group>
-              </ion-item>
+    <ion-card-header>
+      <div>
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="/login"></ion-back-button>
+        </ion-buttons>
+        <h1 class="card-title">Tell us more about <br> <strong>yourself</strong></h1>
+      </div>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="input-container bottom-spacing">
+      
+        <ion-item lines="none">
+          <ion-label>Name</ion-label>
+          <ion-input 
+            class="rtl-input"
+            type="text"
+            name="name"
+            placeholder="Enter your name"
+            [(ngModel)] = "user.name"
+            required
+          ></ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label>Surname</ion-label>
+          <ion-input
+            class="rtl-input"
+            type="text"
+            name="surname"
+            placeholder="Enter your surname"
+            [(ngModel)] = "user.surname"
+            required
+          ></ion-input>
+        </ion-item>
+        
+        <ion-item lines="none">
+          <ion-label>Gender</ion-label>
+          <ion-radio-group [(ngModel)]="user.gender" name="gender" required>
+            <div class="radio-container-row">
+              <ion-radio value="Male" labelPlacement="end">Male</ion-radio>
+              <ion-radio value="Female" labelPlacement="end">Female</ion-radio>
             </div>
+          </ion-radio-group>                
+        </ion-item>
+      
+        <ion-item lines="none">
+          <ion-label>Birthdate</ion-label>
+          <ion-input 
+            type="date"
+            labelPlacement="fixed"
+            name="birthDate"
+            class="rtl-input"
+            [(ngModel)]="user.birthDate" 
+          ></ion-input>
+        </ion-item>
 
-            <div>
-              <ion-button size="block" fill="solid" class="loginbtn" [disabled]="!isFormValid()" (click)="register()">Sign Up</ion-button>
-              <ion-button size="block" fill="solid" color="light" (click)="back()">Back</ion-button>
+        <ion-item lines="none">
+          <ion-label>Weight</ion-label>
+            <ion-input
+              class="rtl-input"
+              type="number"
+              name="weight"
+              placeholder="Enter your weight"
+              [(ngModel)]="user.weight"
+              required
+              text-right
+            ></ion-input>
+            <ion-label style="padding-left: 10px; padding-right: 0px;">kg</ion-label>
+        </ion-item>
+        
+        <ion-item lines="none">
+          <ion-label>Goal</ion-label>
+          <ion-radio-group [(ngModel)]="user.goal" name="goal" required>
+            <div class="radio-container-column">
+                <ion-radio value="Mass gain" labelPlacement="end">Mass gain</ion-radio>
+                <ion-radio value="Tone" labelPlacement="end">Tone</ion-radio>
+                <ion-radio value="Weight loss" labelPlacement="end">Weight loss</ion-radio>
             </div>
-            
-          </ion-card-content>
+          </ion-radio-group>
+        </ion-item>
+      </div>
 
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      <div>
+        <ion-button color="primary" shape="round" size="block" [disabled]="!isFormValid()" (click)="register()">Sign Up</ion-button>
+        <ion-button color="secondary" shape="round" size="block" (click)="cancel()">Cancel</ion-button>
+      </div>
+    </ion-card-content>
+
+  </ion-card>
+    
 </ion-content>

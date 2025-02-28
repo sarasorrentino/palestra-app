@@ -1,26 +1,8 @@
-ion-card {
-    --ion--background-color: transparent;
-    background: transparent;
-    box-shadow: none !important;
-    padding: 0;
-    margin: 0;
-}
-
-ion-card-content {
-    margin-top: 10%;
-}
-
-ion-card-title {
-    font-size: 32px;
-    text-align: center;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color: var(--ion-color-primary);
-}
-
-ion-card-subtitle {
-    padding-top: 15px;
-    color: var(--ion-color-medium);
-    font-size: 14px;
-    text-align: center;
-    font-weight: 400;
+.welcome-text {
+    color: #F7F7F7;
+    font-family: var(--font-family-title, "Plus Jakarta Sans");
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 800;
+    margin-bottom: 50px;
 }

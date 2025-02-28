@@ -1,60 +1,56 @@
 <ion-content class="background-image full-height">
-  <ion-grid class="full-height">
-    <ion-row class="ion-justify-content-center ion-align-items-center full-height">
-      <ion-col size="12" size-md="6" size-lg="4">
-        <ion-card>
+  <img class="logo" src="assets/Logo.svg" alt="Logo"/>
+  <ion-card class="bottom-content">
+    <ion-card-header>
+      <div>
+        <h1 class="card-title">Welcome to <br> <strong>FitPlan</strong></h1>
+        <p class="card-subtitle">All your training plans, anytime, anywhere.</p>
+      </div>
+    </ion-card-header>
 
-          <ion-card-header>
-            <ion-card-title>Sign Up</ion-card-title>
-          </ion-card-header>
+    <ion-card-content>
+      <div class="bottom-spacing">
+        <ion-input
+          class="custom"
+          type="text"
+          name="email"
+          label="Email"
+          labelPlacement="fixed"
+          placeholder="Enter your email"
+          [(ngModel)] = "user.email"
+          (ngModelChange)="validateEmail()"
+          email
+          required></ion-input>
+        <div class="errorMessage">
+          <ion-text color="danger" *ngIf="emailError">
+            <p>{{ emailError }}</p>
+          </ion-text>
+        </div>
 
-          <ion-card-content>
-            <div>
-              <ion-item>
-                <ion-icon name="mail-outline"></ion-icon>
-                <ion-input 
-                  type="text"
-                  name="email"
-                  label="Email"
-                  labelPlacement="floating"
-                  [(ngModel)] = "user.email"
-                  (ngModelChange)="validateEmail()"
-                  email
-                  required></ion-input>
-              </ion-item>
-              <div class="errorMessage">
-                <ion-text color="danger" *ngIf="emailError">
-                  <p>{{ emailError }}</p>
-                </ion-text>
-              </div>
-              <ion-item>
-                <ion-icon name="lock-closed-outline"></ion-icon>
-                <ion-input
-                  type="password"
-                  name="password"
-                  label="Password"
-                  labelPlacement="floating"
-                  [clearOnEdit]="true"
-                  [(ngModel)] = "user.password"
-                  (ngModelChange)="validatePassword()"
-                  required
-                ></ion-input>
-              </ion-item>
-              <div class="errorMessage">
-                <ion-text color="danger" *ngIf="passwordError">
-                  <p>{{ passwordError }}</p>
-                </ion-text>
-              </div>
-            </div>
+        <ion-input
+          class="custom"
+          type="password"
+          name="password"
+          label="Password"
+          labelPlacement="fixed"
+          placeholder="Enter your password"
+          [clearOnEdit]="true"
+          [(ngModel)] = "user.password"
+          (ngModelChange)="validatePassword()"
+          required
+        ></ion-input>
+        <div class="errorMessage">
+          <ion-text color="danger" *ngIf="passwordError">
+            <p>{{ passwordError }}</p>
+          </ion-text>
+        </div>
+      </div>
 
-            <div>
-              <ion-button size="block" fill="solid" class="loginbtn" [disabled]="!emailValid || !passwordValid" (click)="chackCredentials()">Next</ion-button>
-              <ion-text color="primary" class="centered-link" (click)="login()">Already have an account? Sign in.</ion-text>
-            </div>
-            
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      <div>
+        <ion-button color="primary" shape="round" size="block" [disabled]="!emailValid || !passwordValid" (click)="chackCredentials()">Next</ion-button>
+        <ion-text class="center-link">Already have an account? <a class="highlight-link" (click)="login()">Sign in</a></ion-text>
+      </div>
+      
+    </ion-card-content>
+  </ion-card>
 </ion-content>

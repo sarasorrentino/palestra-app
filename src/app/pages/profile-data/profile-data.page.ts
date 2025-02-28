@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UserStorageService } from 'src/app/services/user-storage.service';
 
@@ -11,7 +12,7 @@ import { UserStorageService } from 'src/app/services/user-storage.service';
 })
 export class ProfileDataPage implements OnInit {
 
-  constructor(private router: Router, private userStorage: UserStorageService) { }
+  constructor(private router: Router, private userStorage: UserStorageService, private alertController: AlertController) { }
 
   ngOnInit() {}
 
@@ -61,8 +62,26 @@ export class ProfileDataPage implements OnInit {
     Navigation
   ----------------------------------------------------------------------------------------------------*/
 
-  back () {
-    this.router.navigate(['register']);
+  async cancel () {
+    const alert = await this.alertController.create({
+      header: 'Do you to discard all your progress?',
+      message: '',
+      buttons: [
+        {
+          text: 'Confirm',
+          role: 'destructive',
+          handler: () => {
+            this.router.navigate(['welcome']);
+          }
+        },
+        {
+          text: 'Keep editing',
+          role: 'cancel',
+        }
+        
+      ]
+    });
+    await alert.present();
   }
 
   login () {

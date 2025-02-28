@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title> {{ title || ('Hi, ' + (currentUsername || 'Utente')) }} </ion-title>
     <ion-icon *ngIf="!showIcon" slot="end" name="log-out" size="large" (click)="logout()"></ion-icon>

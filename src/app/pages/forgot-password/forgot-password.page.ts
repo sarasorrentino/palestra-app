@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UserStorageService } from 'src/app/services/user-storage.service';
+import { LoginPage } from '../login/login.page';
 
 @Component({
   selector: 'app-forgot-password',
