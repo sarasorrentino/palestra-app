@@ -1,16 +1,17 @@
 ion-header {
-    padding: 10% 5%;
     box-shadow: none;
+    --background: var(--ion-background-color);
 }
 
 ion-toolbar {
-    --background: none;
+    --background: var(--ion-background-color);
     --border-color: none;
     --border-width: 0 0 0;
-    --min-height: 80px;
+    --min-height: 120px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 5% 5%;
 }
 
 .header-ios ion-toolbar:last-of-type {

@@ -5,16 +5,30 @@
         <ion-row>
             <ion-col>
                 <ion-card *ngIf="currentPlan">
+                    <div class="training-dots">
+                        <div
+                          *ngFor="let index of [].constructor(workoutTotal); let i = index"
+                          [class.completed]="i < workoutIndex-1"
+                          [class.next]="i === workoutIndex-1"
+                          class="dot"
+                        >
+                        <ion-icon *ngIf="i < workoutIndex-1" name="checkmark-outline"></ion-icon>
+                        </div>
+                    </div>     
                     <ion-card-header (click)="navToPlan()">
-                      <ion-card-title> {{ currentPlan.title }} </ion-card-title>
-                      <ion-card-subtitle> {{ currentPlan.n_days }} DAYS </ion-card-subtitle>
-                    </ion-card-header>
-                    <ion-card-content>
-                      {{ currentPlan.description }}
-                    </ion-card-content>
-                    <div class="start-button">
-                        <app-icon-button icon="play" label="Start workout" [action]="navToWorkout"></app-icon-button>
-                    </div>
+                        <div>
+                            <h1 class="card-title"> {{ currentPlan.title }} </h1>
+                            <p class="card-subtitle"> Day {{ currentPlan.n_days }} </p>
+                            <div class="card-footer">
+                                <ion-chip>
+                                    <ion-icon name="stopwatch-outline"></ion-icon>
+                                    <ion-label>45 min</ion-label>
+                                </ion-chip>
+                                <ion-icon class="play-button" name="play" (click)="navToWorkout()"></ion-icon>                            
+                            </div>
+                            
+                        </div>
+                    </ion-card-header>   
                 </ion-card>
                 <ion-card *ngIf="!currentPlan" (click)="createProgram()">
                     <ion-card-header>
@@ -28,15 +42,18 @@
         </ion-row>
         <ion-row>
             <ion-col>
-                <app-icon-button fill="solid" icon="add" label="New Workout Plan" [action]="createProgram"></app-icon-button>
+                <ion-button color="primary" size="block" (click)="navToPlan()">
+                    <ion-icon name="add" slot="start" size="large"></ion-icon>
+                    New Plan
+                </ion-button>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col>
-                <app-icon-button fill="outline" icon="barbell-outline" label="Your Plans" [action]="navToPlans"></app-icon-button>
+                <app-icon-button icon="barbell-outline" label="Your <br> Plans" [action]="navToPlans"></app-icon-button>
             </ion-col>
             <ion-col>
-                <app-icon-button fill="outline" icon="Heart" label="Exercises" [action]="navToManual"></app-icon-button>
+                <app-icon-button icon="Heart" label="Saved <br> Exercises" [action]="navToManual"></app-icon-button>
             </ion-col>
         </ion-row>
     </ion-grid>

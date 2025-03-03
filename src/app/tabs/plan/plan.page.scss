@@ -1,54 +1,25 @@
 ion-header {
-    padding-top: 10%;
-    padding-bottom: 0;
-    padding-left: 5%;
-    padding-right: 5%;
     box-shadow: none;
+    --background: var(--ion-background-color);
 }
 
 ion-toolbar {
-    --background: none;
+    --background: var(--ion-background-color);
     --border-color: none;
     --border-width: 0 0 0;
     --min-height: 80px;
-    --padding-top: 20px;
-    --padding-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 5%;
 }
 
 .header-ios ion-toolbar:last-of-type {
     --border-width: 0 0 0px;
 }
 
-ion-title {
-    font-size: 36px;
-    text-align: center;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color: var(--ion-color-primary);
-
-    padding: 0;
-    margin: 0;
-}
-
-.subtitle{
-    padding-top: 15px;
-    color: var(--ion-color-medium);
-    font-size: 18px;
-    text-align: center;
-    font-weight: 400;
-    display: block;
-}
-
 .chip-icon {
     margin-right: 8px;
-}
-
-.chips {
-    margin-top: 10px;
-}
-
-ion-icon {
-    margin: 0;
-    padding: 0;
 }
 
 ion-popover {
@@ -67,23 +38,51 @@ ion-grid {
     margin-bottom: 10px;
 }
 
-ion-card {
-    --background: #323232;
-    --color: var(--ion-color-light);
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
+
+
+ion-card-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.exercise-title {
+    color: var(--ion-color-light);
+    font-family: var(--font-family-title, "Plus Jakarta Sans");
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    text-align: left;
+    margin-top: 0;
+}
+
+.exercise-subtitle {
+    margin: 0px;
+    color: var(--ion-color-light);
+    font-size: 16px;
+    font-weight: 300;
+    display: block;
+    text-align: left;
 }
 
 ion-item {
-    --border-radius: 8px;
-    --background: none;
+    width: 100%;
+    height: 100%;
+    --padding-top: 0;
+    --padding-bottom: 0;
+    --padding-left: 0;
+    --padding-right: 0;
+    --padding-end: 0;
+    --margin-right: 0;
+    --background: var(--dark-color);
+    border-radius: 20px;
 }
 
-ion-thumbnail {
+img {
     width: 100px;
     height: 100px;
+    margin-right: 20px;
+    border-radius: 20px;
+    border: 1px solid var(--ion-color-primary);
 }
 
 ion-modal {

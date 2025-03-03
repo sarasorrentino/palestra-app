@@ -88,4 +88,7 @@ export class PlansPage implements OnInit {
     await alert.present();
   }
   
+  navToWorkout() {
+    this.router.navigate(['/countdown']);
+  }
 }

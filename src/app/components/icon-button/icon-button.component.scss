@@ -1,15 +1,13 @@
 ion-button {
+    height: 100px;
     --background: var(--dark-color);
+    --color: var(--ion-color-primary);
     outline: none;
+    text-align: left;
 }
 
-.primary-button {
-    --background: var(--ion-color-primary); /* Cambia colore di sfondo */
-    --color: var(--background-color); /* Cambia colore del testo */
-}
-
-.secondary-button {
-    --background: var(--dark-color);
-    --color: var(--ion-color-primary); /* Cambia colore del testo */
-    border-color: var(var(--dark-color));
+ion-icon {
+    width: 32px;
+    height: 32px;
+    padding-right: 12px;
 }

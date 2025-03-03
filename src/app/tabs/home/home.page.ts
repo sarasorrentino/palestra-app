@@ -11,14 +11,20 @@ import { PlansStorageService } from 'src/app/services/plans-storage.service';
 })
 export class HomePage implements OnInit {
 
-  constructor(private router: Router, private localStorage: LocalStorageService, private planStorage: PlansStorageService) { }
+  constructor(private router: Router, private planStorage: PlansStorageService) { }
 
   currentPlan: any;
+  workoutIndex: number = 2;
+  workoutTotal: number = 4;
   
   ngOnInit() {
     this.planStorage.currentPlan$.subscribe(plan => {
-      if(plan)
+      if(plan){
         this.currentPlan = plan;
+        //this.workoutTotal = this.currentPlan.n_days;
+        //this.workoutIndex = this.planStorage.getSelectedDay();
+      }
+        
     });
   }
 

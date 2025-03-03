@@ -1,23 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col>
-          <ion-icon name="arrow-back-outline" size="large" color="primary"></ion-icon>
-          <ion-title> {{ [selectedPlan.title] }} </ion-title>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="ion-justify-items-center">
-          <span class="subtitle"> {{ [selectedPlan.description] }} </span>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/plans"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar class="custom-toolbar">
+    <h1 class="title"> {{ selectedPlan.title }} </h1>
+    <h2 class="subtitle"> {{ selectedPlan.description }} </h2>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-
+<ion-content class="ion-padding">
+      
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
       <ion-fab-button id="open-modal">
         <ion-icon name="add"></ion-icon>
@@ -36,40 +30,40 @@
     </ion-segment-button>
   </ion-segment>
   
-  
   <div *ngIf="selectedDay !== null">
     <p>Hai selezionato il giorno {{ selectedDay + 1 }}</p>
 
     <ion-list lines="none">
       <ion-item-sliding *ngFor="let exercise of exercises" #slidingItem>
-        <ion-item>
-          <ion-card>
-            <ion-item>
-              <ion-thumbnail slot="start">
-                <img [src]="getExerciseX(exercise.uid, 3)" [alt]="getExerciseX(exercise.uid, 0)">
-              </ion-thumbnail>
+        <ion-item lines="none">
               <ion-grid>
                 <ion-row>
+                  <ion-col size="auto">
+                    <img [src]="getExerciseX(exercise.uid, 3)" [alt]="getExerciseX(exercise.uid, 0)">
+                  </ion-col>
                   <ion-col>
-                    <ion-label>
-                      <p> {{ getExerciseX(exercise.uid, 2) }} </p>
-                      <h1> {{ getExerciseX(exercise.uid, 0) }} </h1>
-                    </ion-label>
+                    <!--
+                      <ion-chip>
+                        <ion-label>Chest</ion-label>
+                    </ion-chip>
+                  -->
+                      <h1 class="exercise-title"> {{ getExerciseX(exercise.uid, 0) }} </h1>
+                      <p class="exercise-subtitle"> {{ getExerciseX(exercise.uid, 2) }} </p>              
                   </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>
-                    <div class="chips">
-                      <ion-chip>
-                        <!--<ion-icon class="chip-icon" name="barbell-outline" color="primary"></ion-icon>-->
-                        <ion-label>{{exercise.series}} series x {{exercise.repeats}} repeats</ion-label>
-                      </ion-chip>
-                    </div>
+                    <ion-chip>
+                      <ion-icon class="chip-icon" name="barbell-outline" color="primary"></ion-icon>
+                      <ion-label>{{exercise.series}} series</ion-label>
+                    </ion-chip>
+                    <ion-chip>
+                      <ion-icon class="chip-icon" name="barbell-outline" color="primary"></ion-icon>
+                      <ion-label>{{exercise.repeats}} repeats</ion-label>
+                    </ion-chip>
                   </ion-col>
                 </ion-row>
               </ion-grid>
-            </ion-item>
-          </ion-card>
         </ion-item>
         <ion-item-options side="end">
           <ion-item-option color="danger">
@@ -80,7 +74,5 @@
     </ion-list>
 
   </div>
-  
-
 
 </ion-content>

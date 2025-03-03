@@ -17,7 +17,7 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
     IonicModule,
     HomePageRoutingModule,
     HeaderComponent,
-    IconButtonComponent
+    IconButtonComponent,
   ],
   declarations: [HomePage]
 })

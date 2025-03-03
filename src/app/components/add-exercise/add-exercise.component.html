@@ -1,69 +1,81 @@
 <ng-container [ngSwitch]="currentStep">
-  <ion-header>
-    <ion-toolbar *ngSwitchCase="1">
-      <ion-buttons slot="start">
-        <ion-button (click)="cancel()">Cancel</ion-button>
-      </ion-buttons>
-      <ion-title>Add Exercise</ion-title>
-      <ion-buttons slot="end">
-        <ion-button (click)="goNext()" [strong]="true" [disabled]="!selectedExercise">Next</ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-    <ion-toolbar *ngSwitchCase="2">
-      <ion-buttons slot="start">
-        <ion-button (click)="goBack()">Back</ion-button>
-      </ion-buttons>
-      <ion-title>Add Exercise</ion-title>
-      <ion-buttons slot="end">
-        <ion-button (click)="add()" [strong]="true" [disabled]="!selectedExercise">Add</ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
 
-  <ion-content *ngSwitchCase="1" class="ion-padding">
-      <ion-item *ngFor="let exercise of exercises" (click)="selectExercise(exercise.id)" [ngClass]="{'selected': exercise.id === selectedExercise}">
-        <ion-thumbnail slot="start">
-          <img [src]="exercise.image" alt="{{ exercise.name }}"/>
-        </ion-thumbnail>
-        <ion-label>{{ exercise.name }}</ion-label>
-        <ion-label>{{ exercise.muscleGroup }}</ion-label>
-      </ion-item>
-  </ion-content>
-
-  <ion-content *ngSwitchCase="2" class="ion-padding">
-    <div class="top-margin">
-      <div class="center">
-        <ion-text class="bold-text">N° Series</ion-text>
-        <ion-text class="small-text">Descrizione di cosa sono le serie</ion-text>
-        <div class="counter__section">
-          <ion-button (click)="decrementSeries()">-</ion-button>
-          <p>{{newExercise.series}}</p>
-          <ion-button (click)="incrementSeries()">+</ion-button>
-        </div>
+  <ion-card>
+    <ion-card-header *ngSwitchCase="1">
+      <div class="custom-header">
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Cancel</ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button (click)="goNext()" [strong]="true" [disabled]="!selectedExercise"><strong>Next</strong></ion-button>
+        </ion-buttons>
       </div>
+      <h1 class="card-title"><strong>Add Exercise</strong></h1>
+    </ion-card-header>
+
+    <ion-card-header *ngSwitchCase="2">
+      <div class="custom-header">
+        <ion-buttons slot="start">
+          <ion-button (click)="goBack()">Back</ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button id="open-toast" (click)="add()" [strong]="true" [disabled]="!selectedExercise"><strong>Add</strong></ion-button>
+        </ion-buttons>
+        <ion-toast color="success" trigger="open-toast" swipeGesture="vertical" message="Exercise successfully added to the plan" [duration]="5000"></ion-toast>
+      </div>
+      <h1 class="card-title"><strong>Add Exercise</strong></h1>
+    </ion-card-header>
+    
+      <ion-card-content *ngSwitchCase="1" class="ion-padding">
+        <div class="scrollable-list">
+          <ion-item lines="none" *ngFor="let exercise of exercises" (click)="selectExercise(exercise.id)" [ngClass]="{'selected': exercise.id === selectedExercise}">
+            <ion-thumbnail slot="start">
+              <img [src]="exercise.image" alt="{{ exercise.name }}"/>
+            </ion-thumbnail>
+            <ion-label> <strong> {{  exercise.name }} </strong> </ion-label>
+            <ion-label>{{ exercise.muscleGroup }}</ion-label>
+          </ion-item>
+        </div>
+      </ion-card-content>
+
+      <ion-card-content *ngSwitchCase="2" class="ion-padding">
+        <div class="top-margin">
+          <div class="center">
+            <h3 class="selector-divider">Select n° of Series</h3>
+            <div class="counter__section">
+              <ion-icon name="remove-circle" color="primary" size="large" (click)="decrementSeries()"></ion-icon>
+              <p>{{newExercise.series}}</p>
+              <ion-icon name="add-circle" color="primary" size="large" (click)="incrementSeries()"></ion-icon>
+            </div>
+          </div>
+          
+          <div class="center">
+            <h3 class="selector-divider">Select n° of Repeats</h3>
+            <div class="counter__section">
+              <ion-icon name="remove-circle" color="primary" size="large" (click)="decrementRepeats()"></ion-icon>
+              <p>{{newExercise.repeats}}</p>
+              <ion-icon name="add-circle" color="primary" size="large" (click)="incrementRepeats()"></ion-icon>
+            </div>
+          </div>
       
-      <div class="center">
-        <ion-text class="bold-text">N° Repeats</ion-text>
-        <ion-text class="small-text">Descrizione di cosa sono le ripetizioni</ion-text>
-        <div class="counter__section">
-          <ion-button (click)="decrementRepeats()">-</ion-button>
-          <p>{{newExercise.repeats}}</p>
-          <ion-button (click)="incrementRepeats()">+</ion-button>
+          <div class="center">
+            <h3 class="selector-divider">Select Rest Time</h3>
+            <div class="counter__section">
+              <ion-icon name="remove-circle" color="primary" size="large" (click)="decrementRestTime()"></ion-icon>
+              <p>{{newExercise.restTime}} sec</p>
+              <ion-icon name="add-circle" color="primary" size="large" (click)="incrementRestTime()"></ion-icon>
+            </div>
+          </div>
         </div>
-      </div>
+       
+        </ion-card-content>
+
+
+
+
   
-      <div class="center">
-        <ion-text class="bold-text">Rest Time</ion-text>
-        <ion-text class="small-text">Descrizione di cosa è il rest time</ion-text>
-        <div class="counter__section">
-          <ion-button (click)="decrementRestTime()">-</ion-button>
-          <p>{{newExercise.restTime}} sec</p>
-          <ion-button (click)="incrementRestTime()">+</ion-button>
-        </div>
-      </div>
-    </div>
-    
-    
-  </ion-content>
+  </ion-card>
+
+  
   
 </ng-container>

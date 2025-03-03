@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserStorageService } from 'src/app/services/user-storage.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,9 +10,69 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private userStorage: UserStorageService) { }
+  
+    user = this.userStorage.getCurrentUser();
+    changedUser = this.userStorage.getCurrentUser();
+  
+    currentValue = '';
+    passwordError: string = "";
+    passwordValid: boolean = false;
 
-  ngOnInit() {
-  }
+    onIonChange(event: CustomEvent) {
+      this.currentValue = event.detail.value;
+    }
+  
+    onDidDismiss(event: CustomEvent) {
+      console.log('didDismiss', JSON.stringify(event.detail));
+    }
+  
+    ngOnInit() {}
+  
+    back () {
+      this.router.navigate(['register']);
+    }
+  
+    isFormValid(): boolean {
+      //console.log(this.user);
+      return !!(
+        this.user.name &&
+        this.user.surname &&
+        this.user.gender &&
+        this.user.birthDate &&
+        this.user.weight &&
+        this.user.goal
+      );
+    }
+  
+    isFormChanged(): boolean {
+      //console.log(this.user);
+      return JSON.stringify(this.user) !== JSON.stringify(this.changedUser);
+    }
+
+    validatePassword() {
+      this.passwordError = '';
+      this.passwordValid = false;
+  
+      if (!this.user.password) {
+        this.passwordError = 'Password is required.';
+      } else if (this.user.password.length < 6) {
+        this.passwordError = 'Password must be at least 6 characters long';
+      }
+      else {
+        this.passwordValid = true;
+      }
+    }  
+  
+    updateUser() {
+      this.userStorage.updateUser(this.user); // Update users list
+      this.userStorage.setCurrentUser(this.user.uid); // Update current user
+  
+      console.log("Updated user");
+    }
+  
+    reset() {
+      this.user = this.userStorage.getCurrentUser();
+    }
 
 }

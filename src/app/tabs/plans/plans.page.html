@@ -9,7 +9,7 @@
 
     <ion-list lines="none">
       <ion-item-sliding *ngFor="let plan of plans" #slidingItem>
-        <ion-item>
+        <ion-item lines="none">
           <ion-card (click)="selectPlan(plan.uid)">
             <ion-icon 
               *ngIf="plan.isCurrent" 
@@ -19,11 +19,14 @@
             <ion-card-header>
               <ion-card-title> {{ plan.title }} </ion-card-title>
               <ion-card-subtitle> {{ plan.n_days }} DAYS </ion-card-subtitle>
+              <div class="card-footer">
+                <ion-chip>
+                    <ion-icon name="stopwatch-outline"></ion-icon>
+                    <ion-label>45 min</ion-label>
+                </ion-chip>
+                <ion-icon class="play-button" name="play" (click)="navToWorkout()"></ion-icon>                            
+              </div>
             </ion-card-header>
-          
-            <ion-card-content>
-              {{ plan.description }}
-            </ion-card-content>
           </ion-card>
         </ion-item>
     

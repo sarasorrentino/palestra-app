@@ -37,6 +37,10 @@
 @import "@ionic/angular/css/palettes/dark.system.css";
 
 //------
+:host {
+    --background: none !important;
+}
+
 body {
 	--ion-font-family: var(--font-primary);
 	background-color: var(--background-color);
@@ -91,7 +95,6 @@ ion-card {
     border-top-right-radius: 20px; 
     padding: 0;
     margin: 0;
-    animation: slideUp 0.5s ease-out forwards;
 }
 
 @keyframes slideUp {
@@ -109,9 +112,8 @@ ion-card {
 
 .flex-center {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    height: 100%;
 }
 
 .align-center {
@@ -215,11 +217,51 @@ ion-item {
     --border-width: 0;
 }
 
+.title {
+    color: var(--ion-color-primary);
+    text-align: center;
+    font-family: var(--font-family-title, "Plus Jakarta Sans");
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.subtitle{
+    padding-top: 0px;
+    color: var(--ion-color-medium);
+    font-size: 18px;
+    text-align: center;
+    font-weight: 400;
+    display: block;
+}
+
+.text-divider {
+    color: var(--ion-color-primary);
+    font-size: 16px;
+    width: 100%;
+    display: flex;
+    align-items: start;
+    text-align: left;
+}
+
 .input-container {
     display: flex;
     flex-direction: column; /* Se vuoi separarli verticalmente */
     gap: 10px; /* Distanza tra gli elementi */
 }  
+
+.card-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.play-button {
+    font-size: 40px;
+    color: var(--ion-color-primary);
+}
 
 .radio-container-row {
     display: flex;
@@ -236,6 +278,17 @@ ion-item {
 
 .rtl-input {
     text-align: right;
+}
+
+.date {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: center;
+}
+
+ion-datetime-button {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 ion-radio::part(container) {
@@ -267,4 +320,33 @@ ion-radio.radio-checked::part(mark) {
     border-color: #fff;
 
     transform: rotate(45deg);
+}
+
+ion-list {
+    border-radius: 8px;
+    --background: none;
+}
+
+.list-ios {
+    background: none;
+}
+
+ion-item-sliding {
+    --ion-safe-area-right: 0;
+    --ion-safe-area-left: 0;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+ion-item {
+    width: 100%;
+    height: 100%;
+    --padding-top: 0;
+    --padding-bottom: 0;
+    --padding-left: 0;
+    --padding-right: 0;
+    --padding-end: 0;
+    --margin-right: 0;
+    --background-color: var(--dark-color);
+    border-radius: 20px;
 }

@@ -1,25 +1,57 @@
 ion-card {
     background: var(--dark-color);
     --color: var(--ion-color-light);
-    box-shadow: none !important;
     border-radius: 20px;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    animation: slideUp 0.5s ease-out forwards;
 }
 
-ion-card-title {
-    --color: var(--ion-color-primary);
+.card-title {
+    color: #F7F7F7;
+    text-align: left;
+    font-size: 24px;
+    font-weight: 600;
 }
 
-ion-card-subtitle {
-    --color: var(--ion-color-primary);
+.card-subtitle {
+    color: #F7F7F7;
+    text-align: left;
+    font-size: 20px;
+    font-weight: 300;
+    margin-top: 0px;
 }
 
-.start-button {
-    margin-bottom: 10%;
-    margin-left: 10%;
-    margin-right: 10%;
+ion-button {
+    height: 60px;
+    border-radius: 5px;
 }
+
+.training-dots {
+    padding-top: 25px;
+    padding-bottom: 0px;
+    padding-right: 25px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.training-dots ion-icon {
+    font-size: 14px;
+}
+  
+.dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: var(--medium-color);
+    border: 1px solid var(--ion-color-primary);
+}
+  
+.dot.completed {
+    background-color: var(--ion-color-primary);
+    border: none;
+    color: var(--dark-color);
+}
+
+.dot.next {
+    background-color: var(--ion-color-primary);
+}
+  
