@@ -1,9 +1,7 @@
 <div class="exercise-chart-container">
-  <label for="exerciseSelect">Select Exercise:</label>
-  <select id="exerciseSelect" [(ngModel)]="selectedExercise" (change)="onExerciseChange()">
-    <option *ngFor="let exercise of exercises" [ngValue]="exercise">{{ exercise.name }}</option>
-  </select>
-
+  <ion-select [(ngModel)]="selectedExercise" (ionChange)="onExerciseChange()" label="Exercise" placeholder="Select exercise" interface="action-sheet">
+    <ion-select-option *ngFor="let exercise of exercises" [value]="exercise">{{ exercise.name }}</ion-select-option>
+  </ion-select>
   <div style="width: 100%; height: 400px;">
     <canvas #loadChart></canvas>
   </div>

@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Workout </ion-title>
+    <ion-icon slot="end" name="log-out-outline" size="large" (click)="quit()"></ion-icon>
+  </ion-toolbar>
+
+    <div class="progress-container">
+      <div class="progress-bar" [ngStyle]="{'width': getProgressPercentage() + '%'}"></div>
+    </div>
+    <div class="progress-text">
+      <p class="text-divider"> {{ currentExerciseIndex + 1 }} of {{ n_exercises }} </p>
+      <p class="text-divider"> {{ getProgressPercentage() }}% </p>
+    </div>
+</ion-header>

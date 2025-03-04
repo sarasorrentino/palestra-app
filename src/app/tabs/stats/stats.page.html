@@ -1,11 +1,43 @@
 <app-header title="Your Stats"></app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-    <h2>Workout History</h2>
+
+    <p class="text-divider">Performance</p>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <div class="stats-box">
+                    <div class="box-icon">
+                        <ion-icon name="flame"></ion-icon>
+                        <ion-label>Workouts <br> Completed</ion-label>
+                    </div>
+                    <div class="box-value">
+                        <p>3</p>
+                    </div>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div class="stats-box">
+                    <div class="box-icon">
+                        <ion-icon name="stopwatch"></ion-icon>
+                        <ion-label>Total <br> Duration</ion-label>
+                    </div>
+                    <div class="box-value">
+                        <p>3h <br> 20</p>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <p class="text-divider">Workout History</p>
     <div class="chart-container">
         <canvas #workoutHistoryChart class="chart-scrollable"></canvas>
     </div>
 
-    <app-exercise-load-chart></app-exercise-load-chart>
+    <p class="text-divider">Loads History</p>
+    <div class="chart-container">
+        <app-exercise-load-chart></app-exercise-load-chart>
+    </div>
       
 </ion-content>      

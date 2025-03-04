@@ -1,9 +1,63 @@
 .chart-container {
   width: 100%;
   overflow-x: auto;
+  border-radius: 20px;
+  padding: 20px;
+  background-color: var(--dark-color);
 }
 
 .chart-scrollable {
   width: 600px;
   height: 200px;
+}
+
+ion-grid {
+  padding: 0px;
+}
+
+ion-row {
+  padding: 0px;
+}
+
+.stats-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+  background-color: var(--dark-color);
+  border-radius: 20px;
+  padding: 20px;
+  height: fit-content;
+}
+
+.box-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 10px;
+  color: var(--ion-color-primary);
+}
+
+.box-icon ion-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.box-icon ion-label {
+  font-size: 14px;
+}
+
+.box-value {
+  align-items: end;
+  justify-content: end;
+  color: var(--light-color);
+}
+
+.box-value p {
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 0.9;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  padding-right: 5px;
 }

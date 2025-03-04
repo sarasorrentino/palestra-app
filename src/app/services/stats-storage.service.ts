@@ -44,9 +44,10 @@ export class StatsStorageService {
         datasets: [{
           label: title,
           data: data,
-          backgroundColor: 'rgba(255, 206, 9, 0.6)',
-          borderColor: 'rgb(255, 206, 9)',
-          borderWidth: 1
+          backgroundColor: 'rgba(179, 228, 41, 0.20)',
+          borderColor: '#B3E429',
+          borderWidth: 1,
+          borderRadius: 0.5
         }]
       },
       options: {
@@ -59,15 +60,37 @@ export class StatsStorageService {
         },
         scales: {
           x: {
+            grid: {
+              color: 'rgba(255, 255, 255, 0.2)',
+            },
+            ticks: {
+              color: 'white'
+            },
             title: {
-              display: true,
-              text: 'Date'
+              display: false,
+              text: 'Date',
+              color: '#f7f7f7',
+              font: {
+                size: 16,
+              }
             }
           },
           y: {
+            grid: {
+              color: 'rgba(255, 255, 255, 0.2)',
+            },
+            ticks: {
+              color: 'white'
+            },
+            max: Math.max(...data) + 5,
             title: {
               display: true,
-              text: 'Duration (minutes)'
+              text: 'Duration (min)',
+              color: '#f7f7f7',
+              font: {
+                size: 16,
+                weight: 'bold'
+              }
             },
             beginAtZero: true
           }
@@ -82,13 +105,13 @@ export class StatsStorageService {
     const config: ChartConfiguration = {
       type: 'line',
       data: {
-        labels: dates, // Ora usa le date come etichette
+        labels: dates,
         datasets: [{
           label: `${exerciseName} - Weight (kg)`,
-          data: weights, // carichi per ciascuna data
-          backgroundColor: 'rgba(54, 162, 235, 0.6)',
-          borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 1
+          data: weights,
+          borderWidth: 1,
+          backgroundColor: 'rgba(179, 228, 41, 0.20)',
+          borderColor: '#B3E429',
         }]
       },
       options: {
@@ -101,15 +124,38 @@ export class StatsStorageService {
         },
         scales: {
           x: {
+            grid: {
+              color: 'rgba(255, 255, 255, 0.2)',
+            },
+            ticks: {
+              color: 'white'
+            },
             title: {
-              display: true,
-              text: 'Date'
+              display: false,
+              text: 'Date',
+              color: '#f7f7f7',
+              font: {
+                size: 16,
+                weight: 'bold'
+              }
             }
           },
           y: {
+            grid: {
+              color: 'rgba(255, 255, 255, 0.2)',
+            },
+            ticks: {
+              color: 'white',
+            },
+            max: Math.max(...weights) + 5,
             title: {
               display: true,
-              text: 'Weight (kg)'
+              text: 'Weight (kg)',
+              color: '#f7f7f7',
+              font: {
+                size: 16,
+                weight: 'bold'
+              }
             },
             beginAtZero: true
           }

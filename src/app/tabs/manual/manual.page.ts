@@ -11,6 +11,7 @@ export class ManualPage implements OnInit {
 
   exercises: any[] = [];
   favoriteExercises: any[] = [];
+  viewFavorites: any = false;
 
   constructor(private http: HttpClient) { }
 
@@ -34,5 +35,9 @@ export class ManualPage implements OnInit {
 
   isFavorite(exercise: any): boolean {
     return this.favoriteExercises.some(e => e.name === exercise.name);
+  }
+
+  toggleFavoritesView(){
+    this.viewFavorites = !this.viewFavorites;
   }
 }

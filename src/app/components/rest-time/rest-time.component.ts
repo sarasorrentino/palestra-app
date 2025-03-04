@@ -15,7 +15,10 @@ export class RestTimeComponent {
   maxSeconds: number = 60;
   private interval: any;
 
+  restTime: boolean = false;
+
   startTimer() {
+    this.restTime = true;
     if (this.interval) {
       clearInterval(this.interval);
     }
@@ -31,6 +34,7 @@ export class RestTimeComponent {
 
   stopTimer() {
     clearInterval(this.interval);
+    this.restTime = false;
   }
 
   resetTimer() {

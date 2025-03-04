@@ -35,7 +35,7 @@ export class StatsPage implements OnInit {
   ngAfterViewInit() {
     const container = document.querySelector('.chart-container');
     if (container) {
-      container.scrollLeft = container.scrollWidth; // Scorri fino alla fine
+      container.scrollLeft = container.scrollWidth;
     }
     const labels = ['2025-02-20', '2025-02-21', '2025-02-22', '2025-02-23', '2025-02-24'];
     const durations = [30, 45, 50, 40, 60];

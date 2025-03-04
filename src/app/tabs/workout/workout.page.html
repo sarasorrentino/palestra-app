@@ -1,10 +1,8 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> {{ selectedPlan.title }} - Day {{ selectedDay + 1 }} </ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-workout-header [currentExerciseIndex]="this.currentExerciseIndex" [n_exercises]="this.exercises.length"></app-workout-header>
 
 <ion-content [fullscreen]="true">
+
+
   <div class="timer-container">
     <h2>Duration</h2>
     <div class="timer-display">{{ getFormattedTime() }}</div>

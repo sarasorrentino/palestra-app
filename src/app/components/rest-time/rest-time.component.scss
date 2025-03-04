@@ -1,15 +1,37 @@
-ion-card {
-    text-align: center;
-    margin: 20px;
+.rest-time-box {
+  width: 100%;
+  background-color: var(--primary-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  padding: 20px;
+  border-radius: 20px;
+  color: var(--background-color);
+}
+
+.time-label {
+  display: flex;
+  flex-direction: column;
+  align-content: left;
+  p {
+    font-size: 14px;
+    margin: 0px;
+    text-align: left;
   }
-  
-  ion-progress-bar {
-    margin: 20px 0;
-    height: 20px;
-    border-radius: 10px;
+  h1 {
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--background-color);
+    margin: 0px;
   }
-  
-  ion-button {
-    margin: 5px;
-  }
-  
+}
+
+.time-button {
+  align-content: center;
+  justify-content: center;
+}
+
+ion-icon {
+  color: var(--background-color);
+}

@@ -97,6 +97,13 @@ ion-card {
     margin: 0;
 }
 
+img {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    border: 1px solid var(--ion-color-primary);
+}
+
 @keyframes slideUp {
     0% {
         transform: translateY(100%); /* Posiziona la card fuori dallo schermo (sotto) */
