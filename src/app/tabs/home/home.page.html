@@ -15,9 +15,9 @@
                         <ion-icon *ngIf="i < workoutIndex-1" name="checkmark-outline"></ion-icon>
                         </div>
                     </div>     
-                    <ion-card-header (click)="navToPlan()">
+                    <ion-card-header>
                         <div>
-                            <h1 class="card-title"> {{ currentPlan.title }} </h1>
+                            <h1 class="card-title" (click)="navToPlan()"> {{ currentPlan.title }} </h1>
                             <p class="card-subtitle"> Day {{ currentPlan.n_days }} </p>
                             <div class="card-footer">
                                 <ion-chip>

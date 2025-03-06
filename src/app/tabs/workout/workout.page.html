@@ -1,9 +1,73 @@
-<app-workout-header [currentExerciseIndex]="this.currentExerciseIndex" [n_exercises]="this.exercises.length"></app-workout-header>
+<app-workout-header [currentExerciseIndex]="this.currentExerciseIndex+1" [n_exercises]="this.exercises.length" [workoutTimer]="getFormattedTime()"></app-workout-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
 
+  <ion-grid class="exercise-display">
+    <ion-row>
+      <ion-col>
+        <h1> <strong> {{ currentExercise.name }} </strong></h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <img [src]="currentExercise.image" [alt]="currentExercise.name"/>    
+        <div class="weight-edit">
+          <ion-chip>
+            <ion-icon name="server"></ion-icon>
+            <ion-label>40 kg</ion-label>
+          </ion-chip>
+          <div class="icon-circle">
+            <ion-icon name="pencil"></ion-icon>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <div class="timer-container">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <app-rest-time></app-rest-time>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <div class="stats-box">
+                <div class="box-icon">
+                    <ion-icon name="barbell-outline"></ion-icon>
+                    <ion-label>Current <br> Series</ion-label>
+                </div>
+                <div class="box-value">
+                    <p>1/3</p>
+                </div>
+            </div>
+        </ion-col>
+        <ion-col>
+            <div class="stats-box">
+                <div class="box-icon">
+                    <ion-icon name="flame"></ion-icon>
+                    <ion-label>Repeats <br> Counter</ion-label>
+                </div>
+                <div class="box-value">
+                    <p>15</p>
+                </div>
+            </div>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-row>
+    <ion-col>    
+      <ion-button color="secondary" shape="round" size="block" (click)="previousExercise()" [disabled]="this.currentExerciseIndex === 0"> Previous </ion-button>
+    </ion-col>
+    <ion-col>    
+      <ion-button *ngIf="this.currentExerciseIndex !== this.exercises.length-1" color="primary" shape="round" size="block" (click)="nextExercise()"> {{ 'Next'}} </ion-button>
+      <ion-button *ngIf="this.currentExerciseIndex === this.exercises.length-1" color="primary" shape="round" size="block" (click)="endWorkout()"> {{ 'Done' }} </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+<!--
+ <div class="timer-container">
     <h2>Duration</h2>
     <div class="timer-display">{{ getFormattedTime() }}</div>
     <ion-button (click)="pauseResumeTimer()">
@@ -11,19 +75,29 @@
     </ion-button>
   </div>
 
-  <div class="exercise-card" *ngIf="currentExercise">
+   <div class="exercise-card" *ngIf="currentExercise">
     <h3>{{ currentExercise.muscleGroup }}</h3>
     <h1>{{ currentExercise.name }}</h1>
     <ion-chip>
-      <!--<ion-icon class="chip-icon" name="barbell-outline" color="primary"></ion-icon>-->
+      <ion-icon class="chip-icon" name="barbell-outline" color="primary"></ion-icon>
       <ion-label> {{completedSeries}}/{{currentExercise.series}} series x {{currentExercise.repeats}} repeats</ion-label>
     </ion-chip>
     <ion-chip>
-      <!--<ion-icon class="chip-icon" name="barbell-outline" color="primary"></ion-icon>-->
+      <ion-icon class="chip-icon" name="barbell-outline" color="primary"></ion-icon>
       <ion-label>{{currentExercise.restTime}} sec</ion-label>
     </ion-chip>
     <img [src]="currentExercise.image" [alt]="currentExercise.name" class="exercise-image"/>    
-    <app-rest-time></app-rest-time>
-    <ion-button expand="block" (click)="nextExercise()"> {{ this.currentExerciseIndex < this.exercises.length - 1 ? 'Next' : 'Done' }} </ion-button>
   </div>
-</ion-content>
+
+  <div class="exercise">
+    <h1>{{ currentExercise.name }}</h1>
+    <img [src]="currentExercise.image" [alt]="currentExercise.name" class="exercise-image"/>    
+    <div class="weight-edit">
+      <ion-chip>
+        <ion-icon name="server"></ion-icon>
+        <ion-label>40 kg</ion-label>
+      </ion-chip>
+      <ion-icon name="pencil"></ion-icon>
+    </div>
+  </div>
+-->

@@ -39,24 +39,24 @@
     <ion-item lines="none">
       <ion-label>Name</ion-label>
       <ion-input 
+        class="custom"
         type="text"
         name="name"
         placeholder="Enter your name"
         [(ngModel)] = "user.name"
         required
-        class="rtl-input"
       ></ion-input>
     </ion-item>
 
     <ion-item lines="none">
       <ion-label>Surname</ion-label>
       <ion-input
+        class="custom"
         type="text"
         name="surname"
         placeholder="Enter your surname"
         [(ngModel)] = "user.surname"
         required
-        class="rtl-input"
       ></ion-input>
     </ion-item>
     
@@ -73,10 +73,10 @@
     <ion-item lines="none">
       <ion-label>Birthdate</ion-label>
       <ion-input 
+        class="custom"
         type="date"
         labelPlacement="fixed"
         name="birthDate"
-        class="rtl-input"
         [(ngModel)]="user.birthDate" 
       ></ion-input>
     </ion-item>
@@ -84,7 +84,7 @@
     <ion-item lines="none">
       <ion-label>Weight</ion-label>
         <ion-input
-          class="rtl-input"
+          class="custom"
           type="number"
           name="weight"
           placeholder="Enter your weight"

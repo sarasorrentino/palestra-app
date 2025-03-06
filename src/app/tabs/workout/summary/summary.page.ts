@@ -30,6 +30,6 @@ export class SummaryPage implements OnInit {
   }
 
   navToHome() {
-    this.router.navigate(['/tabs/home']);
+    this.router.navigateByUrl('/tabs/home', { replaceUrl: true });
   }
 }

@@ -55,7 +55,8 @@ export class HomePage implements OnInit {
   }
 
   navToWorkout() {
-    this.router.navigate(['/countdown']);
+    //this.router.navigate(['/countdown']);
+    this.router.navigateByUrl('/countdown', { replaceUrl: true });
   }
 
 }

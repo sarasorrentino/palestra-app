@@ -6,20 +6,47 @@
   background: #f4f5f8;
 }
 
-.exercise-card {
-  text-align: center;
-  background: #000000;
+ion-grid {
+  margin-bottom: 5px;
   padding: 20px;
+  background-color: var(--dark-color);
   border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 80%;
 }
-  
-.exercise-image {
-  width: 50%;
-  max-width: 300px;
-  border-radius: 15px;
-  margin: 20px 0;
-}
-  
 
+.box-value p {
+  padding-right: 0px;
+}
+
+.exercise-display {
+  justify-items: center;
+  background: none;
+  
+}
+
+img {
+  width: 180px;
+  height: 180px;
+  margin: 10px;
+  border-radius: 20px;
+}
+
+.weight-edit {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.icon-circle {
+  padding: 4px;
+  background: var(--primary-color);
+  align-content: center;
+  justify-content: center;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  ion-icon{
+    color: var(--dark-color);
+  }
+}

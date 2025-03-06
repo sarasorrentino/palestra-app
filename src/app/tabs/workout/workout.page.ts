@@ -25,8 +25,8 @@ export class WorkoutPage implements OnInit {
     rest_time: ''
   }
 
-  currentExerciseIndex = 0;
-  currentExercise: any;
+  currentExerciseIndex: number = 0;
+  currentExercise: any = '';
   completedSeries = 0;
   
   ngOnInit() {
@@ -34,18 +34,17 @@ export class WorkoutPage implements OnInit {
 
     this.http.get<any[]>('/assets/database/exercises_db.json').subscribe(data => {
       this.exercisesDB = data;
-      //console.log(this.exercisesDB);
       this.loadCurrentExercise();
       this.startWorkoutTimer();
     });
 
     this.planStorage.selectedPlan$.subscribe(plan => {
       this.selectedPlan = plan;
-      console.log(this.selectedPlan);
+      //console.log(this.selectedPlan);
       this.selectedDay = this.planStorage.getSelectedDay();
       this.exercises = this.selectedPlan.days[this.selectedDay].exercises;
-      console.log("Lista esercizi giorno: ");
-      console.log(this.selectedPlan.days);
+      //console.log("Lista esercizi giorno: ");
+      //console.log(this.selectedPlan.days);
     });
 
   }
@@ -62,15 +61,24 @@ export class WorkoutPage implements OnInit {
   }
 
   nextExercise() {
-    if (this.currentExerciseIndex < this.exercises.length - 1) {
+    if (this.currentExerciseIndex < this.exercises.length) {
       this.currentExerciseIndex++;
       this.loadCurrentExercise();
-    } else {
-      localStorage.setItem('duration', JSON.stringify(this.workoutTimer));
-      this.currentExerciseIndex = 0;
-      this.router.navigate(['summary']);
-      //alert('Workout Completed! 🎉');
     }
+  }
+
+  previousExercise() {
+    if (this.currentExerciseIndex > 0) {
+      this.currentExerciseIndex--;
+      this.loadCurrentExercise();
+    }
+  }
+
+  endWorkout() {
+    localStorage.setItem('duration', JSON.stringify(this.workoutTimer));
+    //this.currentExerciseIndex = 0;
+    this.router.navigateByUrl('/summary', { replaceUrl: true });
+
   }
 
   getExerciseInfoById(exerciseID: number, requestCode: number) {

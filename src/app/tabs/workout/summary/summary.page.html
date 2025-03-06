@@ -1,10 +1,47 @@
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
 
-  <h1>Workout Complete 🎉</h1>
-  <h3> {{ selectedPlan.title }}</h3>
-  <h4> Day {{ selectedDay }}</h4>
-  <h3> {{ getFormattedTime() }} </h3>
+  <div class="content-wrapper">
+    <h1>Workout Complete 🎉</h1>
 
-  <ion-button expand="block" (click)="navToHome()"> Done </ion-button>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h3> {{ selectedPlan.title }}</h3>
+          <h4> Day {{ selectedDay }}</h4>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col>
+              <div class="stats-box">
+                  <div class="box-icon">
+                      <ion-icon name="flame"></ion-icon>
+                      <ion-label>Exercises <br> Completed</ion-label>
+                  </div>
+                  <div class="box-value">
+                      <p>7</p>
+                  </div>
+              </div>
+          </ion-col>
+          <ion-col>
+              <div class="stats-box">
+                  <div class="box-icon">
+                      <ion-icon name="stopwatch"></ion-icon>
+                      <ion-label>Total <br> Duration</ion-label>
+                  </div>
+                  <div class="box-value">
+                      <p>3h <br> 20</p>
+                  </div>
+              </div>
+          </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button color="primary" shape="round" size="block" (click)="navToHome()"> Done </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>  
+  </div>
+  
+  <!--<h3> {{ getFormattedTime() }} </h3>-->
 
 </ion-content>

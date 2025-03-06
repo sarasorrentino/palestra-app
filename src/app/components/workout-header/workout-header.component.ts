@@ -20,7 +20,7 @@ export class WorkoutHeaderComponent  implements OnInit {
 
   @Input() currentExerciseIndex: number = 0;
   @Input() n_exercises: number = 0;
-
+  @Input() workoutTimer: any = '';
 
   ngOnInit() {}
 
@@ -29,7 +29,7 @@ export class WorkoutHeaderComponent  implements OnInit {
   }
 
   getProgressPercentage(): number {
-    return Math.floor((this.currentExerciseIndex+1 / this.n_exercises) * 100);
+    return Math.floor((this.currentExerciseIndex / this.n_exercises) * 100);
   }
   
 }

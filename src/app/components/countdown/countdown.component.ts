@@ -40,7 +40,11 @@ export class CountdownComponent implements OnDestroy{
       }, 10);
     } else {
       this.isRunning = false;
-      this.router.navigate(['/workout']);
+      //this.router.navigate(['/workout']);
+      console.log("fineee");
+      this.router.navigateByUrl('/workout', { replaceUrl: true })
+      .then(success => console.log("Navigazione riuscita:", success))
+      .catch(error => console.error("Errore navigazione:", error));
     }
   }
 
