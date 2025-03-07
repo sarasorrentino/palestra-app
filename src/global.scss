@@ -36,7 +36,9 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
-//------
+/*----------------------------------------------------------------------------------------------------
+    General
+----------------------------------------------------------------------------------------------------*/
 :host {
     --background: none !important;
 }
@@ -48,27 +50,13 @@ body {
     width: 100%;
 }
 
-.background-image {
-    --background: none;
-    background-image: url('./assets/images/background-image.png'); /* Sostituisci con il percorso della tua immagine */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: auto;
-}
-  
-h1, h2, h3 {
-	color: var(--light-color);
+.full-height {
+    height: 100vh;
 }
 
-.logo {
-    position: absolute;
-    top: 100px;
-    left: 5%;
-    width: 60px;
-}
-
+/*----------------------------------------------------------------------------------------------------
+    Spacing & Allignment
+----------------------------------------------------------------------------------------------------*/
 .bottom-content {
     position: absolute;
     bottom: 0;
@@ -79,43 +67,6 @@ h1, h2, h3 {
 .bottom-spacing {
     margin-bottom: 30px;
 }
-
-ion-button {
-    height: 50px;
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: none;
-    border: none;
-}
-
-ion-card {
-    background: rgba(27, 27, 27, 0.90);
-    box-shadow: none !important;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px; 
-    padding: 0;
-    margin: 0;
-}
-
-img {
-    width: 100px;
-    height: 100px;
-    border-radius: 20px;
-    border: 1px solid var(--ion-color-primary);
-}
-
-@keyframes slideUp {
-    0% {
-        transform: translateY(100%); /* Posiziona la card fuori dallo schermo (sotto) */
-        opacity: 0; /* Rendi la card invisibile */
-    }
-    100% {
-        transform: translateY(0); /* Muove la card alla sua posizione originale */
-        opacity: 1; /* Rendi la card visibile */
-    }
-}
-
-//----
 
 .flex-center {
     display: flex;
@@ -129,99 +80,17 @@ img {
     align-items: center;
 }
 
-.transform-initial {
-    text-transform: initial;
-}
-
-
-.full-height {
-    height: 100vh; /* Imposta l'altezza al 100% della finestra */
-}
-
-// Links ----------------------------------------------------
-.right-link {
-    display: block;
-    text-align: right;
-    color: var(--light-color);
-    font-size: 14px;
-    text-decoration: underline;
-    margin-bottom: 32px;
-}
-
-.center-link {
-    display: block;
-    text-align: center;
-    color: var(--light-color);
-    font-size: 14px;
-    margin-top: 10px;
-}
-  
-.highlight-link {
-    color: var(--ion-color-primary); /* Imposta il colore della parola "Sign up" a verde */
-    text-decoration: underline; /* Aggiunge la sottolineatura alla parola "Sign up" */
-}
-  
-// Input ----------------------------------------------------
-
-ion-input.custom {
-    --background: rgba(247, 247, 247, 0.20);
-    --color: var(--light-color);
-    --placeholder-opacity: 0.6;
-    --padding-bottom: 20px;
-    --padding-end: 20px;
-    --padding-start: 20px;
-    --padding-top: 20px;
-    --border-radius: 5px;
-}
-
-.custom::part(label) {
+.justify-center {
     display: flex;
-    justify-content: flex-end;
-  }
-  
-  
-.errorMessage {
-    padding-left: 15px;
-    margin-top: 5px;
-    margin-bottom: 10px;
+    flex-direction: row;
+    justify-content: center;
 }
 
-.card-title {
-    color: #F7F7F7;
-    text-align: center;
-    font-family: var(--font-family-title, "Plus Jakarta Sans");
-    font-size: 30px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 32px;
-}
-
-strong {
-    font-weight: 800;
-}
-
-.card-subtitle {
-    color: var(--medium-color);
-    text-align: center;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-}
-
-ion-card-header {
-    margin-bottom: 10px;
-}
-
-ion-item {
-    --background: rgba(247, 247, 247, 0.20);
-    --color: var(--light-color);
-    --placeholder-opacity: 0.6;
-    --padding-bottom: 10px;
-    --padding-end: 20px;
-    --padding-start: 20px;
-    --padding-top: 10px;
-    --border-radius: 5px;
-    --border-width: 0;
+/*----------------------------------------------------------------------------------------------------
+    Typography
+----------------------------------------------------------------------------------------------------*/
+h1, h2, h3 {
+	color: var(--light-color);
 }
 
 .title {
@@ -251,11 +120,190 @@ ion-item {
     text-align: left;
 }
 
+.transform-initial {
+    text-transform: initial;
+}
+
+strong {
+    font-weight: 800;
+}
+
+/*----------------------------------------------------------------------------------------------------
+    Input - Items
+----------------------------------------------------------------------------------------------------*/
+.right-link {
+    display: block;
+    text-align: right;
+    color: var(--light-color);
+    font-size: 14px;
+    text-decoration: underline;
+    margin-bottom: 32px;
+}
+
+.center-link {
+    display: block;
+    text-align: center;
+    color: var(--light-color);
+    font-size: 14px;
+    margin-top: 10px;
+}
+  
+.highlight-link {
+    color: var(--ion-color-primary);
+    text-decoration: underline;
+}
+
+.rtl-input {
+    text-align: right;
+}
+
+/*----------------------------------------------------------------------------------------------------
+    Images
+----------------------------------------------------------------------------------------------------*/
+.background-image {
+    --background: none;
+    background-image: url('./assets/images/background-image.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: auto;
+}
+
+.logo {
+    position: absolute;
+    top: 100px;
+    left: 5%;
+    width: 60px;
+    border: none;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    border: 1px solid var(--ion-color-primary);
+}
+
+.round-image {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/*----------------------------------------------------------------------------------------------------
+    Input - Items
+----------------------------------------------------------------------------------------------------*/
+ion-input.custom {
+    --background: rgba(247, 247, 247, 0.20);
+    --color: var(--light-color);
+    --placeholder-opacity: 0.6;
+    --padding-bottom: 20px;
+    --padding-end: 20px;
+    --padding-start: 20px;
+    --padding-top: 20px;
+    --border-radius: 5px;
+}
+
+.custom::part(label) {
+    display: flex;
+    justify-content: flex-end;
+}
+  
+.errorMessage {
+    padding-left: 15px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
 .input-container {
     display: flex;
-    flex-direction: column; /* Se vuoi separarli verticalmente */
-    gap: 10px; /* Distanza tra gli elementi */
-}  
+    flex-direction: column;
+    gap: 10px;
+}
+
+ion-item {
+    width: 100%;
+    height: 100%;
+    --padding-top: 0;
+    --padding-bottom: 0;
+    --padding-left: 0;
+    --padding-right: 0;
+    --padding-end: 0;
+    --margin-right: 0;
+    --background-color: var(--dark-color);
+    border-radius: 5px;
+}
+
+ion-item-sliding {
+    --ion-safe-area-right: 0;
+    --ion-safe-area-left: 0;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.custom-item {
+    --background: rgba(247, 247, 247, 0.20);
+    --color: var(--light-color);
+    --placeholder-opacity: 0.6;
+    --padding-bottom: 10px;
+    --padding-end: 20px;
+    --padding-start: 20px;
+    --padding-top: 10px;
+    --border-radius: 5px !important;
+    --border-width: 0;
+}
+
+/*----------------------------------------------------------------------------------------------------
+    Buttons
+----------------------------------------------------------------------------------------------------*/
+ion-button {
+    height: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: none;
+    border: none;
+}
+
+.play-button {
+    font-size: 40px;
+    color: var(--ion-color-primary);
+}
+
+/*----------------------------------------------------------------------------------------------------
+    Cards
+----------------------------------------------------------------------------------------------------*/
+ion-card {
+    background: rgba(27, 27, 27, 0.90);
+    box-shadow: none !important;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px; 
+    padding: 0;
+    margin: 0;
+}
+
+.card-title {
+    color: #F7F7F7;
+    text-align: center;
+    font-family: var(--font-family-title, "Plus Jakarta Sans");
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 32px;
+}
+
+.card-subtitle {
+    color: var(--medium-color);
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+ion-card-header {
+    margin-bottom: 10px;
+}
 
 .card-footer {
     display: flex;
@@ -265,11 +313,34 @@ ion-item {
     padding-top: 10px;
 }
 
-.play-button {
-    font-size: 40px;
-    color: var(--ion-color-primary);
+@keyframes slideUp {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
+/*----------------------------------------------------------------------------------------------------
+    Date
+----------------------------------------------------------------------------------------------------*/
+.date {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: center;
+}
+
+ion-datetime-button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/*----------------------------------------------------------------------------------------------------
+    Radio Buttons
+----------------------------------------------------------------------------------------------------*/
 .radio-container-row {
     display: flex;
     gap: 10px; /* Distanza tra le opzioni */
@@ -281,21 +352,6 @@ ion-item {
     flex-direction: column;
     gap: 10px; /* Distanza tra le opzioni */
     align-items: center; /* Allinea verticalmente */
-}
-
-.rtl-input {
-    text-align: right;
-}
-
-.date {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    align-items: center;
-}
-
-ion-datetime-button {
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 
 ion-radio::part(container) {
@@ -329,6 +385,9 @@ ion-radio.radio-checked::part(mark) {
     transform: rotate(45deg);
 }
 
+/*----------------------------------------------------------------------------------------------------
+    Lists
+----------------------------------------------------------------------------------------------------*/
 ion-list {
     border-radius: 8px;
     --background: none;
@@ -336,24 +395,4 @@ ion-list {
 
 .list-ios {
     background: none;
-}
-
-ion-item-sliding {
-    --ion-safe-area-right: 0;
-    --ion-safe-area-left: 0;
-    border-radius: 8px;
-    margin-bottom: 8px;
-}
-
-ion-item {
-    width: 100%;
-    height: 100%;
-    --padding-top: 0;
-    --padding-bottom: 0;
-    --padding-left: 0;
-    --padding-right: 0;
-    --padding-end: 0;
-    --margin-right: 0;
-    --background-color: var(--dark-color);
-    border-radius: 20px;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserStorageService } from 'src/app/services/user-storage.service';
 
@@ -73,6 +73,27 @@ export class ProfilePage implements OnInit {
   
     reset() {
       this.user = this.userStorage.getCurrentUser();
+    }
+
+    // Profile image
+    profileImage: string | null = null; // Memorizza l'immagine caricata
+
+    @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
+  
+    selectImage() {
+      this.fileInput.nativeElement.click(); // Apre il file picker
+    }
+  
+    onFileSelected(event: any) {
+      const file = event.target.files[0];
+  
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.profileImage = e.target.result; // Imposta l'immagine caricata
+        };
+        reader.readAsDataURL(file);
+      }
     }
 
 }

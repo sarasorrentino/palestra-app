@@ -28,6 +28,8 @@ export class HeaderComponent  implements OnInit {
     if (user) {
       this.currentUsername = user.name;
     }
+    this.loadProfileImage(); // Carica l'immagine al caricamento della pagina
+
   }
 
   async logout() {
@@ -57,4 +59,21 @@ export class HeaderComponent  implements OnInit {
     console.log("ciao");
     this.router.navigate(['/tabs/profile']);
   }
+
+  profileImage: string = ''; // Variabile che conterrà l'immagine profilo
+
+  loadProfileImage() {
+    let imagesData = localStorage.getItem('profile_images') || '[]';
+    let images = JSON.parse(imagesData);
+
+    // Cerca l'immagine associata all'UID dell'utente corrente
+    const user = images.find((user: any) => user.uid === this.userStorage.getCurrentUserId());
+
+    if (user) {
+      this.profileImage = user.string_image;
+    } else {
+      this.profileImage = ''; // Se l'utente non ha un'immagine salvata, usa quella di default
+    }
+  }
+
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -8,7 +8,7 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
 import { HeaderComponent } from 'src/app/components/header/header.component';
-import { ProfileInputComponent } from 'src/app/components/profile-input/profile-input.component';
+import { ProfilePictureComponent } from 'src/app/components/profile-picture/profile-picture.component';
 
 @NgModule({
   imports: [
@@ -17,7 +17,8 @@ import { ProfileInputComponent } from 'src/app/components/profile-input/profile-
     IonicModule,
     ProfilePageRoutingModule,
     HeaderComponent,
-    ProfileInputComponent
+    ProfilePictureComponent,
+    ReactiveFormsModule
   ],
   declarations: [ProfilePage]
 })

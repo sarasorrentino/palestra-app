@@ -1,0 +1,7 @@
+<div class="justify-center">
+  <div class="profile-container">
+    <img [src]="profileImage || 'assets/default-profile-picture.png'" class="profile-image" (click)="selectImage()">
+    <ion-icon name="pencil-outline" class="edit-icon" (click)="selectImage()"></ion-icon>
+    <input type="file" accept="image/*" hidden #fileInput (change)="onFileSelected($event)">
+  </div>
+</div>

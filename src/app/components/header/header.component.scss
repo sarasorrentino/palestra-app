@@ -26,19 +26,12 @@ ion-title {
     margin: 0;
 }
 
+.avatar-container {
+    cursor: pointer;
+    z-index: 10;
+}
+
 ion-icon {
     color: var(--ion-color-primary);
 }
 
-div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.round-image {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-}

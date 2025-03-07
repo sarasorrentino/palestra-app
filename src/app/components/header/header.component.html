@@ -2,8 +2,8 @@
   <ion-toolbar>
     <ion-title> {{ title || ('Hi, ' + (currentUsername || 'Utente')) }} </ion-title>
     <ion-icon *ngIf="!showIcon" slot="end" name="log-out-outline" size="large" (click)="logout()"></ion-icon>
-    <div *ngIf="showIcon" slot="end" class="avatar-container" (click)="navToProfile()">
-      <img class="round-image" alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+    <div *ngIf="showIcon" slot="end" class="avatar-container align-center" (click)="navToProfile()">
+      <img class="round-image" [src]="profileImage || 'assets/img/default-profile-picture.png'" alt="Profile Image" />
     </div>
   </ion-toolbar>
 </ion-header>
