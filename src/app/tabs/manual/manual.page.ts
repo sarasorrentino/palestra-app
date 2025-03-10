@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-manual',
@@ -13,11 +14,17 @@ export class ManualPage implements OnInit {
   favoriteExercises: any[] = [];
   viewFavorites: any = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.http.get<any[]>('/assets/database/exercises_db.json').subscribe(data => {
       this.exercises = data;
+    });
+
+    this.route.queryParams.subscribe(params => {
+      if (params['viewFavorites']) {
+        this.viewFavorites = params['viewFavorites'] === 'true'; // Converti il valore in booleano
+      }
     });
   }
 

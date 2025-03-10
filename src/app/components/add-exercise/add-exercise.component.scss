@@ -1,10 +1,8 @@
-ion-card {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
-
 ion-item {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    --background: rgba(247, 247, 247, 0.20);
+    display: flex;
+    align-content: center;
 }
 
 ion-button {
@@ -43,8 +41,8 @@ p {
 }
 
 .scrollable-list {
-    max-height: 380px; /* Imposta l'altezza della lista */
-    overflow-y: auto;  /* Abilita lo scroll verticale */
+    max-height: 380px;
+    overflow-y: auto;
     margin-bottom: 40px;
 }
   
@@ -80,4 +78,11 @@ ion-card-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    border: none;
 }

@@ -84,8 +84,14 @@ ion-item {
     border-radius: 20px;
 }
 
-
-
 ion-modal {
     --backdrop-opacity: 0.8;
 }
+
+ion-fab {
+    position: fixed !important;
+    bottom: 20px;
+    right: 15px;
+    z-index: 100;
+  }
+  

@@ -2,8 +2,9 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
-  <ion-item>
+  <div class="input-container bottom-spacing">
     <ion-input 
+      class="custom"
       type="text"
       name="title"
       label="Title"
@@ -12,9 +13,8 @@
       [(ngModel)] = "plan.title"
       required
     ></ion-input>
-  </ion-item>
-  <ion-item>
     <ion-input
+      class="custom"
       type="text"
       name="description"
       label="Description"
@@ -23,18 +23,20 @@
       [(ngModel)] = "plan.description"
       required
     ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-input
-      type="number"
-      name="days"
-      label="N° Days"
-      labelPlacement="fixed"
-      placeholder="Enter plan days"
-      [(ngModel)] = "plan.n_days"
-      required
-    ></ion-input>
-  </ion-item>
+    <ion-item class="custom-item" lines="none">
+      <ion-label>N° Days</ion-label>
+        <ion-input
+          class="rtl-input"
+          type="number"
+          name="days"
+          labelPlacement="fixed"
+          placeholder="Enter plan days"
+          [(ngModel)]="plan.n_days"
+          required
+          text-right
+        ></ion-input>
+    </ion-item>
+  </div>
 
   <div>
     <ion-button size="block" fill="solid" class="loginbtn" [disabled]="!isFormValid()" (click)="savePlan()">Save</ion-button>

@@ -6,7 +6,7 @@
       <ion-label>Home</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="plans" href="/tabs/plans">
+    <ion-tab-button tab="plans" [routerLink]="['/tabs/plans']" routerLinkActive="tab-selected" [routerLinkActiveOptions]="{ exact: true }">
       <ion-icon aria-hidden="true" name="barbell-outline"></ion-icon>
       <ion-label>Plans</ion-label>
     </ion-tab-button>

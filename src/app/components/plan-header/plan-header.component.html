@@ -1,11 +1,10 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
 
-    <ion-buttons slot="start" (click)="goBack()">
-      <ion-icon name="arrow-back-outline"></ion-icon>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/plans"></ion-back-button>
     </ion-buttons>
     <ion-title> {{ title }} </ion-title>
 
   </ion-toolbar>
 </ion-header>
-

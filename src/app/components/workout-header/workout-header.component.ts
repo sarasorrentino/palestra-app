@@ -24,8 +24,26 @@ export class WorkoutHeaderComponent  implements OnInit {
 
   ngOnInit() {}
 
-  quit() {
-
+  async quit() {
+    const alert = await this.alertController.create({
+      header: 'Do you want to quit this workout?',
+      message: '',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Confirm',
+          role: 'destructive',
+          cssClass: 'secondary',
+          handler: () => {
+            this.router.navigate(['/tabs/home']);
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
   getProgressPercentage(): number {

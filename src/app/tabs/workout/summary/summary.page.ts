@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlansStorageService } from 'src/app/services/plans-storage.service';
+import { WorkoutStorageService } from 'src/app/services/workout-storage.service';
 
 @Component({
   selector: 'app-summary',
@@ -14,19 +15,24 @@ export class SummaryPage implements OnInit {
   selectedDay: any
   workoutDuration: any;
 
-  constructor(private planStorage: PlansStorageService, private router: Router) { 
+  workoutTime: string = '';
+  totalExerciseNumber: number = 0;
+
+  constructor(private planStorage: PlansStorageService, private router: Router, private workoutStorage: WorkoutStorageService) { 
     this.selectedPlan = this.planStorage.getCurrentPlan();
     this.selectedDay = this.planStorage.getSelectedDay()+1;
     this.workoutDuration = localStorage.getItem('duration');
   }
 
   ngOnInit() {
+    this.workoutTime = this.workoutStorage.convertSecondsToHoursMinutes();
+    this.totalExerciseNumber = this.selectedPlan.days[this.selectedDay].exercises.length+1;
   }
 
   getFormattedTime(): string {
     const minutes = Math.floor(this.workoutDuration / 60);
-    const seconds = this.workoutDuration % 60;
-    return `${minutes.toString().padStart(2, '0')} min ${seconds.toString().padStart(2, '0')} sec`;
+    const hours = Math.floor(minutes / 60);
+    return `${hours.toString()}h\n${minutes.toString().padStart(2, '0')}`;
   }
 
   navToHome() {

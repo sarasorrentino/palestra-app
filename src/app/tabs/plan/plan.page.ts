@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { IonModal, ModalController } from '@ionic/angular';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { PlansStorageService } from 'src/app/services/plans-storage.service';
 import { HttpClient } from '@angular/common/http';
@@ -37,7 +36,7 @@ export class PlanPage implements OnInit {
   /*----------------------------------------------------------------------------------------------------
     Segments management
   ----------------------------------------------------------------------------------------------------*/
-  selectedDay: number | null = null; // Current day selected
+  selectedDay: number | null = 0; // Current day selected
   getArray(n: number): number[] {
     return Array(n).fill(0).map((_, i) => i);
   }
@@ -54,6 +53,9 @@ export class PlanPage implements OnInit {
   
   setSelectedDay(){
     localStorage.setItem('selectedDay', JSON.stringify(this.selectedDay));
+    this.exercises = this.days[this.planStorage.getSelectedDay()].exercises || '';
+    console.log("Stampa esercizi: ");
+    console.log(this.exercises);
   }
 
   getExerciseName(exerciseID: number): string {
@@ -85,15 +87,19 @@ export class PlanPage implements OnInit {
       }
       return findEx.description;
     } else {
-      console.log("No exercise found with ID:", exerciseID); // Avvisa se non trova nulla
+      console.log("No exercise found with ID:", exerciseID);
       return "Description not found";
     }
   }
-  
 
   getExerciseImage(exerciseID: number) {
     const findEx = this.exerciseDB.find((ex: any) => ex.uid === exerciseID);
     return findEx.image;
+  }
+
+  deleteExercise(exerciseId: number){
+    this.planStorage.removeExerciseFromDay(this.planStorage.getSelectedPlan().uid, this.planStorage.getSelectedDay(), exerciseId);
+    console.log("Cancello: " + exerciseId);
   }
 
 }

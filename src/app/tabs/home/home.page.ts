@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { NavController } from '@ionic/angular';
 import { PlansStorageService } from 'src/app/services/plans-storage.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { PlansStorageService } from 'src/app/services/plans-storage.service';
 })
 export class HomePage implements OnInit {
 
-  constructor(private router: Router, private planStorage: PlansStorageService) { }
+  constructor(private router: Router, private planStorage: PlansStorageService, private navCtrl: NavController) { }
 
   currentPlan: any;
   workoutIndex: number = 2;
@@ -37,7 +37,9 @@ export class HomePage implements OnInit {
   }
 
   navToManual() {
-    this.router.navigate(['/tabs/manual']);
+    this.router.navigate(['/tabs/manual'], {
+      queryParams: { viewFavorites: true }
+    });
   }
 
   createProgram() {

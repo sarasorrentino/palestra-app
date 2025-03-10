@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlansStorageService } from 'src/app/services/plans-storage.service';
+import { StatsStorageService } from 'src/app/services/stats-storage.service';
+import { WorkoutStorageService } from 'src/app/services/workout-storage.service';
 
 @Component({
   selector: 'app-workout',
@@ -11,12 +13,36 @@ import { PlansStorageService } from 'src/app/services/plans-storage.service';
 })
 export class WorkoutPage implements OnInit {
 
-  constructor(private planStorage: PlansStorageService, private http: HttpClient, private router: Router) { }
+  alertButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel'
+    },
+    {
+      text: 'Confirm',
+      handler: (data: any) => {
+        if (data.newLoad) {
+          const newLoad = Number(data.newLoad);
+          const newDate = new Date().toISOString().split('T')[0]; // Ottiene la data corrente (YYYY-MM-DD)
+          
+          this.statsStorage.addRecord({
+            id: this.currentExercise.uid, // Assumendo che tu abbia l'UID dell'esercizio selezionato
+            name: this.currentExercise.name, // Assumendo che tu abbia il nome dell'esercizio
+            newLoad: newLoad,
+            newDate: newDate
+          });
+          this.loadExercise = this.statsStorage.getRecordForExercise(this.currentExercise.uid);
+        }
+      }
+    }
+  ];
+
+  constructor(private planStorage: PlansStorageService, private http: HttpClient, private router: Router, private workoutStorage: WorkoutStorageService, private statsStorage: StatsStorageService) { }
   
-  selectedPlan: any;
+  selectedPlan: any = '';
   selectedDay: number = 0;
-  exercises: any;
-  exercisesDB: any;
+  exercises: any = '';
+  exercisesDB: any = '';
 
   exercise = {
     name: '',
@@ -27,7 +53,8 @@ export class WorkoutPage implements OnInit {
 
   currentExerciseIndex: number = 0;
   currentExercise: any = '';
-  completedSeries = 0;
+  loadExercise: number = 0;
+  completedSeries = [];
   
   ngOnInit() {
     this.currentExerciseIndex = 0; // Reset currentExerciseIndex
@@ -40,29 +67,37 @@ export class WorkoutPage implements OnInit {
 
     this.planStorage.selectedPlan$.subscribe(plan => {
       this.selectedPlan = plan;
-      //console.log(this.selectedPlan);
       this.selectedDay = this.planStorage.getSelectedDay();
       this.exercises = this.selectedPlan.days[this.selectedDay].exercises;
-      //console.log("Lista esercizi giorno: ");
-      //console.log(this.selectedPlan.days);
     });
 
+    this.workoutStorage.initializeCompletedSeries(this.exercises);
   }
 
   loadCurrentExercise() {
-    //console.log(this.currentExerciseIndex);
     this.currentExercise = this.exercises[this.currentExerciseIndex];
-    //console.log(this.currentExercise.name);
-    //console.log(this.getExerciseNameById(this.currentExercise.uid));
+    this.workoutStorage.currentExercise(this.currentExercise.uid);
     this.currentExercise.name = this.getExerciseInfoById(this.currentExercise.uid, 0);
     this.currentExercise.muscleGroup = this.getExerciseInfoById(this.currentExercise.uid, 1);
     this.currentExercise.description = this.getExerciseInfoById(this.currentExercise.uid, 2);
     this.currentExercise.image = this.getExerciseInfoById(this.currentExercise.uid, 3);
+    this.loadExercise = this.statsStorage.getRecordForExercise(this.currentExercise.uid);
+  }
+
+  updateLoad() {
+    
+  }
+
+  getCurrentSeries(){
+    let currentExerciseIndex = JSON.parse(localStorage.getItem('currentExerciseIndex') || '[]');
+    let completedSeries = JSON.parse(localStorage.getItem('completedSeries') || '[]');
+    return completedSeries[currentExerciseIndex];
   }
 
   nextExercise() {
     if (this.currentExerciseIndex < this.exercises.length) {
       this.currentExerciseIndex++;
+      this.workoutStorage.updateCurrentExerciseIndex(this.currentExerciseIndex);
       this.loadCurrentExercise();
     }
   }
@@ -70,15 +105,16 @@ export class WorkoutPage implements OnInit {
   previousExercise() {
     if (this.currentExerciseIndex > 0) {
       this.currentExerciseIndex--;
+      this.workoutStorage.updateCurrentExerciseIndex(this.currentExerciseIndex);
       this.loadCurrentExercise();
     }
   }
 
   endWorkout() {
     localStorage.setItem('duration', JSON.stringify(this.workoutTimer));
-    //this.currentExerciseIndex = 0;
+    this.workoutStorage.updateWorkoutHistory(this.workoutTimer);
+    this.workoutStorage.updateTotalWorkoutTime();
     this.router.navigateByUrl('/summary', { replaceUrl: true });
-
   }
 
   getExerciseInfoById(exerciseID: number, requestCode: number) {

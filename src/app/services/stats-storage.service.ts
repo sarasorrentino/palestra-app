@@ -32,7 +32,17 @@ export class StatsStorageService {
       localStorage.setItem('records', JSON.stringify(records));
     }
   }
+
+  getRecordForExercise(exerciseUid: number) {
+    const records = this.getRecords() || [];
+    let existingExercise = records.find((exercise: any) => exercise.uid === exerciseUid);
+    return existingExercise.loads[existingExercise.loads.length-1] || 0; // Return last record or 0
+}
+
   
+  getWorkoutHistoryData(){
+    return JSON.parse(localStorage.getItem('workoutHistoryData') || '[]');
+  }
 
   // Chart
   

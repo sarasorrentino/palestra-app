@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/plans"></ion-back-button>
@@ -10,12 +10,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" [fullscreen]="true">
       
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-      <ion-fab-button id="open-modal">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
+    <ion-fab-button id="open-modal">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
   </ion-fab>
 
   <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)" [initialBreakpoint]="0.60">
@@ -24,15 +24,13 @@
     </ng-template>
   </ion-modal>
 
-  <ion-segment [(ngModel)]="selectedDay" (click)="setSelectedDay()">
+  <ion-segment [(ngModel)]="selectedDay" (click)="setSelectedDay()" class="bottom-spacing">
     <ion-segment-button *ngFor="let i of getArray(selectedPlan.n_days)" [value]="i">
-      Giorno {{ i + 1 }}
+      Day {{ i + 1 }}
     </ion-segment-button>
   </ion-segment>
   
   <div *ngIf="selectedDay !== null">
-    <p>Hai selezionato il giorno {{ selectedDay + 1 }}</p>
-
     <ion-list lines="none">
       <ion-item-sliding *ngFor="let exercise of exercises" #slidingItem>
         <ion-item lines="none">
@@ -42,11 +40,6 @@
                     <img [src]="getExerciseX(exercise.uid, 3)" [alt]="getExerciseX(exercise.uid, 0)">
                   </ion-col>
                   <ion-col>
-                    <!--
-                      <ion-chip>
-                        <ion-label>Chest</ion-label>
-                    </ion-chip>
-                  -->
                       <h1 class="exercise-title"> {{ getExerciseX(exercise.uid, 0) }} </h1>
                       <p class="exercise-subtitle"> {{ getExerciseX(exercise.uid, 2) }} </p>              
                       <div class="side-chips">
@@ -64,7 +57,7 @@
               </ion-grid>
         </ion-item>
         <ion-item-options side="end">
-          <ion-item-option color="danger">
+          <ion-item-option color="danger" (click)="deleteExercise(exercise.uid)">
             <ion-icon slot="icon-only" name="trash"></ion-icon>
           </ion-item-option>
         </ion-item-options>

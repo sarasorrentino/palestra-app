@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { WorkoutStorageService } from 'src/app/services/workout-storage.service';
 
 @Component({
   selector: 'app-rest-time',
@@ -11,14 +12,17 @@ import { IonicModule } from '@ionic/angular';
 })
 export class RestTimeComponent {
 
-  seconds: number = 60; 
-  maxSeconds: number = 60;
+  constructor(private workoutStorage: WorkoutStorageService) {}
+  
+  @Input() seconds: number = 30; 
+  maxSeconds: number = this.seconds;
   private interval: any;
 
   restTime: boolean = false;
 
   startTimer() {
     this.restTime = true;
+    this.maxSeconds = this.seconds;
     if (this.interval) {
       clearInterval(this.interval);
     }
@@ -28,6 +32,8 @@ export class RestTimeComponent {
       } else {
         this.stopTimer();
         this.onTimerEnd();
+        this.seconds = this.maxSeconds;
+        this.workoutStorage.updateCompletedSeries();
       }
     }, 1000);
   }
@@ -47,7 +53,7 @@ export class RestTimeComponent {
   }
 
   onTimerEnd() {
-    console.log("Rest time over!");
+    //console.log("Rest time over!");
   }
 
 }

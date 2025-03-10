@@ -133,6 +133,20 @@ export class PlansStorageService {
       localStorage.setItem('plans', JSON.stringify(plans));
     }
   }
+  
+  removeExerciseFromDay(planId: number, dayIndex: number, exerciseId: number) {
+    let plans = JSON.parse(localStorage.getItem('plans') || '[]');
+    let plan = plans.find((p: any) => p.uid === planId);
+
+    if (plan) {
+      let day = plan.days.find((d: any) => d.dayIndex === dayIndex);
+      if (day) {
+        day.exercises = day.exercises.filter((exercise: any) => exercise.uid !== exerciseId);
+      }
+      localStorage.setItem('plans', JSON.stringify(plans));
+    }
+  }
+
 
   // Create hash code from email
   generateHash(title: string): number {

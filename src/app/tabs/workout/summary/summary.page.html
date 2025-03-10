@@ -18,7 +18,7 @@
                       <ion-label>Exercises <br> Completed</ion-label>
                   </div>
                   <div class="box-value">
-                      <p>7</p>
+                      <p>{{totalExerciseNumber}}</p>
                   </div>
               </div>
           </ion-col>
@@ -29,7 +29,7 @@
                       <ion-label>Total <br> Duration</ion-label>
                   </div>
                   <div class="box-value">
-                      <p>3h <br> 20</p>
+                      <p>{{getFormattedTime()}}</p>
                   </div>
               </div>
           </ion-col>
@@ -41,7 +41,5 @@
       </ion-row>
     </ion-grid>  
   </div>
-  
-  <!--<h3> {{ getFormattedTime() }} </h3>-->
 
 </ion-content>
