@@ -23,11 +23,11 @@ export class WorkoutPage implements OnInit {
       handler: (data: any) => {
         if (data.newLoad) {
           const newLoad = Number(data.newLoad);
-          const newDate = new Date().toISOString().split('T')[0]; // Ottiene la data corrente (YYYY-MM-DD)
+          const newDate = new Date().toISOString().split('T')[0];
           
           this.statsStorage.addRecord({
-            id: this.currentExercise.uid, // Assumendo che tu abbia l'UID dell'esercizio selezionato
-            name: this.currentExercise.name, // Assumendo che tu abbia il nome dell'esercizio
+            id: this.currentExercise.uid,
+            name: this.currentExercise.name,
             newLoad: newLoad,
             newDate: newDate
           });

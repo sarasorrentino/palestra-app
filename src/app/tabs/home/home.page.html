@@ -5,20 +5,28 @@
         <ion-row>
             <ion-col>
                 <ion-card *ngIf="currentPlan">
-                    <div class="training-dots">
+                    <div id="select-day-alert" class="training-dots">
                         <div
-                          *ngFor="let index of [].constructor(workoutTotal); let i = index"
-                          [class.completed]="i < workoutIndex-1"
-                          [class.next]="i === workoutIndex-1"
+                          *ngFor="let index of [].constructor(totalDays); let i = index"
+                          [class.completed]="i < selectedDay-1"
+                          [class.next]="i === selectedDay-1"
                           class="dot"
                         >
-                        <ion-icon *ngIf="i < workoutIndex-1" name="checkmark-outline"></ion-icon>
+                        <ion-icon *ngIf="i < selectedDay-1" name="checkmark-outline"></ion-icon>
                         </div>
-                    </div>     
+                    </div>
+                    <ion-alert
+                        trigger="select-day-alert"
+                        header="Select workout day"
+                        subHeader=""
+                        message="Select workout day"
+                        [buttons]="alertButtons"
+                        [inputs]="trainingDays"     
+                    ></ion-alert>    
                     <ion-card-header>
                         <div>
                             <h1 class="card-title" (click)="navToPlan()"> {{ currentPlan.title }} </h1>
-                            <p class="card-subtitle"> Day {{ currentPlan.n_days }} </p>
+                            <p class="card-subtitle"> Day {{ selectedDay+1 }} </p>
                             <div class="card-footer">
                                 <ion-chip>
                                     <ion-icon name="stopwatch-outline"></ion-icon>

@@ -35,7 +35,20 @@ export class SummaryPage implements OnInit {
     return `${hours.toString()}h\n${minutes.toString().padStart(2, '0')}`;
   }
 
+  updateWorkoutDay(){
+    const totalDays = this.selectedPlan.n_days;
+    let followingDay = this.selectedDay-1;
+    if(followingDay === totalDays-1){
+      followingDay = 0;
+    }
+    else {
+      followingDay+=1;
+    }
+    localStorage.setItem('selectedDay', JSON.stringify(followingDay));
+  }
+
   navToHome() {
+    this.updateWorkoutDay();
     this.router.navigateByUrl('/tabs/home', { replaceUrl: true });
   }
 }

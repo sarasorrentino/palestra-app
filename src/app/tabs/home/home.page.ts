@@ -14,19 +14,43 @@ export class HomePage implements OnInit {
   constructor(private router: Router, private planStorage: PlansStorageService, private navCtrl: NavController) { }
 
   currentPlan: any;
-  workoutIndex: number = 2;
-  workoutTotal: number = 4;
+  selectedDay: number = 2;
+  totalDays: number = 4;
   
   ngOnInit() {
     this.planStorage.currentPlan$.subscribe(plan => {
       if(plan){
         this.currentPlan = plan;
-        //this.workoutTotal = this.currentPlan.n_days;
-        //this.workoutIndex = this.planStorage.getSelectedDay();
+        this.totalDays = this.currentPlan.n_days;
+        console.log(this.totalDays);
+        this.selectedDay = this.planStorage.getSelectedDay();
+        console.log(this.selectedDay);
       }
         
     });
   }
+
+  trainingDays = Array.from({ length: this.totalDays+1 }, (_, index) => ({
+    type: 'radio',
+    label: `Day ${index + 1}`,
+    value: index + 1,
+    checked: index === this.selectedDay+1
+  }));
+
+  alertButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel'
+    },
+    {
+      text: 'Confirm',
+      handler: (data: any) => {
+        console.log(data);
+        localStorage.setItem('selectedDay', data);
+      }
+    }
+  ];
+
 
   /*----------------------------------------------------------------------------------------------------
     Navigation
