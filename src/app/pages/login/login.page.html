@@ -1,6 +1,6 @@
-<ion-content class="background-image">
+<ion-content class="background-image" scrollY="false">
   <img class="logo" src="assets/Logo.svg" alt="FitPlan Logo"/>
-  <ion-card class="bottom-content">
+  <ion-card class="bottom-card">
     <ion-card-header>
       <div>
         <h1 class="card-title">Welcome back <br> to <strong>FitPlan</strong></h1>
@@ -8,7 +8,7 @@
       </div>
     </ion-card-header>
 
-    <ion-card-content>
+    <ion-card-content class="ion-padding">
       <div>
           <ion-input
             class="custom"
@@ -49,12 +49,11 @@
       </div>
       
       <div>
-        <ion-button  color="primary" shape="round" size="block" [disabled]="!emailValid || !passwordValid" (click)="verifyCredentials()">Login</ion-button>
+        <ion-button  color="primary" size="block" [disabled]="!emailValid || !passwordValid" (click)="verifyCredentials()">Login</ion-button>
         <ion-text class="center-link" >Not registered yet? <a class="highlight-link" (click)="register()">Sign up</a></ion-text>
       </div>
 
     </ion-card-content>
-
   </ion-card>
      
 </ion-content>

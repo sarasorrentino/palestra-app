@@ -8,7 +8,7 @@
     
     <p class="text-divider"> Account credentials</p>
     <ion-input
-      class="custom rtl-input"
+      class="custom"
       type="text"
       name="email"
       label="Email"
@@ -20,7 +20,7 @@
     ></ion-input>
 
     <ion-input
-      class="custom rtl-input"
+      class="custom"
       type="password"
       name="password"
       label="Password"
@@ -109,8 +109,8 @@
     </ion-item>
   </div>
     
-  <div>
+  <div class="flex-center">
     <ion-button size="block" fill="solid" class="loginbtn" [disabled]="!isFormChanged()" (click)="updateUser()">Save</ion-button>
-    <ion-button size="block" fill="solid" color="light" (click)="reset()">Cancel</ion-button>
+    <ion-button size="block" fill="solid" color="secondary" (click)="reset()">Cancel</ion-button>
   </div>
 </ion-content>

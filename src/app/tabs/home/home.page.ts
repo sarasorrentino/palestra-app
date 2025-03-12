@@ -18,23 +18,26 @@ export class HomePage implements OnInit {
   totalDays: number = 4;
   
   ngOnInit() {
+    this.updatePlan();
+  }
+
+  updatePlan(){
     this.planStorage.currentPlan$.subscribe(plan => {
       if(plan){
         this.currentPlan = plan;
         this.totalDays = this.currentPlan.n_days;
-        console.log(this.totalDays);
         this.selectedDay = this.planStorage.getSelectedDay();
-        console.log(this.selectedDay);
+        //console.log("Aggiornamento...");
+        //console.log(this.totalDays);
       }
-        
     });
   }
 
-  trainingDays = Array.from({ length: this.totalDays+1 }, (_, index) => ({
+  trainingDays = Array.from({ length: this.totalDays-1 }, (_, index) => ({
     type: 'radio',
     label: `Day ${index + 1}`,
-    value: index + 1,
-    checked: index === this.selectedDay+1
+    value: index,
+    checked: index === this.selectedDay
   }));
 
   alertButtons = [
@@ -47,6 +50,7 @@ export class HomePage implements OnInit {
       handler: (data: any) => {
         console.log(data);
         localStorage.setItem('selectedDay', data);
+        this.updatePlan();
       }
     }
   ];

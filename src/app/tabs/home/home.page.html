@@ -1,68 +1,64 @@
 <app-header></app-header>
-<ion-content [fullscreen]="true" class="ion-padding">
 
-    <ion-grid>
-        <ion-row>
-            <ion-col>
-                <ion-card *ngIf="currentPlan">
-                    <div id="select-day-alert" class="training-dots">
-                        <div
-                          *ngFor="let index of [].constructor(totalDays); let i = index"
-                          [class.completed]="i < selectedDay-1"
-                          [class.next]="i === selectedDay-1"
-                          class="dot"
-                        >
-                        <ion-icon *ngIf="i < selectedDay-1" name="checkmark-outline"></ion-icon>
-                        </div>
+<ion-content [fullscreen]="true" scrollY="false" class="ion-padding">
+    <div class="box-spacing">
+        <div>
+            <ion-card *ngIf="currentPlan">
+                <div id="select-day-alert" class="training-dots">
+                    <div
+                        *ngFor="let index of [].constructor(totalDays); let i = index"
+                        [class.completed]="i < selectedDay"
+                        [class.next]="i === selectedDay"
+                        class="dot"
+                    >
+                    <ion-icon *ngIf="i < selectedDay" name="checkmark-outline"></ion-icon>
                     </div>
-                    <ion-alert
-                        trigger="select-day-alert"
-                        header="Select workout day"
-                        subHeader=""
-                        message="Select workout day"
-                        [buttons]="alertButtons"
-                        [inputs]="trainingDays"     
-                    ></ion-alert>    
-                    <ion-card-header>
-                        <div>
-                            <h1 class="card-title" (click)="navToPlan()"> {{ currentPlan.title }} </h1>
-                            <p class="card-subtitle"> Day {{ selectedDay+1 }} </p>
-                            <div class="card-footer">
-                                <ion-chip>
-                                    <ion-icon name="stopwatch-outline"></ion-icon>
-                                    <ion-label>45 min</ion-label>
-                                </ion-chip>
-                                <ion-icon class="play-button" name="play" (click)="navToWorkout()"></ion-icon>                            
-                            </div>
-                            
+                </div>
+                <ion-alert
+                    trigger="select-day-alert"
+                    header="Select workout day"
+                    subHeader=""
+                    message=""
+                    [buttons]="alertButtons"
+                    [inputs]="trainingDays"     
+                ></ion-alert>    
+                <ion-card-header>
+                    <div>
+                        <h1 class="card-title" (click)="navToPlan()"> {{ currentPlan.title }} </h1>
+                        <p class="card-subtitle"> Day {{ selectedDay+1 }} </p>
+                        <div class="card-footer">
+                            <ion-chip>
+                                <ion-icon name="stopwatch-outline"></ion-icon>
+                                <ion-label>45 min</ion-label>
+                            </ion-chip>
+                            <ion-icon class="play-button" name="play" (click)="navToWorkout()"></ion-icon>                            
                         </div>
-                    </ion-card-header>   
-                </ion-card>
-                <ion-card *ngIf="!currentPlan" (click)="createProgram()">
-                    <ion-card-header>
-                      <ion-card-title> No plans available </ion-card-title>
-                    </ion-card-header>
-                    <ion-card-content>
-                      Create a new plan to visualize here
-                    </ion-card-content>
-                </ion-card>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <ion-button color="primary" size="block" (click)="navToPlan()">
-                    <ion-icon name="add" slot="start" size="large"></ion-icon>
-                    New Plan
-                </ion-button>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
+                        
+                    </div>
+                </ion-card-header>   
+            </ion-card>
+            <ion-card *ngIf="!currentPlan" (click)="createProgram()">
+                <ion-card-header>
+                    <ion-card-title> No plans available </ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                    Create a new plan to visualize here
+                </ion-card-content>
+            </ion-card>
+        </div>
+        <div>
+            <ion-button color="primary" size="block" (click)="navToPlan()">
+                <ion-icon name="add" slot="start" size="large"></ion-icon>
+                New Plan
+            </ion-button>
+        </div>
+        <div class="space-between">
+            <div>
                 <app-icon-button icon="barbell-outline" label="Your <br> Plans" [action]="navToPlans"></app-icon-button>
-            </ion-col>
-            <ion-col>
+            </div>
+            <div>
                 <app-icon-button icon="Heart" label="Saved <br> Exercises" [action]="navToManual"></app-icon-button>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+            </div>
+        </div>
+    </div>
 </ion-content>

@@ -8,6 +8,13 @@
     <h1 class="title"> {{ selectedPlan.title }} </h1>
     <h2 class="subtitle"> {{ selectedPlan.description }} </h2>
   </ion-toolbar>
+  <div class="ion-padding">
+    <ion-segment [(ngModel)]="selectedDay" (click)="setSelectedDay()">
+      <ion-segment-button *ngFor="let i of getArray(selectedPlan.n_days)" [value]="i">
+        Day {{ i + 1 }}
+      </ion-segment-button>
+    </ion-segment>
+  </div>
 </ion-header>
 
 <ion-content class="ion-padding" [fullscreen]="true">
@@ -23,12 +30,6 @@
       <app-add-exercise></app-add-exercise>
     </ng-template>
   </ion-modal>
-
-  <ion-segment [(ngModel)]="selectedDay" (click)="setSelectedDay()" class="bottom-spacing">
-    <ion-segment-button *ngFor="let i of getArray(selectedPlan.n_days)" [value]="i">
-      Day {{ i + 1 }}
-    </ion-segment-button>
-  </ion-segment>
   
   <div *ngIf="selectedDay !== null">
     <ion-list lines="none">
@@ -57,7 +58,7 @@
               </ion-grid>
         </ion-item>
         <ion-item-options side="end">
-          <ion-item-option color="danger" (click)="deleteExercise(exercise.uid)">
+          <ion-item-option color="danger" (click)="deleteExercise(exercise.uid, slidingItem)">
             <ion-icon slot="icon-only" name="trash"></ion-icon>
           </ion-item-option>
         </ion-item-options>

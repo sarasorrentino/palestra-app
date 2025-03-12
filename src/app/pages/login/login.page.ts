@@ -57,7 +57,7 @@ export class LoginPage implements OnInit {
     this.passwordValid = false;
 
     if (!this.user.password) {
-      this.passwordError = 'Password is required.';
+      this.passwordError = 'Password is required';
     } else if (this.user.password.length < 6) {
       this.passwordError = 'Password must be at least 6 characters long';
     }
@@ -80,7 +80,7 @@ export class LoginPage implements OnInit {
     else {
       this.emailError = '';
       this.passwordError = '';
-      this.passwordError = "Incorrect Email or password";
+      this.passwordError = "Invalid email or password";
     }
   }
 

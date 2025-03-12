@@ -1,26 +1,21 @@
-<ion-content class="background-image">
+<ion-content class="background-image" scrollY="false">
   <img class="logo" src="assets/Logo.svg" alt="FitPlan Logo"/>
-  <ion-grid class="bottom-content">
-    <ion-row class="ion-justify-content-left ion-align-items-center">
-      <ion-col size="12" size-md="6" size-lg="4">
-        
-          <h1 class="welcome-text">
-            YOUR PLANS <br />
-            YOUR PROGRESS <br />
-            ANYTIME, <br />
-            ANYWHERE
-          </h1>
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="ion-justify-content-space-between ion-align-items-center">
-      <ion-col size="6" size-md="6" size-lg="6">
+  <div class="bottom-content ion-padding">
+    <div>  
+      <h1 class="welcome-text">
+        YOUR PLANS <br />
+        YOUR PROGRESS <br />
+        ANYTIME, <br />
+        ANYWHERE
+      </h1>
+    </div>
+    <div class="space-between">
+      <div>
         <ion-button color="primary" shape="round" size="block" (click)="register()">Join Now</ion-button>
-      </ion-col>
-      <ion-col size="6" size-md="6" size-lg="6">
+      </div>
+      <div>
         <ion-button color="secondary" shape="round" size="block" (click)="login()">Login</ion-button>
-      </ion-col>
-    </ion-row>
-    
-  </ion-grid>
+      </div>
+    </div>
+  </div>
 </ion-content>

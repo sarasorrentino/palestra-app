@@ -3,11 +3,15 @@ ion-header {
     --background: var(--ion-background-color);
 }
 
+ion-header div {
+    background: var(--ion-background-color);
+}
+
 ion-toolbar {
     --background: var(--ion-background-color);
     --border-color: none;
     --border-width: 0 0 0;
-    --min-height: 80px;
+    --min-height: 6rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -19,33 +23,20 @@ ion-toolbar {
 }
 
 .chip-icon {
-    margin-right: 8px;
+    margin-right: 0.5rem;
 }
 
 .side-chips {
     display: flex;
     flex-direction: row;
-    gap: 5px;
-    margin-top: 10px;
-}
-
-ion-popover {
-   // --backdrop-opacity: 0.6;
-    --box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.6);
-    --width: 150px;
-}
-
-ion-popover ion-content {
-    --background: rgba(50, 50, 50, 0.8);
-    --color: var(--ion-color-primary);
+    gap: 0.5rem;
+    margin-top: 1rem;
 }
 
 ion-grid {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
-
-
 
 ion-card-header {
     display: flex;

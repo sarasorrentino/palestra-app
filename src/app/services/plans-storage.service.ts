@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { UserStorageService } from './user-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -131,6 +130,7 @@ export class PlansStorageService {
         });
       }
       localStorage.setItem('plans', JSON.stringify(plans));
+      this.updatePlans(plans);
     }
   }
   
@@ -144,11 +144,11 @@ export class PlansStorageService {
         day.exercises = day.exercises.filter((exercise: any) => exercise.uid !== exerciseId);
       }
       localStorage.setItem('plans', JSON.stringify(plans));
+      this.updatePlans(plans);
     }
   }
 
-
-  // Create hash code from email
+  // Create hash code from string (email)
   generateHash(title: string): number {
     let hash = 0;
     for (let i = 0; i < title.length; i++) {

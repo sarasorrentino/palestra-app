@@ -1,17 +1,18 @@
 ion-header {
     box-shadow: none;
     --background: var(--ion-background-color);
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 ion-toolbar {
     --background: var(--ion-background-color);
     --border-color: none;
     --border-width: 0 0 0;
-    --min-height: 120px;
+    --min-height: 8rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5% 5%;
 }
 
 .header-ios ion-toolbar:last-of-type {
@@ -19,7 +20,7 @@ ion-toolbar {
 }
 
 ion-title {
-    font-size: 36px;
+    font-size: 2rem;
     text-align: left;
     color: var(--ion-color-primary);
     padding: 0;

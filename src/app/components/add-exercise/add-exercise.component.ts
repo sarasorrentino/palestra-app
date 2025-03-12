@@ -45,10 +45,9 @@ export class AddExerciseComponent  implements OnInit {
   add() {
     this.newExercise.index = this.exercises.length;
     this.newExercise.planID = this.planStorage.getSelectedPlan().uid;
-    console.log("chiamata");
     this.planStorage.addExerciseToDay(this.newExercise.planID, this.planStorage.getSelectedDay(), this.newExercise);
-    console.log(this.newExercise);
-    console.log("Day: " + this.planStorage.getSelectedDay());
+    //console.log(this.newExercise);
+    //console.log("Day: " + this.planStorage.getSelectedDay());
     return this.modalCtrl.dismiss(null, 'confirm');
   }
 

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonItemSliding } from '@ionic/angular';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { PlansStorageService } from 'src/app/services/plans-storage.service';
-import { PlansUpdateService } from 'src/app/services/plans-update.service';
 import { UserStorageService } from 'src/app/services/user-storage.service';
 
 @Component({
