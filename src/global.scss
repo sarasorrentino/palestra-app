@@ -342,16 +342,11 @@ ion-card {
     font-weight: 400;
 }
 
-ion-card-header {
-    margin-bottom: 1rem;
-}
-
 .card-footer {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    padding-top: 1rem;
+    justify-content: right;
 }
 
 @keyframes slideUp {

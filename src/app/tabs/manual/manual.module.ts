@@ -8,6 +8,7 @@ import { ManualPageRoutingModule } from './manual-routing.module';
 
 import { ManualPage } from './manual.page';
 import { HeaderComponent } from 'src/app/components/header/header.component';
+import { SearchbarFilterPipe } from 'src/app/pipes/searchbar-filter.pipe';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
     FormsModule,
     IonicModule,
     ManualPageRoutingModule,
-    HeaderComponent
+    HeaderComponent,
+    SearchbarFilterPipe
   ],
   declarations: [ManualPage]
 })

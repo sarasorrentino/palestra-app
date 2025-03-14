@@ -2,76 +2,74 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
   
-    <div class="searchbar">
-        <ion-searchbar class="custom"></ion-searchbar>
+  <div class="searchbar">
+    <ion-searchbar class="custom" [debounce]="500" [(ngModel)]="searchText"></ion-searchbar>
+    <ion-icon 
+        name="heart-outline"
+        *ngIf="!viewFavorites"
+        (click)="toggleFavoritesView()"
+        class="searchbar-icon"
+    ></ion-icon>
+    <ion-icon 
+        name="heart"
+        *ngIf="viewFavorites"
+        (click)="toggleFavoritesView()"
+        class="searchbar-icon"
+    ></ion-icon>
+  </div>
+  
+  <div *ngIf="!viewFavorites">
+    <ion-list>
+      <p class="text-divider">All exercises</p>
+      <ion-card *ngFor="let exercise of exercises | searchbarFilter:searchText">
         <ion-icon 
-            name="heart-outline"
-            *ngIf="!viewFavorites"
-            (click)="toggleFavoritesView()"
-            class="searchbar-icon"
+          [name]="isFavorite(exercise) ? 'heart' : 'heart-outline'"
+          (click)="toggleFavorite(exercise)"
+          class="favorite-icon"
         ></ion-icon>
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="auto">
+              <img [src]="exercise.image" [alt]="exercise.name">
+            </ion-col>
+            <ion-col>
+              <ion-chip>
+                <ion-label>{{exercise.muscleGroup}}</ion-label>
+              </ion-chip>
+              <h1 class="exercise-title"> {{ exercise.name }} </h1>
+              <p class="exercise-subtitle"> {{ exercise.description }} </p>              
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-list>
+  </div>
+
+  <div *ngIf="viewFavorites">
+    <ion-list>
+      <p class="text-divider">Favorite exercises</p>
+      <ion-card *ngFor="let exercise of favoriteExercises | searchbarFilter:searchText">
         <ion-icon 
-            name="heart"
-            *ngIf="viewFavorites"
-            (click)="toggleFavoritesView()"
-            class="searchbar-icon"
+          [name]="isFavorite(exercise) ? 'heart' : 'heart-outline'"
+          (click)="toggleFavorite(exercise)"
+          class="favorite-icon"
         ></ion-icon>
-    </div>
-    
-    <div *ngIf="!viewFavorites">
-        <ion-list>
-            <p class="text-divider">All exercises</p>
-            <ion-card *ngFor="let exercise of exercises">
-                <ion-icon 
-                [name]="isFavorite(exercise) ? 'heart' : 'heart-outline'"
-                (click)="toggleFavorite(exercise)"
-                class="favorite-icon"
-                ></ion-icon>
-                <ion-grid>
-                    <ion-row class="ion-align-items-center">
-                      <ion-col size="auto" class="ion-align-">
-                        <img [src]="exercise.image" [alt]="exercise.name">
-                      </ion-col>
-                      <ion-col>
-                            <ion-chip>
-                              <ion-label>{{exercise.muscleGroup}}</ion-label>
-                            </ion-chip>
-
-                          <h1 class="exercise-title"> {{ exercise.name }} </h1>
-                          <p class="exercise-subtitle"> {{ exercise.description }} </p>              
-                        </ion-col>
-                    </ion-row>
-                  </ion-grid>
-            </ion-card>
-        </ion-list>
-    </div>
-
-    <div *ngIf="viewFavorites">
-        <ion-list>
-            <p class="text-divider">Favorite exercises</p>
-            <ion-card *ngFor="let exercise of favoriteExercises">
-                <ion-icon 
-                [name]="isFavorite(exercise) ? 'heart' : 'heart-outline'"
-                (click)="toggleFavorite(exercise)"
-                class="favorite-icon"
-                ></ion-icon>
-                <ion-grid>
-                    <ion-row class="ion-align-items-center">
-                      <ion-col size="auto" class="ion-align-">
-                        <img [src]="exercise.image" [alt]="exercise.name">
-                      </ion-col>
-                      <ion-col>
-                            <ion-chip>
-                              <ion-label>{{exercise.muscleGroup}}</ion-label>
-                            </ion-chip>
-
-                          <h1 class="exercise-title"> {{ exercise.name }} </h1>
-                          <p class="exercise-subtitle"> {{ exercise.description }} </p>              
-                        </ion-col>
-                    </ion-row>
-                  </ion-grid>
-            </ion-card>
-        </ion-list>
-    </div>
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="auto">
+              <img [src]="exercise.image" [alt]="exercise.name">
+            </ion-col>
+            <ion-col>
+              <ion-chip>
+                <ion-label>{{exercise.muscleGroup}}</ion-label>
+              </ion-chip>
+              <h1 class="exercise-title"> {{ exercise.name }} </h1>
+              <p class="exercise-subtitle"> {{ exercise.description }} </p>              
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-list>
+  </div>
 
 </ion-content>

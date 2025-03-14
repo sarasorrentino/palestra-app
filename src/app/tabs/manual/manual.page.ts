@@ -12,20 +12,23 @@ export class ManualPage implements OnInit {
 
   exercises: any[] = [];
   favoriteExercises: any[] = [];
-  viewFavorites: any = false;
+  viewFavorites: boolean = false;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) { }
+  searchText: string = '';
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.http.get<any[]>('/assets/database/exercises_db.json').subscribe(data => {
       this.exercises = data;
     });
 
-    this.route.queryParams.subscribe(params => {
-      if (params['viewFavorites']) {
-        this.viewFavorites = params['viewFavorites'] === 'true'; // Converti il valore in booleano
-      }
-    });
+    this.favoriteExercises = JSON.parse(localStorage.getItem('favorites') || JSON.stringify(false));
+    localStorage.setItem('viewFavorites', JSON.stringify(false));
+  }
+
+  ionViewWillEnter() {
+    this.viewFavorites=JSON.parse(localStorage.getItem('viewFavorites') || 'false');
   }
 
   toggleFavorite(exercise: any) {
@@ -46,5 +49,7 @@ export class ManualPage implements OnInit {
 
   toggleFavoritesView(){
     this.viewFavorites = !this.viewFavorites;
+    localStorage.setItem('viewFavorites', JSON.stringify(this.viewFavorites));
   }
+
 }

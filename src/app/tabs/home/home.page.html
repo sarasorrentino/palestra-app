@@ -28,8 +28,8 @@
                         <p class="card-subtitle"> Day {{ selectedDay+1 }} </p>
                         <div class="card-footer">
                             <ion-chip>
-                                <ion-icon name="stopwatch-outline"></ion-icon>
-                                <ion-label>45 min</ion-label>
+                                <!--<ion-icon name="stopwatch-outline"></ion-icon>-->
+                                <ion-label>{{ totalExercises }} {{ totalExercises === 1 ? 'exercise' : 'exercises' }}</ion-label>
                             </ion-chip>
                             <ion-icon class="play-button" name="play" (click)="navToWorkout()"></ion-icon>                            
                         </div>

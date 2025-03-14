@@ -16,7 +16,8 @@ export class HomePage implements OnInit {
   currentPlan: any;
   selectedDay: number = 2;
   totalDays: number = 4;
-  
+  totalExercises: number = 0;
+
   ngOnInit() {
     this.updatePlan();
   }
@@ -27,8 +28,7 @@ export class HomePage implements OnInit {
         this.currentPlan = plan;
         this.totalDays = this.currentPlan.n_days;
         this.selectedDay = this.planStorage.getSelectedDay();
-        //console.log("Aggiornamento...");
-        //console.log(this.totalDays);
+        this.totalExercises = this.currentPlan.days[this.selectedDay].exercises.length;
       }
     });
   }
@@ -65,9 +65,8 @@ export class HomePage implements OnInit {
   }
 
   navToManual() {
-    this.router.navigate(['/tabs/manual'], {
-      queryParams: { viewFavorites: true }
-    });
+    localStorage.setItem('viewFavorites', JSON.stringify(true));
+    this.router.navigate(['/tabs/manual']);
   }
 
   createProgram() {

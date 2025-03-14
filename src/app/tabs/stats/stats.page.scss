@@ -11,10 +11,14 @@
   height: 200px;
 }
 
-ion-grid {
+ion-grid, ion-col, ion-row{
   padding: 0px;
 }
 
 ion-row {
-  padding: 0px;
+  gap: 0.5rem;
+}
+
+.stats-box {
+  background-color: var(--dark-color);
 }
