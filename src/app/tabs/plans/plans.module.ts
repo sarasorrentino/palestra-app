@@ -8,6 +8,7 @@ import { PlansPageRoutingModule } from './plans-routing.module';
 
 import { PlansPage } from './plans.page';
 import { HeaderComponent } from 'src/app/components/header/header.component';
+import { NewPlanCardComponent } from 'src/app/components/new-plan-card/new-plan-card.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
     FormsModule,
     IonicModule,
     PlansPageRoutingModule,
-    HeaderComponent
+    HeaderComponent,
+    NewPlanCardComponent
   ],
   declarations: [PlansPage]
 })

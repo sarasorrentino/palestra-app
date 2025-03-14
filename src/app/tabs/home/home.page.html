@@ -46,7 +46,7 @@
             </ion-card>
         </div>
         <div>
-            <ion-button color="primary" size="block" (click)="navToPlan()">
+            <ion-button color="primary" size="block" (click)="openCard()"> <!--CAMBIARE NAV TO NEW PLAN-->
                 <ion-icon name="add" slot="start" size="large"></ion-icon>
                 New Plan
             </ion-button>
@@ -61,3 +61,6 @@
         </div>
     </div>
 </ion-content>
+
+<div *ngIf="isCardVisible" class="overlay" (click)="closeCard()"></div>
+<app-new-plan-card *ngIf="isCardVisible"></app-new-plan-card>

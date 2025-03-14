@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { PlansStorageService } from 'src/app/services/plans-storage.service';
@@ -11,15 +11,28 @@ import { PlansStorageService } from 'src/app/services/plans-storage.service';
 })
 export class HomePage implements OnInit {
 
-  constructor(private router: Router, private planStorage: PlansStorageService, private navCtrl: NavController) { }
+  constructor(private router: Router, private planStorage: PlansStorageService, private navCtrl: NavController, private renderer: Renderer2) { }
 
   currentPlan: any;
   selectedDay: number = 2;
   totalDays: number = 4;
   totalExercises: number = 0;
 
+  isCardVisible = false;
+
+  openCard() {
+    this.isCardVisible = true;
+    this.renderer.addClass(document.body, 'tab-bar-hidden'); // Nasconde la tab bar
+  }
+  
+  closeCard() {
+    this.isCardVisible = false;
+    this.renderer.removeClass(document.body, 'tab-bar-hidden'); // Mostra la tab bar
+  }
+
   ngOnInit() {
     this.updatePlan();
+    this.openCard();
   }
 
   updatePlan(){

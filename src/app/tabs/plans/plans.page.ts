@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonItemSliding } from '@ionic/angular';
 import { PlansStorageService } from 'src/app/services/plans-storage.service';
@@ -14,7 +14,19 @@ export class PlansPage implements OnInit {
 
   plans: any[] = [];
 
-  constructor(private router: Router, private planStorage: PlansStorageService, private userStorage: UserStorageService, private alertController: AlertController) { }
+  constructor(private router: Router, private planStorage: PlansStorageService, private userStorage: UserStorageService, private alertController: AlertController, private renderer: Renderer2) { }
+
+  isCardVisible = false;
+
+  openCard() {
+    this.isCardVisible = true;
+    this.renderer.addClass(document.body, 'tab-bar-hidden'); // Nasconde la tab bar
+  }
+  
+  closeCard() {
+    this.isCardVisible = false;
+    this.renderer.removeClass(document.body, 'tab-bar-hidden'); // Mostra la tab bar
+  }
 
   ngOnInit() {
     this.planStorage.plans$.subscribe(plans => {

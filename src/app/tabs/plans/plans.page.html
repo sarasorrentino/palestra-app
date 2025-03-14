@@ -1,8 +1,8 @@
 <app-header title="Your Plans"></app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-        <ion-fab-button (click)="newPlan()">
+    <ion-fab *ngIf="!isCardVisible" slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button (click)="openCard()">
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
@@ -72,3 +72,6 @@
     </ion-list>
   -->
 </ion-content>
+
+<div *ngIf="isCardVisible" class="overlay" (click)="closeCard()"></div>
+<app-new-plan-card *ngIf="isCardVisible"></app-new-plan-card>
