@@ -1,81 +1,52 @@
 <ng-container [ngSwitch]="currentStep">
 
   <ion-card>
-    <ion-card-header *ngSwitchCase="1">
-      <div class="custom-header">
-        <ion-buttons slot="start">
-          <ion-button (click)="cancel()">Cancel</ion-button>
-        </ion-buttons>
-        <ion-buttons slot="end">
-          <ion-button (click)="goNext()" [strong]="true" [disabled]="!selectedExercise"><strong>Next</strong></ion-button>
-        </ion-buttons>
-      </div>
-      <h1 class="card-title"><strong>Add Exercise</strong></h1>
-    </ion-card-header>
-
-    <ion-card-header *ngSwitchCase="2">
-      <div class="custom-header">
-        <ion-buttons slot="start">
-          <ion-button (click)="goBack()">Back</ion-button>
-        </ion-buttons>
-        <ion-buttons slot="end">
-          <ion-button id="open-toast" (click)="add()" [strong]="true" [disabled]="!selectedExercise"><strong>Add</strong></ion-button>
-        </ion-buttons>
-        <ion-toast color="success" trigger="open-toast" swipeGesture="vertical" message="Exercise successfully added to the plan" [duration]="5000"></ion-toast>
-      </div>
-      <h1 class="card-title"><strong>Add Exercise</strong></h1>
+    <ion-card-header>
+      <h1 class="card-title">Create new plan</h1>
     </ion-card-header>
     
-      <ion-card-content *ngSwitchCase="1" class="ion-padding">
-        <div class="scrollable-list">
-          <ion-item lines="none" *ngFor="let exercise of exercises" (click)="selectExercise(exercise.id)" [ngClass]="{'selected': exercise.id === selectedExercise}">
-            <ion-thumbnail slot="start">
-              <img [src]="exercise.image" alt="{{ exercise.name }}"/>
-            </ion-thumbnail>
-            <ion-label> <strong> {{  exercise.name }} </strong> </ion-label>
-            <ion-label>{{ exercise.muscleGroup }}</ion-label>
-          </ion-item>
-        </div>
-      </ion-card-content>
+    <ion-card-content *ngSwitchCase="1" class="ion-padding">
+      <div class="scrollable-list">
+        <ion-item lines="none" *ngFor="let exercise of exercises" (click)="selectExercise(exercise.id)" [ngClass]="{'selected': exercise.id === selectedExercise}">
+          <ion-thumbnail slot="start">
+            <img [src]="exercise.image" alt="{{ exercise.name }}"/>
+          </ion-thumbnail>
+          <ion-label> <strong> {{  exercise.name }} </strong> </ion-label>
+          <ion-label>{{ exercise.muscleGroup }}</ion-label>
+        </ion-item>
+      </div>
+    </ion-card-content>
 
-      <ion-card-content *ngSwitchCase="2" class="ion-padding">
-        <div class="top-margin">
-          <div class="center">
-            <h3 class="selector-divider">Select n° of Series</h3>
-            <div class="counter__section">
-              <ion-icon name="remove-circle" color="primary" size="large" (click)="decrementSeries()"></ion-icon>
-              <p>{{newExercise.series}}</p>
-              <ion-icon name="add-circle" color="primary" size="large" (click)="incrementSeries()"></ion-icon>
-            </div>
-          </div>
-          
-          <div class="center">
-            <h3 class="selector-divider">Select n° of Repeats</h3>
-            <div class="counter__section">
-              <ion-icon name="remove-circle" color="primary" size="large" (click)="decrementRepeats()"></ion-icon>
-              <p>{{newExercise.repeats}}</p>
-              <ion-icon name="add-circle" color="primary" size="large" (click)="incrementRepeats()"></ion-icon>
-            </div>
-          </div>
-      
-          <div class="center">
-            <h3 class="selector-divider">Select Rest Time</h3>
-            <div class="counter__section">
-              <ion-icon name="remove-circle" color="primary" size="large" (click)="decrementRestTime()"></ion-icon>
-              <p>{{newExercise.restTime}} sec</p>
-              <ion-icon name="add-circle" color="primary" size="large" (click)="incrementRestTime()"></ion-icon>
-            </div>
+    <ion-card-content *ngSwitchCase="2" class="ion-padding">
+      <div class="top-margin">
+        <div class="center">
+          <h3 class="selector-divider">Select n° of Series</h3>
+          <div class="counter__section">
+            <ion-icon name="remove-circle" color="primary" size="large" (click)="decrementSeries()"></ion-icon>
+            <p>{{newExercise.series}}</p>
+            <ion-icon name="add-circle" color="primary" size="large" (click)="incrementSeries()"></ion-icon>
           </div>
         </div>
+        
+        <div class="center">
+          <h3 class="selector-divider">Select n° of Repeats</h3>
+          <div class="counter__section">
+            <ion-icon name="remove-circle" color="primary" size="large" (click)="decrementRepeats()"></ion-icon>
+            <p>{{newExercise.repeats}}</p>
+            <ion-icon name="add-circle" color="primary" size="large" (click)="incrementRepeats()"></ion-icon>
+          </div>
+        </div>
+    
+        <div class="center">
+          <h3 class="selector-divider">Select Rest Time</h3>
+          <div class="counter__section">
+            <ion-icon name="remove-circle" color="primary" size="large" (click)="decrementRestTime()"></ion-icon>
+            <p>{{newExercise.restTime}} sec</p>
+            <ion-icon name="add-circle" color="primary" size="large" (click)="incrementRestTime()"></ion-icon>
+          </div>
+        </div>
+      </div>
        
-        </ion-card-content>
-
-
-
-
-  
+    </ion-card-content>
   </ion-card>
-
-  
-  
 </ng-container>

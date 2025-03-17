@@ -1,0 +1,63 @@
+<ion-card [ngClass]="{ 'animation': isCardVisible }" class="bottom-card">
+
+  <ion-card-header>
+    <h1 class="card-title">Create new plan</h1>
+  </ion-card-header>
+
+  <ion-card-content *ngIf="firstSelection" class="ion-padding">
+    <div class="input-container">
+      <p class="text-divider">Select exercise</p>
+
+      <div class="scrollable-list">
+        <ion-item lines="none" *ngFor="let exercise of exercises" (click)="selectExercise(exercise.id)" [ngClass]="{'selected': exercise.id === selectedExercise}">
+          <ion-thumbnail slot="start">
+            <img [src]="exercise.image" alt="{{ exercise.name }}"/>
+          </ion-thumbnail>
+          <ion-label> <strong> {{ exercise.name }} </strong> </ion-label>
+          <ion-label>{{ exercise.muscleGroup }}</ion-label>
+        </ion-item>
+      </div>
+    </div>
+
+    <ion-button color="primary" size="block" [disabled]="!isSelectionValid()" (click)="goNext()">Next</ion-button>
+
+  </ion-card-content>
+
+  <ion-card-content *ngIf="!firstSelection" class="ion-padding">
+    <div class="input-container">
+
+      <div class="center">
+        <p class="text-divider">Select n° of Repeats</p>
+        <div class="counter__section">
+          <ion-icon name="remove-circle" color="primary" size="large" (click)="decrementRepeats()"></ion-icon>
+          <p class="selection-number">{{newExercise.repeats}}</p>
+          <ion-icon name="add-circle" color="primary" size="large"  (click)="incrementRepeats()"></ion-icon>
+        </div>
+      </div>
+
+      <div class="center">
+        <p class="text-divider">Select n° of Series</p>
+        <div class="counter__section">
+          <ion-icon name="remove-circle" color="primary" size="large" (click)="decrementSeries()"></ion-icon>
+          <p class="selection-number">{{newExercise.series}}</p>
+          <ion-icon name="add-circle" color="primary" size="large"  (click)="incrementSeries()"></ion-icon>
+        </div>
+      </div>
+
+      <div class="center">
+        <p class="text-divider">Select Rest Time</p>
+        <div class="counter__section">
+          <ion-icon name="remove-circle" color="primary" size="large" (click)="decrementRestTime()"></ion-icon>
+          <p class="selection-number">{{newExercise.restTime}}</p>
+          <ion-icon name="add-circle" color="primary" size="large"  (click)="incrementRestTime()"></ion-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-container">
+      <ion-button color="primary" size="block" [disabled]="!isExerciseValid()" (click)="add()">Add exercise</ion-button>
+      <ion-button color="secondary" size="block" (click)="goBack()">Back</ion-button>  
+    </div>
+    
+  </ion-card-content>
+</ion-card>

@@ -13,14 +13,32 @@ import { delay } from 'rxjs';
 })
 export class PlanPage implements OnInit {
 
-  constructor(private planStorage: PlansStorageService, private http: HttpClient) { }
+  constructor(private planStorage: PlansStorageService, private http: HttpClient, private renderer: Renderer2) { }
 
   selectedPlan: any;
   days: any;
   exercises: any;
   exerciseDB: any[] = [];
 
+  isCardVisible = false;
+
+  updateVisibility(value: boolean) {
+    this.isCardVisible = value;
+    this.updatePlan();
+  }
+
+  openCard() {
+    this.isCardVisible = true;
+    this.renderer.addClass(document.body, 'tab-bar-hidden'); // Nasconde la tab bar
+  }
+  
+  closeCard() {
+    this.isCardVisible = false;
+    this.renderer.removeClass(document.body, 'tab-bar-hidden'); // Mostra la tab bar
+  }
+
   ngOnInit() {
+    this.closeCard();
     // Get plan
     this.planStorage.selectedPlan$.subscribe(plan => {
       this.selectedPlan = plan;
@@ -107,24 +125,23 @@ export class PlanPage implements OnInit {
 
   async addExercise(exerciseId: number){
     this.planStorage.addExerciseToDay(this.planStorage.getSelectedPlan().uid, this.planStorage.getSelectedDay(), exerciseId);
-
-    // Update plan
-    let plan = this.planStorage.getCurrentPlan();
-    this.selectedPlan = plan;
-    this.days = this.selectedPlan.days;
-    this.exercises = this.days[this.planStorage.getSelectedDay()].exercises;
+    this.updatePlan();
   }
 
   async deleteExercise(exerciseId: number, slidingItem: IonItemSliding){
     this.planStorage.removeExerciseFromDay(this.planStorage.getSelectedPlan().uid, this.planStorage.getSelectedDay(), exerciseId);
     //console.log("Cancello: " + exerciseId);
+    this.updatePlan();
+    slidingItem.close(); 
+  }
 
+  updatePlan(){
     // Update plan
     let plan = this.planStorage.getCurrentPlan();
     this.selectedPlan = plan;
     this.days = this.selectedPlan.days;
     this.exercises = this.days[this.planStorage.getSelectedDay()].exercises;
-    slidingItem.close();
+    console.log(this.exercises);
   }
 
 }

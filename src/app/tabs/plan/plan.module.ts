@@ -9,7 +9,7 @@ import { PlanPageRoutingModule } from './plan-routing.module';
 import { PlanPage } from './plan.page';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { AddExerciseComponent } from 'src/app/components/add-exercise/add-exercise.component';
-import { NewPlanCardComponent } from 'src/app/components/new-plan-card/new-plan-card.component';
+import { NewExerciseCardComponent } from 'src/app/components/new-exercise-card/new-exercise-card.component';
 
 @NgModule({
   imports: [
@@ -19,7 +19,7 @@ import { NewPlanCardComponent } from 'src/app/components/new-plan-card/new-plan-
     PlanPageRoutingModule,
     HeaderComponent,
     AddExerciseComponent,
-    NewPlanCardComponent
+    NewExerciseCardComponent
   ],
   declarations: [PlanPage]
 })

@@ -20,16 +20,18 @@
 <ion-content class="ion-padding" [fullscreen]="true">
       
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button id="open-modal">
+    <ion-fab-button (click)="openCard()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
+  <!--
   <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)" [initialBreakpoint]="0.60">
     <ng-template>
       <app-add-exercise></app-add-exercise>
     </ng-template>
   </ion-modal>
+-->
   
   <div *ngIf="selectedDay !== null">
     <ion-list lines="none">
@@ -68,3 +70,6 @@
   </div>
 
 </ion-content>
+
+<div *ngIf="isCardVisible" class="overlay" (click)="closeCard()"></div>
+<app-new-exercise-card *ngIf="isCardVisible" (visibilityChanged)="updateVisibility($event)"></app-new-exercise-card>
