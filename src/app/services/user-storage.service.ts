@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserStorageService {
-
-  constructor() { }
 
   public user = {
     uid: 0,
@@ -19,8 +18,15 @@ export class UserStorageService {
     goal: ""
   };
 
+  private currentUser = new BehaviorSubject<number>(0);
+  private profileImage = new BehaviorSubject<string>('');
+
   users: any[] = []; // Temporary users list
   
+  constructor() {
+    this.loadProfileImage();
+  }
+
 /*----------------------------------------------------------------------------------------------------
     User management
 ----------------------------------------------------------------------------------------------------*/
@@ -62,11 +68,14 @@ export class UserStorageService {
   /*----------------------------------------------------------------------------------------------------
     Current user management
   ----------------------------------------------------------------------------------------------------*/
-
+  getCurrentObservableUser() {
+    return this.currentUser.asObservable();
+  }
+  
   getCurrentUser() {
-    const currentUserID = JSON.parse(localStorage.getItem('currentUser') || 'null'); // Usa 'null' invece di '[]'
+    const currentUserID = JSON.parse(localStorage.getItem('currentUser') || '[]');
     if (!currentUserID) {
-      console.log("Nessun utente attualmente loggato.");
+      console.log("No user is currently logged in.");
       return null;
     }
     
@@ -91,6 +100,7 @@ export class UserStorageService {
     const user = users.find((x: any) => x.email === email);
     const UID = this.generateHash(user.email);
     localStorage.setItem('currentUser', JSON.stringify(UID));
+    this.currentUser.next(user);
   }
 
   resetCurrentUser() {
@@ -105,6 +115,27 @@ export class UserStorageService {
       hash |= 0; // 32-bit integer
     }
     return Math.abs(hash); // No negative numbers
+  }
+
+/*----------------------------------------------------------------------------------------------------
+    Profile Image Management
+  ----------------------------------------------------------------------------------------------------*/
+  
+  getProfileImage() {
+    return this.profileImage.asObservable();
+  }
+
+  loadProfileImage() {
+    let imagesData = localStorage.getItem('profile_images') || '[]';
+    let images = JSON.parse(imagesData);
+
+    const user = images.find((user: any) => user.uid === this.getCurrentUserId());
+
+    if (user) {
+      this.profileImage.next(user.string_image);
+    } else {
+      this.profileImage.next('');
+    }
   }
 
 }

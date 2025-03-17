@@ -18,6 +18,8 @@ export class ProfilePage implements OnInit {
     currentValue = '';
     passwordError: string = "";
     passwordValid: boolean = false;
+    
+    profileImage: string = '';
 
     onIonChange(event: CustomEvent) {
       this.currentValue = event.detail.value;
@@ -27,7 +29,11 @@ export class ProfilePage implements OnInit {
       console.log('didDismiss', JSON.stringify(event.detail));
     }
   
-    ngOnInit() {}
+    ngOnInit() {
+      this.userStorage.getProfileImage().subscribe(image => {
+        this.profileImage = image;
+      }); 
+    }
   
     back () {
       this.router.navigate(['register']);
@@ -76,12 +82,11 @@ export class ProfilePage implements OnInit {
     }
 
     // Profile image
-    profileImage: string | null = null; // Memorizza l'immagine caricata
 
     @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
   
     selectImage() {
-      this.fileInput.nativeElement.click(); // Apre il file picker
+      this.fileInput.nativeElement.click(); // Open file picker
     }
   
     onFileSelected(event: any) {
@@ -90,7 +95,7 @@ export class ProfilePage implements OnInit {
       if (file) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          this.profileImage = e.target.result; // Imposta l'immagine caricata
+          this.profileImage = e.target.result; // Show uploaded image
         };
         reader.readAsDataURL(file);
       }

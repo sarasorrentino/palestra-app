@@ -11,33 +11,22 @@ import { UserStorageService } from 'src/app/services/user-storage.service';
 })
 export class ProfilePictureComponent  implements OnInit {
 
-  profileImage: string | null = null; // Per memorizzare l'immagine profilo
+  profileImage: string = '';
 
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
 
   constructor(private userStorage: UserStorageService) {}
 
   ngOnInit() {
-    this.loadProfileImage(); // Carica l'immagine salvata quando l'utente accede
-  }
-  
-  loadProfileImage() {
-    let imagesData = localStorage.getItem('profile_images') || '[]';
-    let images = JSON.parse(imagesData);
-
-    // Cerca l'immagine associata all'UID dell'utente corrente
-    const user = images.find((user: any) => user.uid === this.userStorage.getCurrentUserId());
-
-    if (user) {
-      this.profileImage = user.string_image;
-    } else {
-      this.profileImage = ''; // Se l'utente non ha un'immagine salvata, usa quella di default
-    }
+    this.userStorage.loadProfileImage();
+    this.userStorage.getProfileImage().subscribe(image => {
+      this.profileImage = image;
+    });
   }
 
   selectImage() {
-    console.log('Immagine cliccata, ora seleziono il file...');
-    this.fileInput.nativeElement.click(); // Attiva l'input file
+    console.log('Choosing file...');
+    this.fileInput.nativeElement.click(); // Activate file input
   }
 
   onFileSelected(event: any) {
@@ -45,33 +34,28 @@ export class ProfilePictureComponent  implements OnInit {
   
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e: any) => {
-        console.log('Immagine caricata nel reader');
-  
-        // Recupera la lista di immagini salvate o inizializza un array vuoto
+      reader.onload = (e: any) => {  
+
         let imagesData = localStorage.getItem('profile_images') || '[]';
         let images = JSON.parse(imagesData);
   
-        // Controlla se l'utente esiste già nella lista
         const existingUserIndex = images.findIndex((user: any) => user.uid === this.userStorage.getCurrentUserId());
   
         if (existingUserIndex !== -1) {
-          // Se l'utente esiste, aggiorna la sua immagine
-          images[existingUserIndex].string_image = e.target.result;
+          images[existingUserIndex].string_image = e.target.result; // If user exists, update img
         } else {
-          // Se l'utente non esiste, aggiungi un nuovo oggetto
-          images.push({ uid: this.userStorage.getCurrentUserId(), string_image: e.target.result });
+          images.push({ uid: this.userStorage.getCurrentUserId(), string_image: e.target.result }); // If user does not exist, create new object
         }
   
-        // Salva l'array aggiornato in localStorage sotto `profile_images`
-        localStorage.setItem('profile_images', JSON.stringify(images));
+        localStorage.setItem('profile_images', JSON.stringify(images)); // Update local storage
   
         // Aggiorna l'immagine profilo per la visualizzazione
         this.profileImage = e.target.result as string;
+        this.userStorage.loadProfileImage();
       };
       reader.readAsDataURL(file); // Converte l'immagine in Base64
     } else {
-      console.log('Nessun file selezionato');
+      console.log('No file selected');
     }
   }
   
