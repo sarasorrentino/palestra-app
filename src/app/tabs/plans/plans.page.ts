@@ -17,6 +17,7 @@ export class PlansPage implements OnInit {
   constructor(private router: Router, private planStorage: PlansStorageService, private userStorage: UserStorageService, private alertController: AlertController, private renderer: Renderer2) { }
 
   isCardVisible = false;
+  isPlansEmpty = false;
 
   openCard() {
     this.isCardVisible = true;
@@ -32,8 +33,13 @@ export class PlansPage implements OnInit {
     this.planStorage.plans$.subscribe(plans => {
       this.plans = plans;
       this.plans = plans.filter((plan: any) => plan.ownerID === this.userStorage.getCurrentUserId());
-      console.log(this.plans);
+      
+      if (this.plans.length === 0){
+        this.isPlansEmpty = true;
+      }
+      //console.log(this.plans);
     });
+
   }
 
   newPlan(){

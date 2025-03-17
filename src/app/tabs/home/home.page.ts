@@ -32,7 +32,6 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.updatePlan();
-    this.openCard();
   }
 
   updatePlan(){

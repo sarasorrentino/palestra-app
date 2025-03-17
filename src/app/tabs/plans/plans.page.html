@@ -7,7 +7,16 @@
         </ion-fab-button>
     </ion-fab>
 
-    <ion-list lines="none">
+    <ion-card *ngIf="isPlansEmpty" style="height: fit-content">
+      <ion-card-header>
+          <ion-card-title> No plans available </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+          Create a new plan to visualize here
+      </ion-card-content>
+    </ion-card>
+
+    <ion-list lines="none" *ngIf="!isPlansEmpty">
       <ion-item-sliding *ngFor="let plan of plans" #slidingItem>
         <ion-item lines="none">
           <ion-card (click)="selectPlan(plan.uid)">

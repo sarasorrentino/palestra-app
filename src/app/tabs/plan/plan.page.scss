@@ -38,6 +38,11 @@ ion-grid {
     margin-bottom: 0.5rem;
 }
 
+ion-card {
+    background-color: var(--dark-color);
+    border-radius: 1rem;
+}
+
 ion-card-header {
     display: flex;
     flex-direction: column;
@@ -84,5 +89,4 @@ ion-fab {
     bottom: 20px;
     right: 15px;
     z-index: 100;
-  }
-  
+}

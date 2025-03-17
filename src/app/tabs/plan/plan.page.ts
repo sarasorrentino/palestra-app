@@ -86,6 +86,7 @@ export class PlanPage implements OnInit {
   setSelectedDay(){
     localStorage.setItem('selectedDay', JSON.stringify(this.selectedDay));
     this.exercises = this.days[this.planStorage.getSelectedDay()].exercises || '';
+    this.getNumberOfExercisesByDay();
     //console.log("Stampa esercizi: ");
     //console.log(this.exercises);
   }
@@ -141,7 +142,12 @@ export class PlanPage implements OnInit {
     this.selectedPlan = plan;
     this.days = this.selectedPlan.days;
     this.exercises = this.days[this.planStorage.getSelectedDay()].exercises;
-    console.log(this.exercises);
+    
+  }
+
+  getNumberOfExercisesByDay(){
+    console.log(this.exercises.length);
+    return this.exercises.length;
   }
 
 }
