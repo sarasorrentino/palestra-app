@@ -48,7 +48,7 @@
   <div *ngIf="viewFavorites">
     <ion-list>
       <p class="text-divider">Favorite exercises</p>
-      <ion-card *ngFor="let exercise of favoriteExercises | searchbarFilter:searchText">
+      <ion-card *ngFor="let exercise of userExercises | searchbarFilter:searchText">
         <ion-icon 
           [name]="isFavorite(exercise) ? 'heart' : 'heart-outline'"
           (click)="toggleFavorite(exercise)"

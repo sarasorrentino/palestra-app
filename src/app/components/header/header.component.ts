@@ -33,7 +33,7 @@ export class HeaderComponent  implements OnInit {
 
     this.userStorage.getProfileImage().subscribe(image => {
       this.profileImage = image;
-    });  
+    });
   }
 
   async logout() {

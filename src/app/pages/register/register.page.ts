@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UserStorageService } from 'src/app/services/user-storage.service';
 
 @Component({
