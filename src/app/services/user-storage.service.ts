@@ -35,6 +35,22 @@ export class UserStorageService {
     let users = JSON.parse(localStorage.getItem('users') || '[]');
     users.push(user);
     localStorage.setItem('users', JSON.stringify(users));
+
+    let existingTimes =  JSON.parse(localStorage.getItem('totalWorkoutTimes') || '[]');
+    existingTimes.push({uid: user.uid, totalTime: 0});
+    localStorage.setItem('totalWorkoutTimes', JSON.stringify(existingTimes));
+
+    // Initialise loads record
+    let exercisesDB = JSON.parse(localStorage.getItem('exercisesDB') || '[]');
+    let existingRecords = JSON.parse(localStorage.getItem('loadRecords') || '[]');
+    let exercisesRecords: any[] = [];
+
+    //console.log(exercisesDB[0].name);
+    for(let i = 1; i <= 10; i++){
+      exercisesRecords.push({name: exercisesDB[i-1].name, loads: [0], dates: new Date().toISOString().split('T')[0]});
+    }
+    existingRecords.push({uid: user.uid, exerciseLoads: exercisesRecords});
+    localStorage.setItem('loadRecords', JSON.stringify(existingRecords));
   }
 
   getUser(uid: number) {

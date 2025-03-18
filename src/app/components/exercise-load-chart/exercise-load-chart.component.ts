@@ -15,7 +15,7 @@ import { StatsStorageService } from 'src/app/services/stats-storage.service';
 export class ExerciseLoadChartComponent implements AfterViewInit {
   @ViewChild('loadChart') loadChartRef!: ElementRef;
 
-  exercises = this.statsStorage.getRecords();
+  exercises = this.statsStorage.getRecords().exerciseLoads;
 
   selectedExercise = this.exercises[0];
   chart!: Chart;

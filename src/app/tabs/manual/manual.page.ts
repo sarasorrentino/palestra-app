@@ -30,7 +30,7 @@ export class ManualPage implements OnInit {
       this.favoriteExercises = JSON.parse(localStorage.getItem('favorite_exercises') || '[]');
       const userFavorites = this.favoriteExercises.find((f: any) => f.uid === this.userStorage.getCurrentUserId());
       this.userExercises = userFavorites ? userFavorites.exercises : [];
-      console.log(this.userExercises);
+      //console.log(this.userExercises);
       localStorage.setItem('viewFavorites', JSON.stringify(false));
     }); 
 

@@ -1,19 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
 import { PlansStorageService } from './plans-storage.service';
+import { UserStorageService } from './user-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StatsStorageService {
 
-  constructor(private planStorage: PlansStorageService) { }
+  constructor(private userStorage: UserStorageService) { }
 
   getRecords() {
-    let records = JSON.parse(localStorage.getItem('records') || '[]');
-    return records;
+    let records = JSON.parse(localStorage.getItem('loadRecords') || '[]');
+    let userRecords = records.find((r: any) => r.uid === this.userStorage.getCurrentUserId());
+    console.log("User records: ");
+    console.log(userRecords);
+    return userRecords;
   }
 
+  // DA CAMBIARE CON LA NUOVA STRUTTURA DATI
   addRecord(newData: { id: number, name: string; newLoad: number; newDate: string }): void {
     const records = this.getRecords();  
     let existingExercise = records.find((exercise: any) => exercise.uid === newData.id); // Da cambiare con il UID

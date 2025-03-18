@@ -31,7 +31,10 @@
     </ion-grid>
 
     <p class="text-divider">Workout History</p>
-    <div class="chart-container">
+    <div *ngIf="totalWorkoutNumber === 0" class="chart-container">
+        <p (click)="backToHome()"><strong>No workouts completed.</strong><br>Have your first workout to visualise your stats!</p>
+    </div>
+    <div class="chart-container" *ngIf="totalWorkoutNumber != 0">
         <canvas #workoutHistoryChart class="chart-scrollable"></canvas>
     </div>
 
