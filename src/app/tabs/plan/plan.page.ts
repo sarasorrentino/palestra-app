@@ -4,6 +4,7 @@ import { OverlayEventDetail } from '@ionic/core/components';
 import { PlansStorageService } from 'src/app/services/plans-storage.service';
 import { HttpClient } from '@angular/common/http';
 import { delay } from 'rxjs';
+import { UserStorageService } from 'src/app/services/user-storage.service';
 
 @Component({
   selector: 'app-plan',
@@ -13,7 +14,7 @@ import { delay } from 'rxjs';
 })
 export class PlanPage implements OnInit {
 
-  constructor(private planStorage: PlansStorageService, private http: HttpClient, private renderer: Renderer2) { }
+  constructor(private userStorage: UserStorageService, private planStorage: PlansStorageService, private http: HttpClient, private renderer: Renderer2) { }
 
   selectedPlan: any;
   days: any;
@@ -29,22 +30,35 @@ export class PlanPage implements OnInit {
 
   openCard() {
     this.isCardVisible = true;
-    this.renderer.addClass(document.body, 'tab-bar-hidden'); // Nasconde la tab bar
+    this.renderer.addClass(document.body, 'tab-bar-hidden'); // Hide tab bar
   }
   
   closeCard() {
     this.isCardVisible = false;
-    this.renderer.removeClass(document.body, 'tab-bar-hidden'); // Mostra la tab bar
+    this.renderer.removeClass(document.body, 'tab-bar-hidden'); // Show tab bar
   }
 
   ngOnInit() {
     this.closeCard();
+
     // Get plan
+    this.selectedPlan = this.planStorage.getSelectedPlan();
+    //console.log("plan");
+    //console.log(this.selectedPlan);
+    this.days = this.selectedPlan.days;
+    //console.log("days");
+    //console.log(this.selectedPlan.days);
+    this.exercises = this.days[this.planStorage.getSelectedDay()];
+    //console.log("exercises from selected day");
+    //console.log(this.exercises);
+
+    /*
     this.planStorage.selectedPlan$.subscribe(plan => {
       this.selectedPlan = plan;
       this.days = this.selectedPlan.days;
-      this.exercises = this.days[this.planStorage.getSelectedDay()].exercises;
-    });
+      console.log("numero di giorni: " + this.days);
+      this.exercises = this.days[this.planStorage.getSelectedDay()];
+    });*/
 
     // Get exercisesDB
     this.http.get<any[]>('/assets/database/exercises_db.json').subscribe(data => {
@@ -68,27 +82,25 @@ export class PlanPage implements OnInit {
   /*----------------------------------------------------------------------------------------------------
     Segments management
   ----------------------------------------------------------------------------------------------------*/
-  selectedDay: number | null = 0; // Current day selected
+  selectedDay: number = this.planStorage.getSelectedDay(); // Current day selected
   getArray(n: number): number[] {
     return Array(n).fill(0).map((_, i) => i);
-  }
-
-  @ViewChild(IonModal) modal!: IonModal;
-
-  cancel() {
-    this.modal.dismiss(null, 'cancel');
   }
 
   onWillDismiss(event: CustomEvent<OverlayEventDetail>) {
     localStorage.setItem('selectedExercise', '');
   }
   
-  setSelectedDay(){
-    localStorage.setItem('selectedDay', JSON.stringify(this.selectedDay));
-    this.exercises = this.days[this.planStorage.getSelectedDay()].exercises || '';
-    this.getNumberOfExercisesByDay();
-    //console.log("Stampa esercizi: ");
-    //console.log(this.exercises);
+  setSelectedDay() {
+    let existingSelectedDays = JSON.parse(localStorage.getItem('selectedDays') || '[]');
+    //console.log(existingSelectedDays);
+
+    const currentUserId = this.userStorage.getCurrentUserId();    
+    let userIndex = existingSelectedDays.findIndex((u: any) => { return u.uid === currentUserId; }) || null;
+  
+    existingSelectedDays[userIndex].selectedDay = this.selectedDay;
+    localStorage.setItem('selectedDays', JSON.stringify(existingSelectedDays));
+    this.exercises = this.days[this.selectedDay] || '[]';
   }
 
   getExerciseX(exerciseID: any, code: number) {
@@ -136,17 +148,18 @@ export class PlanPage implements OnInit {
     slidingItem.close(); 
   }
 
-  updatePlan(){
+  updatePlan() {
     // Update plan
     let plan = this.planStorage.getCurrentPlan();
     this.selectedPlan = plan;
     this.days = this.selectedPlan.days;
-    this.exercises = this.days[this.planStorage.getSelectedDay()].exercises;
-    
+    this.exercises = this.days[this.planStorage.getSelectedDay()];
   }
 
-  getNumberOfExercisesByDay(){
-    console.log(this.exercises.length);
+  getNumberOfExercisesByDay() {
+    //console.log(this.exercises);
+    //console.log("numero esercizi per giorno selezionato: " + this.exercises.length);
+    //console.log(this.exercises.length);
     return this.exercises.length;
   }
 

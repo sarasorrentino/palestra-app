@@ -28,6 +28,9 @@ export class PlansStorageService {
     this.selectedPlanSubject.next(newPlan);
   }
 
+  private selectedDaySubject = new BehaviorSubject<any[]>(this.getSelectedDay());
+  selectedDay$ = this.selectedDaySubject.asObservable();
+
   constructor() { }
 
   public plan = {
@@ -51,6 +54,9 @@ export class PlansStorageService {
     if (plans.length === 0){
       plan.isCurrent = true;
       this.setCurrentPlan(plan.uid);
+    }
+    for(let i = 0; i < plan.n_days; i++){
+      plan.days.push([]);
     }
     plans.push(plan);
     localStorage.setItem('plans', JSON.stringify(plans));
@@ -111,8 +117,19 @@ export class PlansStorageService {
     return plan;
   }
 
+  setSelectedDay(day: number) {
+    let currentUserID = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    let selectedDays =  JSON.parse(localStorage.getItem('selectedDays') || '[]');
+    let userIndex = selectedDays.findIndex((u: any) => u.uid === currentUserID);
+    selectedDays[userIndex].selectedDay = day;
+    localStorage.setItem('selectedDays', JSON.stringify(selectedDays));
+  }
+
   getSelectedDay() {
-    return JSON.parse(localStorage.getItem('selectedDay') || '[]');
+    let currentUserID = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    let selectedDays =  JSON.parse(localStorage.getItem('selectedDays') || '[]');
+    let selectedDay = selectedDays.find((d: any) => d.uid === currentUserID);
+    return selectedDay.selectedDay;
   }
 
   addExerciseToDay(planId: number, dayIndex: number, exercise: any) {

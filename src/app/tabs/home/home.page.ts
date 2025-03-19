@@ -1,4 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
+import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { PlansStorageService } from 'src/app/services/plans-storage.service';
@@ -15,7 +16,7 @@ export class HomePage implements OnInit {
 
   currentPlan: any;
   selectedDay: number = 2;
-  totalDays: number = 4;
+  totalDays: number = 3;
   totalExercises: number = 0;
 
   isCardVisible = false;
@@ -38,18 +39,27 @@ export class HomePage implements OnInit {
     this.planStorage.currentPlan$.subscribe(plan => {
       if(plan){
         this.currentPlan = plan;
+        console.log("current plan");
+        console.log(this.currentPlan);
         this.totalDays = this.currentPlan.n_days;
+        console.log("n days");
+        console.log(this.totalDays);
         this.selectedDay = this.planStorage.getSelectedDay();
-        this.totalExercises = this.currentPlan.days[this.selectedDay].exercises.length;
+        console.log("selected day");
+        console.log(this.selectedDay);
+        this.totalExercises = this.currentPlan.days[this.selectedDay].length;
+        console.log("n esercizi");
+        console.log(this.totalExercises);
       }
     });
   }
 
-  trainingDays = Array.from({ length: this.totalDays-1 }, (_, index) => ({
+  // Select day alert
+  trainingDays = Array.from({ length: this.totalDays}, (_, index) => ({
     type: 'radio',
     label: `Day ${index + 1}`,
     value: index,
-    checked: index === this.selectedDay
+    checked: index === this.planStorage.getSelectedDay()
   }));
 
   alertButtons = [
@@ -60,8 +70,7 @@ export class HomePage implements OnInit {
     {
       text: 'Confirm',
       handler: (data: any) => {
-        console.log(data);
-        localStorage.setItem('selectedDay', data);
+        this.planStorage.setSelectedDay(data);
         this.updatePlan();
       }
     }
@@ -87,7 +96,7 @@ export class HomePage implements OnInit {
 
   navToPlan() {
     this.planStorage.setSelectedPlan(this.planStorage.getCurrentPlanID());
-    console.log(this.planStorage.getSelectedPlan().uid);
+    //console.log(this.planStorage.getSelectedPlan().uid);
     this.router.navigate(['/tabs/plans/plan']);
   }
 

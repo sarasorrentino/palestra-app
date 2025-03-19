@@ -40,12 +40,33 @@ export class UserStorageService {
     existingTimes.push({uid: user.uid, totalTime: 0});
     localStorage.setItem('totalWorkoutTimes', JSON.stringify(existingTimes));
 
-    // Initialise loads record
+    /*----------------------------------------------------------------------------------------------------
+        Selected plan + day
+    ----------------------------------------------------------------------------------------------------*/
+    let existingSelectedDays = JSON.parse(localStorage.getItem('selectedDays') || '[]');
+
+    // Check if initialised
+    if(existingSelectedDays){ // If exists, check if user exists
+      let checkUser = existingSelectedDays.find((u: any) => u.uid === this.getCurrentUserId) || null;
+      if(!checkUser){ // If user does not exists, it is created
+        existingSelectedDays.push({uid: user.uid, selectedDay: 0});
+        localStorage.setItem('selectedDays', JSON.stringify(existingSelectedDays));
+      }
+      else {
+        console.log("Already existing user!!!");
+      }
+    }
+    else { // If does not exist, create + add first user (initial day = 0)
+      localStorage.setItem('selectedDays', JSON.stringify({uid: user.uid, selectedDay: 0}));
+    }
+
+    /*----------------------------------------------------------------------------------------------------
+        Initialise loads
+    ----------------------------------------------------------------------------------------------------*/
     let exercisesDB = JSON.parse(localStorage.getItem('exercisesDB') || '[]');
     let existingRecords = JSON.parse(localStorage.getItem('loadRecords') || '[]');
     let exercisesRecords: any[] = [];
 
-    //console.log(exercisesDB[0].name);
     for(let i = 1; i <= 10; i++){
       exercisesRecords.push({name: exercisesDB[i-1].name, loads: [0], dates: new Date().toISOString().split('T')[0]});
     }
@@ -96,7 +117,7 @@ export class UserStorageService {
     }
     
     const user = this.getUser(currentUserID);
-    console.log("Current user:", user);
+    //console.log("Current user:", user);
     return user;
   }
 

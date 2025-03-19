@@ -36,7 +36,7 @@ export class ProfileDataPage implements OnInit {
     Input validation
   ----------------------------------------------------------------------------------------------------*/
   isFormValid(): boolean {
-    console.log(this.user);
+    //console.log(this.user);
     return !!(
       this.user.name &&
       this.user.surname &&
