@@ -11,6 +11,13 @@ export class WelcomePage implements OnInit {
 
   constructor(private router: Router) { }
 
+  ionViewWillLeave() {
+    const activeElement = document.activeElement as HTMLElement;
+    if (activeElement) {
+      activeElement.blur();
+    }
+  }  
+  
   ngOnInit() {
     localStorage.setItem('exercisesDB', JSON.stringify([
       {
