@@ -31,7 +31,7 @@
       <app-add-exercise></app-add-exercise>
     </ng-template>
   </ion-modal>
--->
+  -->
 
 <ion-card *ngIf="getNumberOfExercisesByDay() === 0" style="height: fit-content">
   <ion-card-header>
@@ -81,4 +81,4 @@
 </ion-content>
 
 <div *ngIf="isCardVisible" class="overlay" (click)="closeCard()"></div>
-<app-new-exercise-card *ngIf="isCardVisible" (visibilityChanged)="updateVisibility($event)"></app-new-exercise-card>
+<app-new-exercise-card *ngIf="isCardVisible"></app-new-exercise-card>

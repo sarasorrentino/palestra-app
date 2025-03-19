@@ -15,3 +15,11 @@ ion-card {
     margin-top: 1rem;
     margin-bottom: 2rem;
 }
+
+ion-card-content {
+    padding-bottom: 0;
+}
+
+.center-link {
+    color: var(--light-color);
+}

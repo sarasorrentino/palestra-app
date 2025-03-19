@@ -19,8 +19,10 @@
       </div>
     </div>
 
-    <ion-button color="primary" size="block" [disabled]="!isSelectionValid()" (click)="goNext()">Next</ion-button>
-
+    <div class="input-container">
+      <ion-button color="primary" size="block" [disabled]="!isSelectionValid()" (click)="goNext()">Next</ion-button>
+      <ion-button color="secondary" size="block" (click)="closeCard()">Cancel</ion-button>  
+    </div>
   </ion-card-content>
 
   <ion-card-content *ngIf="!firstSelection" class="ion-padding">

@@ -23,23 +23,20 @@ export class PlanPage implements OnInit {
 
   isCardVisible = false;
 
-  updateVisibility(value: boolean) {
-    this.isCardVisible = value;
-    this.updatePlan();
-  }
-
   openCard() {
-    this.isCardVisible = true;
+    this.planStorage.setCardVisibilityStatus(true);
     this.renderer.addClass(document.body, 'tab-bar-hidden'); // Hide tab bar
   }
   
   closeCard() {
-    this.isCardVisible = false;
+    this.planStorage.setCardVisibilityStatus(false);
     this.renderer.removeClass(document.body, 'tab-bar-hidden'); // Show tab bar
   }
 
   ngOnInit() {
-    this.closeCard();
+    this.planStorage.cardVisibility$.subscribe(value => {
+      this.isCardVisible = value;
+    });
 
     // Get plan
     this.selectedPlan = this.planStorage.getSelectedPlan();

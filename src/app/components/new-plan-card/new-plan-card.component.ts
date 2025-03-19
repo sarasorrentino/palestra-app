@@ -27,14 +27,15 @@ export class NewPlanCardComponent  implements OnInit {
 
   constructor(private userStorage: UserStorageService, private planStorage: PlansStorageService, private router: Router, private renderer: Renderer2) {}
 
-  isCardVisible = false;
-
   openCard() {
-    this.isCardVisible = true;
+    console.log("Inside open card");
+    this.planStorage.setCardVisibilityStatus(true);
     this.renderer.addClass(document.body, 'tab-bar-hidden'); // Nasconde la tab bar
   }
   
   closeCard() {
+    console.log("Inside closed card");
+    this.planStorage.setCardVisibilityStatus(false);
     this.renderer.removeClass(document.body, 'tab-bar-hidden'); // Mostra la tab bar
   }
 
@@ -51,7 +52,7 @@ export class NewPlanCardComponent  implements OnInit {
     this.plan.uid = this.planStorage.generateHash(this.plan.title+this.plan.ownerID);
     this.plan.ownerID = this.userStorage.getCurrentUserId();
     this.planStorage.setPlan(this.plan);
-    this.router.navigate(['tabs/plans']);
+    this.closeCard();
   }
 
   increaseDays() {
@@ -63,6 +64,6 @@ export class NewPlanCardComponent  implements OnInit {
       this.plan.n_days--;
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
 }

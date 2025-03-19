@@ -22,18 +22,22 @@ export class HomePage implements OnInit {
   isCardVisible = false;
 
   openCard() {
-    this.isCardVisible = true;
-    this.renderer.addClass(document.body, 'tab-bar-hidden'); // Nasconde la tab bar
+    this.planStorage.setCardVisibilityStatus(true);
+    this.renderer.addClass(document.body, 'tab-bar-hidden'); // Hide tab bar
   }
   
   closeCard() {
-    this.isCardVisible = false;
-    this.renderer.removeClass(document.body, 'tab-bar-hidden'); // Mostra la tab bar
+    this.planStorage.setCardVisibilityStatus(false);
+    this.renderer.removeClass(document.body, 'tab-bar-hidden'); // Show tab bar
   }
 
   ngOnInit() {
     this.updatePlan();
     this.updateCurrentPlan();
+
+    this.planStorage.cardVisibility$.subscribe(value => {
+      this.isCardVisible = value;
+    });
   }
 
   ionViewWillEnter() {

@@ -31,6 +31,18 @@ export class PlansStorageService {
   private selectedDaySubject = new BehaviorSubject<any[]>(this.getSelectedDay());
   selectedDay$ = this.selectedDaySubject.asObservable();
 
+  private cardVisibilitySubject = new BehaviorSubject<boolean>(this.getCardVisibilityStatus());
+  cardVisibility$ = this.cardVisibilitySubject.asObservable();
+
+  setCardVisibilityStatus(value: boolean) {
+    localStorage.setItem('cardVisibility', JSON.stringify(value));
+    this.cardVisibilitySubject.next(value);
+  }
+
+  getCardVisibilityStatus() {
+    return JSON.parse(localStorage.getItem('cardVisibility') || 'false'); // Default: false
+  }
+
   constructor() { }
 
   public plan = {

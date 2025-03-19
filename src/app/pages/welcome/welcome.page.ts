@@ -19,6 +19,8 @@ export class WelcomePage implements OnInit {
   }  
   
   ngOnInit() {
+    localStorage.setItem('cardVisibility', JSON.stringify(false));
+
     localStorage.setItem('exercisesDB', JSON.stringify([
       {
       "id": 1,

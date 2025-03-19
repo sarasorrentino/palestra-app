@@ -20,13 +20,13 @@ export class PlansPage implements OnInit {
   isPlansEmpty = false;
 
   openCard() {
-    this.isCardVisible = true;
-    this.renderer.addClass(document.body, 'tab-bar-hidden'); // Nasconde la tab bar
+    this.planStorage.setCardVisibilityStatus(true);
+    this.renderer.addClass(document.body, 'tab-bar-hidden'); // Hide tab bar
   }
   
   closeCard() {
-    this.isCardVisible = false;
-    this.renderer.removeClass(document.body, 'tab-bar-hidden'); // Mostra la tab bar
+    this.planStorage.setCardVisibilityStatus(false);
+    this.renderer.removeClass(document.body, 'tab-bar-hidden'); // Show tab bar
   }
 
   ngOnInit() {
@@ -37,7 +37,13 @@ export class PlansPage implements OnInit {
       if (this.plans.length === 0){
         this.isPlansEmpty = true;
       }
-      //console.log(this.plans);
+      else {
+        this.isPlansEmpty = false;
+      }
+    });
+
+    this.planStorage.cardVisibility$.subscribe(value => {
+      this.isCardVisible = value;
     });
 
   }

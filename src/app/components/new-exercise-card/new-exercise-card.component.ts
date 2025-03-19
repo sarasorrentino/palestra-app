@@ -38,8 +38,7 @@ export class NewExerciseCardComponent  implements OnInit {
   constructor(private modalCtrl: ModalController, private http: HttpClient, private planStorage: PlansStorageService, private router: Router, private renderer: Renderer2) {}
   
   closeCard() {
-    this.isCardVisible = false;
-    this.emitVisibility();
+    this.planStorage.setCardVisibilityStatus(false);
     this.renderer.removeClass(document.body, 'tab-bar-hidden'); // Mostra la tab bar
   }
 

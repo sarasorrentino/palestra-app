@@ -1,6 +1,6 @@
 <ion-card class="bottom-card">
   <ion-card-header>
-    <h1 class="card-title">Create new plan</h1>
+      <h1 class="card-title">Create new plan</h1>
   </ion-card-header>
 
   <ion-card-content class="ion-padding">
@@ -39,7 +39,9 @@
 
     </div>
 
-    <ion-button color="primary" size="block" [disabled]="!isFormValid()" (click)="savePlan()">Create plan</ion-button>
-
+    <div class="input-container">
+      <ion-button color="primary" size="block" [disabled]="!isFormValid()" (click)="savePlan()">Create plan</ion-button>
+      <ion-button color="secondary" size="block" (click)="closeCard()">Cancel</ion-button>  
+    </div>
   </ion-card-content>
 </ion-card>
