@@ -141,7 +141,7 @@ export class UserStorageService {
   }
 
   resetCurrentUser() {
-    localStorage.setItem('currentUser', '[]');
+    localStorage.setItem('currentUser', '');
   }
 
   // Create hash code from email

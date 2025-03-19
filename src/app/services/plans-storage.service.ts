@@ -78,7 +78,7 @@ export class PlansStorageService {
 
   getCurrentUserPlans() {
     let plans = JSON.parse(localStorage.getItem('plans') || '[]');
-    return plans.filter((plan: any) => plan.ownerID === localStorage.getItem('currentUser'));
+    return plans.filter((plan: any) => plan.ownerID === JSON.parse(localStorage.getItem('currentUser') || ''));
   }
 
   setCurrentPlan(planID: number) {
@@ -105,6 +105,10 @@ export class PlansStorageService {
     return plan;
   }
 
+  resetCurrentPlan() {
+    localStorage.setItem('currentPlan', '');
+  }
+
   setSelectedPlan(planID: number) {
     localStorage.setItem('selectedPlan', JSON.stringify(planID));
     this.updateSelectedPlan(this.getSelectedPlan());
@@ -115,6 +119,10 @@ export class PlansStorageService {
     const plans = JSON.parse(localStorage.getItem('plans') || '[]');
     const plan = plans.find((x: any) => x.uid === selectedPlanID);
     return plan;
+  }
+
+  resetSelectedPlan() {
+    localStorage.setItem('selectedPlan', '');
   }
 
   setSelectedDay(day: number) {

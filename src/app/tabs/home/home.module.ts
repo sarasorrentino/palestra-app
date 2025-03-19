@@ -23,10 +23,4 @@ import { NewPlanCardComponent } from 'src/app/components/new-plan-card/new-plan-
   ],
   declarations: [HomePage]
 })
-export class HomePageModule {
-
-  print(){
-    console.log("Plans");
-  }
-
-}
+export class HomePageModule { }

@@ -30,6 +30,10 @@ export class ProfilePage implements OnInit {
     }
   
     ngOnInit() {
+      this.userStorage.getCurrentObservableUser().subscribe(user => {
+        this.user = this.userStorage.getCurrentUser();
+      }); 
+  
       this.userStorage.getProfileImage().subscribe(image => {
         this.profileImage = image;
       }); 

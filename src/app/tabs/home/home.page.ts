@@ -33,23 +33,38 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.updatePlan();
+    this.updateCurrentPlan();
+  }
+
+  ionViewWillEnter() {
+    this.updateCurrentPlan();
+  }
+
+  updateCurrentPlan() {
+    this.currentPlan = '';
+    let userPlans = this.planStorage.getCurrentUserPlans();
+    for(let i = 0; i < userPlans.length; i++) {
+      if (userPlans[i].isCurrent) {
+        this.planStorage.updateCurrentPlan(userPlans[i]);
+      }
+    }
   }
 
   updatePlan(){
     this.planStorage.currentPlan$.subscribe(plan => {
       if(plan){
         this.currentPlan = plan;
-        console.log("current plan");
-        console.log(this.currentPlan);
+        //console.log("current plan");
+        //console.log(this.currentPlan);
         this.totalDays = this.currentPlan.n_days;
-        console.log("n days");
-        console.log(this.totalDays);
+        //console.log("n days");
+        //console.log(this.totalDays);
         this.selectedDay = this.planStorage.getSelectedDay();
-        console.log("selected day");
-        console.log(this.selectedDay);
+        //console.log("selected day");
+        //console.log(this.selectedDay);
         this.totalExercises = this.currentPlan.days[this.selectedDay].length;
-        console.log("n esercizi");
-        console.log(this.totalExercises);
+        //console.log("n esercizi");
+        //console.log(this.totalExercises);
       }
     });
   }

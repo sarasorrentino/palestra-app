@@ -5,6 +5,7 @@ import { addIcons } from 'ionicons';
 import { logOutOutline, cogOutline } from 'ionicons/icons';
 import { CommonModule } from '@angular/common';
 import { UserStorageService } from 'src/app/services/user-storage.service';
+import { PlansStorageService } from 'src/app/services/plans-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,7 @@ import { UserStorageService } from 'src/app/services/user-storage.service';
 })
 export class HeaderComponent  implements OnInit {
 
-  constructor(private router: Router, private alertController: AlertController, private userStorage: UserStorageService) {
+  constructor(private router: Router, private alertController: AlertController, private userStorage: UserStorageService, private planStorage: PlansStorageService) {
     addIcons({ logOutOutline, cogOutline });
   }
 
@@ -42,18 +43,20 @@ export class HeaderComponent  implements OnInit {
       message: '',
       buttons: [
         {
-          text: 'Cancel',
-          role: 'cancel',
-        },
-        {
           text: 'Confirm',
           role: 'destructive',
           cssClass: 'secondary',
           handler: () => {
             this.router.navigate(['welcome']);
             this.userStorage.resetCurrentUser();
+            this.planStorage.resetCurrentPlan();
+            this.planStorage.resetSelectedPlan();
             console.log('Logged out');
           }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
         }
       ]
     });
