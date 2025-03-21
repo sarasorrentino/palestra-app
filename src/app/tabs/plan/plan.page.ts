@@ -90,11 +90,8 @@ export class PlanPage implements OnInit {
   
   setSelectedDay() {
     let existingSelectedDays = JSON.parse(localStorage.getItem('selectedDays') || '[]');
-    //console.log(existingSelectedDays);
-
-    const currentUserId = this.userStorage.getCurrentUserId();    
-    let userIndex = existingSelectedDays.findIndex((u: any) => { return u.uid === currentUserId; }) || null;
-  
+    const currentUserId = this.userStorage.getCurrentUserId();
+    let userIndex = existingSelectedDays.findIndex((u: any) => u.uid === currentUserId);
     existingSelectedDays[userIndex].selectedDay = this.selectedDay;
     localStorage.setItem('selectedDays', JSON.stringify(existingSelectedDays));
     this.exercises = this.days[this.selectedDay] || '[]';
@@ -104,7 +101,6 @@ export class PlanPage implements OnInit {
     // Verifica se l'esercizio DB è pronto
     if (!this.exerciseDB || this.exerciseDB.length === 0) {
       console.warn("exerciseDB is not loaded yet.");
-      return "Loading...";
     }
 
     const findEx = this.exerciseDB.find((ex: any) => ex?.id === exerciseID);

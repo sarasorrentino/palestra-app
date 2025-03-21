@@ -36,12 +36,12 @@
                     </div>
                 </ion-card-header>   
             </ion-card>
-            <ion-card *ngIf="!currentPlan" (click)="createProgram()">
+            <ion-card *ngIf="!currentPlan" (click)="navToPlans()">
                 <ion-card-header>
-                    <ion-card-title> No plans available </ion-card-title>
+                    <ion-card-title> No plan selected </ion-card-title>
                 </ion-card-header>
                 <ion-card-content>
-                    Create a new plan to visualize here
+                    Select a plan to start exercising
                 </ion-card-content>
             </ion-card>
         </div>

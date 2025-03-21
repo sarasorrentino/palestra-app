@@ -155,17 +155,11 @@ export class PlansStorageService {
   addExerciseToDay(planId: number, dayIndex: number, exercise: any) {
     let plans = JSON.parse(localStorage.getItem('plans') || '[]');
     let plan = plans.find((p: any) => p.uid === planId);
-
+    //console.log(plan);
     if (plan) {
-      let day = plan.days.find((d: any) => d.dayIndex === dayIndex);
-      if (day) {
-        day.exercises.push(exercise);
-      } else {
-        plan.days.push({
-          dayIndex,
-          exercises: [exercise]
-        });
-      }
+      let day = plan.days[dayIndex];
+      //console.log(day);
+      day.push(exercise);
       localStorage.setItem('plans', JSON.stringify(plans));
       this.updatePlans(plans);
     }
@@ -173,15 +167,20 @@ export class PlansStorageService {
   
   removeExerciseFromDay(planId: number, dayIndex: number, exerciseId: number) {
     let plans = JSON.parse(localStorage.getItem('plans') || '[]');
-    let plan = plans.find((p: any) => p.uid === planId);
+    let planIndex = plans.findIndex((p: any) => p.uid === planId);
 
-    if (plan) {
-      let day = plan.days.find((d: any) => d.dayIndex === dayIndex);
-      if (day) {
-        day.exercises = day.exercises.filter((exercise: any) => exercise.uid !== exerciseId);
-      }
-      localStorage.setItem('plans', JSON.stringify(plans));
-      this.updatePlans(plans);
+    if (planIndex !== -1) {
+        let plan = plans[planIndex];
+        //console.log("Piano prima della modifica:", plan);
+
+        if (plan.days[dayIndex]) {
+            plan.days[dayIndex] = plan.days[dayIndex].filter((exercise: any) => exercise.uid !== exerciseId);
+        }
+
+        //console.log("Piano dopo la modifica:", plan);
+        plans[planIndex] = plan;
+        localStorage.setItem('plans', JSON.stringify(plans));
+        this.updatePlans(plans);
     }
   }
 
