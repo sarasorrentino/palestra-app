@@ -22,23 +22,29 @@ export class WorkoutHeaderComponent  implements OnInit {
   @Input() n_exercises: number = 0;
   @Input() workoutTimer: any = '';
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getWorkoutTimer();
+  }
 
   async quit() {
+    this.pauseResumeTimer();
     const alert = await this.alertController.create({
       header: 'Do you want to quit this workout?',
       message: '',
       buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        },
         {
           text: 'Confirm',
           role: 'destructive',
           cssClass: 'secondary',
           handler: () => {
             this.router.navigate(['/tabs/home']);
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            this.pauseResumeTimer();
           }
         }
       ]
@@ -50,4 +56,24 @@ export class WorkoutHeaderComponent  implements OnInit {
     return Math.floor((this.currentExerciseIndex / this.n_exercises) * 100);
   }
   
+  timerInterval: any;
+  isPaused: boolean = false;
+
+  getWorkoutTimer() {
+    this.timerInterval = setInterval(() => {
+      if (!this.isPaused) {
+        this.workoutTimer++;
+      }
+    }, 1000);
+  }
+
+  pauseResumeTimer() {
+    this.isPaused = !this.isPaused;
+  }
+
+  getFormattedTime(): string {
+    const minutes = Math.floor(this.workoutTimer / 60);
+    const seconds = this.workoutTimer % 60;
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }
 }

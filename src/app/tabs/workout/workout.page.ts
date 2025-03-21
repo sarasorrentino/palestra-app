@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { PlansStorageService } from 'src/app/services/plans-storage.service';
 import { StatsStorageService } from 'src/app/services/stats-storage.service';
 import { WorkoutStorageService } from 'src/app/services/workout-storage.service';
@@ -16,7 +17,7 @@ export class WorkoutPage implements OnInit {
   alertButtons = [
     {
       text: 'Cancel',
-      role: 'cancel'
+      role: 'destructive',
     },
     {
       text: 'Confirm',
@@ -37,7 +38,7 @@ export class WorkoutPage implements OnInit {
     }
   ];
 
-  constructor(private planStorage: PlansStorageService, private http: HttpClient, private router: Router, private workoutStorage: WorkoutStorageService, private statsStorage: StatsStorageService) { }
+  constructor(private alertController: AlertController, private planStorage: PlansStorageService, private http: HttpClient, private router: Router, private workoutStorage: WorkoutStorageService, private statsStorage: StatsStorageService) { }
   
   selectedPlan: any = '';
   selectedDay: number = 0;
@@ -68,10 +69,11 @@ export class WorkoutPage implements OnInit {
     this.planStorage.selectedPlan$.subscribe(plan => {
       this.selectedPlan = plan;
       this.selectedDay = this.planStorage.getSelectedDay();
-      this.exercises = this.selectedPlan.days[this.selectedDay].exercises;
+      this.exercises = this.selectedPlan.days[this.selectedDay];
     });
 
     this.workoutStorage.initializeCompletedSeries(this.exercises);
+    this.getCurrentSeries();
   }
 
   loadCurrentExercise() {
@@ -82,10 +84,6 @@ export class WorkoutPage implements OnInit {
     this.currentExercise.description = this.getExerciseInfoById(this.currentExercise.uid, 2);
     this.currentExercise.image = this.getExerciseInfoById(this.currentExercise.uid, 3);
     this.loadExercise = this.statsStorage.getRecordForExercise(this.currentExercise.uid);
-  }
-
-  updateLoad() {
-    
   }
 
   getCurrentSeries(){
@@ -167,7 +165,48 @@ export class WorkoutPage implements OnInit {
   getFormattedTime(): string {
     const minutes = Math.floor(this.workoutTimer / 60);
     const seconds = this.workoutTimer % 60;
+    //console.log(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Insert new load',
+      message: 'Update exercise load',
+      inputs: [
+        {
+          name: 'newLoad',
+          type: 'number',
+          placeholder: 'Enter new load',
+          value: ''
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'destructive',
+        },
+        {
+          text: 'Confirm',
+          handler: (data) => {
+            if (data.newLoad) {
+              const newLoad = Number(data.newLoad);
+              const newDate = new Date().toISOString().split('T')[0];
+
+              this.statsStorage.addRecord({
+                id: this.currentExercise.uid,
+                name: this.currentExercise.name,
+                newLoad: newLoad,
+                newDate: newDate
+              });
+              this.loadExercise = this.statsStorage.getRecordForExercise(this.currentExercise.uid);
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

@@ -26,7 +26,7 @@ export class SummaryPage implements OnInit {
 
   ngOnInit() {
     this.workoutTime = this.workoutStorage.convertSecondsToHoursMinutes();
-    this.totalExerciseNumber = this.selectedPlan.days[this.selectedDay].exercises.length+1;
+    this.totalExerciseNumber = this.selectedPlan.days[this.selectedDay].length-1;
   }
 
   getFormattedTime(): string {

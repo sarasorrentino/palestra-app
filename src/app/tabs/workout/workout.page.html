@@ -1,11 +1,11 @@
-<app-workout-header [currentExerciseIndex]="this.currentExerciseIndex+1" [n_exercises]="this.exercises.length" [workoutTimer]="getFormattedTime()"></app-workout-header>
+<app-workout-header [currentExerciseIndex]="this.currentExerciseIndex+1" [n_exercises]="this.exercises.length"></app-workout-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
   <ion-grid class="exercise-display">
     <ion-row>
       <ion-col>
-        <h1> <strong> {{ currentExercise.name }} </strong></h1>
+        <h1> <strong> {{currentExercise.name}} </strong></h1>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -16,23 +16,9 @@
             <ion-icon name="server"></ion-icon>
             <ion-label>{{loadExercise}} kg</ion-label>
           </ion-chip>
-          <div class="icon-circle"id="updateLoad-alert">
+          <div class="icon-circle" (click)="presentAlert()">
             <ion-icon name="pencil"></ion-icon>
           </div>
-          <ion-alert
-            trigger="updateLoad-alert"
-            header="Insert new load"
-            subHeader=""
-            message="Update exercise load"
-            [buttons]="alertButtons"
-            [inputs]="[
-              {
-                name: 'newLoad',
-                type: 'number',
-                placeholder: 'Enter new load'
-              }
-            ]"
-          ></ion-alert>
         </div>
       </ion-col>
     </ion-row>

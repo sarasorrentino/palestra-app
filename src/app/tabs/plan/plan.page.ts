@@ -106,7 +106,6 @@ export class PlanPage implements OnInit {
     const findEx = this.exerciseDB.find((ex: any) => ex?.id === exerciseID);
     if (!findEx) {
       console.warn(`No exercise found with ID: ${exerciseID}`);
-      return "Exercise not found";
     }
 
     switch (code) {

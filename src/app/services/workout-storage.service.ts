@@ -48,7 +48,7 @@ export class WorkoutStorageService {
       total += workoutHistoryData[i].duration;
     }
     //localStorage.setItem('totalWorkoutTime', JSON.stringify(total)); UPDATE TOTAL TIME VALUE PER USER
-    console.log(total);
+   //console.log(total);
     return total;
   }
 

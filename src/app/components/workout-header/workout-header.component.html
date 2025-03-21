@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title> Workout </ion-title>
-    <ion-icon slot="end" name="log-out-outline" size="large" (click)="quit()"></ion-icon>
+    <ion-icon slot="end" name="stop-circle-outline" size="large" (click)="quit()"></ion-icon>
   </ion-toolbar>
 
     <div class="progress-container">
@@ -9,6 +9,6 @@
     </div>
     <div class="progress-text">
       <p class="text-divider"> {{ currentExerciseIndex }} of {{ n_exercises }} </p>
-      <p class="text-divider"> {{ workoutTimer }} </p>
+      <p class="text-divider"> {{ getFormattedTime() }} </p>
     </div>
 </ion-header>

@@ -68,9 +68,9 @@ export class UserStorageService {
     let exercisesRecords: any[] = [];
 
     for(let i = 1; i <= 10; i++){
-      exercisesRecords.push({name: exercisesDB[i-1].name, loads: [0], dates: new Date().toISOString().split('T')[0]});
+      exercisesRecords.push({name: exercisesDB[i-1].id, loads: [0], dates: [new Date().toISOString().split('T')[0]]});
     }
-    existingRecords.push({uid: user.uid, exerciseLoads: exercisesRecords});
+    existingRecords.push({uid: user.uid, records: exercisesRecords});
     localStorage.setItem('loadRecords', JSON.stringify(existingRecords));
   }
 
