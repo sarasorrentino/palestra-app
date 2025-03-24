@@ -15,10 +15,10 @@ export class HomePage implements OnInit {
   constructor(private router: Router, private planStorage: PlansStorageService, private navCtrl: NavController, private renderer: Renderer2) { }
 
   currentPlan: any;
-  selectedDay: number = 2;
+  selectedDay: number = this.planStorage.getSelectedDay();
   totalDays: number = 3;
   totalExercises: number = 0;
-
+  trainingDays: any = [];
   isCardVisible = false;
 
   openCard() {
@@ -42,6 +42,7 @@ export class HomePage implements OnInit {
 
   ionViewWillEnter() {
     this.updateCurrentPlan();
+    this.selectedDay = this.planStorage.getSelectedDay();
   }
 
   updateCurrentPlan() {
@@ -64,22 +65,21 @@ export class HomePage implements OnInit {
         //console.log("n days");
         //console.log(this.totalDays);
         this.selectedDay = this.planStorage.getSelectedDay();
-        //console.log("selected day");
-        //console.log(this.selectedDay);
         this.totalExercises = this.currentPlan.days[this.selectedDay].length;
         //console.log("n esercizi");
         //console.log(this.totalExercises);
       }
+
+      // Select day alert
+      this.trainingDays = Array.from({ length: this.totalDays}, (_, index) => ({
+        type: 'radio',
+        label: `Day ${index + 1}`,
+        value: index,
+        checked: index === this.planStorage.getSelectedDay()
+      }));
+
     });
   }
-
-  // Select day alert
-  trainingDays = Array.from({ length: this.totalDays}, (_, index) => ({
-    type: 'radio',
-    label: `Day ${index + 1}`,
-    value: index,
-    checked: index === this.planStorage.getSelectedDay()
-  }));
 
   alertButtons = [
     {

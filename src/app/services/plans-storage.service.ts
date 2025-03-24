@@ -28,7 +28,7 @@ export class PlansStorageService {
     this.selectedPlanSubject.next(newPlan);
   }
 
-  private selectedDaySubject = new BehaviorSubject<any[]>(this.getSelectedDay());
+  private selectedDaySubject = new BehaviorSubject<number>(this.getSelectedDay());
   selectedDay$ = this.selectedDaySubject.asObservable();
 
   private cardVisibilitySubject = new BehaviorSubject<boolean>(this.getCardVisibilityStatus());
@@ -145,6 +145,15 @@ export class PlansStorageService {
     localStorage.setItem('selectedDays', JSON.stringify(selectedDays));
   }
 
+  increaseSelectedDay(totalDays: number) {
+    let currentUserID = JSON.parse(localStorage.getItem('currentUser') || '[]');
+    let selectedDays =  JSON.parse(localStorage.getItem('selectedDays') || '[]');
+    let userIndex = selectedDays.findIndex((u: any) => u.uid === currentUserID);
+    if(selectedDays[userIndex].selectedDay < totalDays-1) { selectedDays[userIndex].selectedDay++; console.log('aumento giorno');}
+    else { selectedDays[userIndex].selectedDay = 0; console.log("resetto giorno");}
+    localStorage.setItem('selectedDays', JSON.stringify(selectedDays));
+  }
+
   getSelectedDay() {
     let currentUserID = JSON.parse(localStorage.getItem('currentUser') || '[]');
     let selectedDays =  JSON.parse(localStorage.getItem('selectedDays') || '[]');
@@ -162,6 +171,7 @@ export class PlansStorageService {
       day.push(exercise);
       localStorage.setItem('plans', JSON.stringify(plans));
       this.updatePlans(plans);
+      this.updateSelectedPlan(plan);
     }
   }
   
@@ -181,6 +191,7 @@ export class PlansStorageService {
         plans[planIndex] = plan;
         localStorage.setItem('plans', JSON.stringify(plans));
         this.updatePlans(plans);
+        this.updateSelectedPlan(plan);
     }
   }
 

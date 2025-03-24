@@ -25,14 +25,6 @@
     </ion-fab-button>
   </ion-fab>
 
-  <!--
-  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)" [initialBreakpoint]="0.60">
-    <ng-template>
-      <app-add-exercise></app-add-exercise>
-    </ng-template>
-  </ion-modal>
-  -->
-
 <ion-card *ngIf="getNumberOfExercisesByDay() === 0" style="height: fit-content">
   <ion-card-header>
       <ion-card-title> No exercises for this day </ion-card-title>

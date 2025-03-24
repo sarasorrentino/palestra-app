@@ -38,6 +38,7 @@ export class PlanPage implements OnInit {
       this.isCardVisible = value;
     });
 
+    /*
     // Get plan
     this.selectedPlan = this.planStorage.getSelectedPlan();
     //console.log("plan");
@@ -48,14 +49,13 @@ export class PlanPage implements OnInit {
     this.exercises = this.days[this.planStorage.getSelectedDay()];
     //console.log("exercises from selected day");
     //console.log(this.exercises);
-
-    /*
+    */
+    
     this.planStorage.selectedPlan$.subscribe(plan => {
       this.selectedPlan = plan;
       this.days = this.selectedPlan.days;
-      console.log("numero di giorni: " + this.days);
       this.exercises = this.days[this.planStorage.getSelectedDay()];
-    });*/
+    });
 
     // Get exercisesDB
     this.http.get<any[]>('/assets/database/exercises_db.json').subscribe(data => {
@@ -107,19 +107,20 @@ export class PlanPage implements OnInit {
     if (!findEx) {
       console.warn(`No exercise found with ID: ${exerciseID}`);
     }
-
-    switch (code) {
-      case 0:
-        return findEx.name || "Name not available";
-      case 1:
-        return findEx.muscleGroup || "Muscle group not available";
-      case 2:
-        return findEx.description || "Description not available";
-      case 3:
-        return findEx.image || "Image not available";
-      default:
-        console.warn(`Invalid code provided: ${code}`);
-        return "Invalid code";
+    else {
+      switch (code) {
+        case 0:
+          return findEx.name || "Name not available";
+        case 1:
+          return findEx.muscleGroup || "Muscle group not available";
+        case 2:
+          return findEx.description || "Description not available";
+        case 3:
+          return findEx.image || "Image not available";
+        default:
+          console.warn(`Invalid code provided: ${code}`);
+          return "Invalid code";
+      }
     }
   }
   
@@ -142,7 +143,7 @@ export class PlanPage implements OnInit {
 
   updatePlan() {
     // Update plan
-    let plan = this.planStorage.getCurrentPlan();
+    let plan = this.planStorage.getSelectedPlan();
     this.selectedPlan = plan;
     this.days = this.selectedPlan.days;
     this.exercises = this.days[this.planStorage.getSelectedDay()];

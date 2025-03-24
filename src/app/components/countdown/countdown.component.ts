@@ -19,6 +19,7 @@ export class CountdownComponent implements OnDestroy{
   constructor(private router: Router) {}
 
   ngOnInit() {
+    this.currentIndex = 0;
     this.startCountdown();
   }
 
@@ -51,6 +52,7 @@ export class CountdownComponent implements OnDestroy{
   ngOnDestroy() {
     if (this.currentIndex) {
       clearTimeout(this.currentIndex);
+      this.currentIndex = 0;
       console.log('Timer cancellato!');
     }
   }

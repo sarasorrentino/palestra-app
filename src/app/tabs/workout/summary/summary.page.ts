@@ -25,8 +25,16 @@ export class SummaryPage implements OnInit {
   }
 
   ngOnInit() {
+    this.selectedPlan = this.planStorage.getCurrentPlan();
+    this.selectedDay = this.planStorage.getSelectedDay();
+    this.workoutDuration = localStorage.getItem('duration');
     this.workoutTime = this.workoutStorage.convertSecondsToHoursMinutes();
-    this.totalExerciseNumber = this.selectedPlan.days[this.selectedDay].length-1;
+    //console.log(this.selectedPlan.days[this.selectedDay]);
+    this.totalExerciseNumber = this.selectedPlan.days[this.selectedDay].length;
+  }
+
+  ionViewWillEnter() {
+    this.totalExerciseNumber = this.selectedPlan.days[this.selectedDay].length;
   }
 
   getFormattedTime(): string {
@@ -37,14 +45,7 @@ export class SummaryPage implements OnInit {
 
   updateWorkoutDay(){
     const totalDays = this.selectedPlan.n_days;
-    let followingDay = this.selectedDay-1;
-    if(followingDay === totalDays-1){
-      followingDay = 0;
-    }
-    else {
-      followingDay+=1;
-    }
-    localStorage.setItem('selectedDay', JSON.stringify(followingDay));
+    this.planStorage.increaseSelectedDay(totalDays);
   }
 
   navToHome() {
