@@ -95,6 +95,11 @@ export class HomePage implements OnInit {
     }
   ];
 
+  checkDayValidity() {
+    if(this.totalExercises === 0)
+      return false;
+    return true;
+  }
 
   /*----------------------------------------------------------------------------------------------------
     Navigation
@@ -117,6 +122,11 @@ export class HomePage implements OnInit {
     this.planStorage.setSelectedPlan(this.planStorage.getCurrentPlanID());
     //console.log(this.planStorage.getSelectedPlan().uid);
     this.router.navigate(['/tabs/plans/plan']);
+  }
+
+  navToNewPlan() {
+    this.planStorage.setCardVisibilityStatus(true);
+    this.router.navigate(['/tabs/plans']);
   }
 
   navToProfile() {

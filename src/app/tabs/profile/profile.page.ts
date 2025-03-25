@@ -72,13 +72,13 @@ export class ProfilePage implements OnInit {
       else {
         this.passwordValid = true;
       }
-    }  
+    }
   
     updateUser() {
       this.userStorage.updateUser(this.user); // Update users list
       this.userStorage.setCurrentUser(this.user.uid); // Update current user
-  
-      console.log("Updated user");
+      this.user = this.userStorage.getCurrentUser();
+      this.changedUser = this.userStorage.getCurrentUser();
     }
   
     reset() {

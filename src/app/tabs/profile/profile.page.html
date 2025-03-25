@@ -110,7 +110,8 @@
   </div>
     
   <div class="flex-center">
-    <ion-button size="block" fill="solid" class="loginbtn" [disabled]="!isFormChanged()" (click)="updateUser()">Save</ion-button>
+    <ion-button id="open-toast" size="block" fill="solid" class="loginbtn" [disabled]="!isFormChanged()" (click)="updateUser()">Save</ion-button>
+    <ion-toast class="custom-toast" color="primary" trigger="open-toast" message="User profile successfully updated." [duration]="3000" position="bottom"></ion-toast>
     <ion-button size="block" fill="solid" color="secondary" (click)="reset()">Cancel</ion-button>
   </div>
 </ion-content>

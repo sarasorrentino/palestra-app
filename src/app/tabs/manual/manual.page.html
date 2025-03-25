@@ -48,27 +48,38 @@
   <div *ngIf="viewFavorites">
     <ion-list>
       <p class="text-divider">Favorite exercises</p>
-      <ion-card *ngFor="let exercise of userExercises | searchbarFilter:searchText">
-        <ion-icon 
-          [name]="isFavorite(exercise) ? 'heart' : 'heart-outline'"
-          (click)="toggleFavorite(exercise)"
-          class="favorite-icon"
-        ></ion-icon>
-        <ion-grid>
-          <ion-row class="ion-align-items-center">
-            <ion-col size="auto">
-              <img [src]="exercise.image" [alt]="exercise.name">
-            </ion-col>
-            <ion-col>
-              <ion-chip>
-                <ion-label>{{exercise.muscleGroup}}</ion-label>
-              </ion-chip>
-              <h1 class="exercise-title"> {{ exercise.name }} </h1>
-              <p class="exercise-subtitle"> {{ exercise.description }} </p>              
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+      <ion-card *ngIf="userExercises.length === 0" (click)="toggleFavoritesView()" style="height: fit-content">
+        <ion-card-header>
+            <ion-card-title> No saved exercises </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            Add new exercises from the main list.
+        </ion-card-content>
       </ion-card>
+
+      <div  *ngIf="userExercises.length !== 0">
+        <ion-card *ngFor="let exercise of userExercises | searchbarFilter:searchText">
+          <ion-icon 
+            [name]="isFavorite(exercise) ? 'heart' : 'heart-outline'"
+            (click)="toggleFavorite(exercise)"
+            class="favorite-icon"
+          ></ion-icon>
+          <ion-grid>
+            <ion-row class="ion-align-items-center">
+              <ion-col size="auto">
+                <img [src]="exercise.image" [alt]="exercise.name">
+              </ion-col>
+              <ion-col>
+                <ion-chip>
+                  <ion-label>{{exercise.muscleGroup}}</ion-label>
+                </ion-chip>
+                <h1 class="exercise-title"> {{ exercise.name }} </h1>
+                <p class="exercise-subtitle"> {{ exercise.description }} </p>              
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </div>
     </ion-list>
   </div>
 

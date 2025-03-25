@@ -3,6 +3,9 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/plans"></ion-back-button>
     </ion-buttons>
+    <ion-button class="header-play-button" slot="end" fill="clear" (click)="navToWorkout()" [disabled]="getNumberOfExercisesByDay() === 0">
+      <ion-icon class="play-button-icon" name="play"></ion-icon>                            
+  </ion-button>
   </ion-toolbar>
   <ion-toolbar class="custom-toolbar">
     <h1 class="title"> {{ selectedPlan.title }} </h1>

@@ -29,7 +29,9 @@
               <ion-card-title> {{ plan.title }} </ion-card-title>
               <ion-card-subtitle> {{ plan.n_days }} DAYS </ion-card-subtitle>
               <div class="card-footer">
-                <ion-icon class="play-button" name="play" (click)="navToWorkout()"></ion-icon>                            
+                <ion-button fill="clear" (click)="navToWorkout()" [disabled]="plan.days[0].length === 0">
+                  <ion-icon class="play-button-icon" name="play"></ion-icon>                            
+              </ion-button>                          
               </div>
             </ion-card-header>
           </ion-card>

@@ -25,7 +25,7 @@ export class ProfilePictureComponent  implements OnInit {
   }
 
   selectImage() {
-    console.log('Choosing file...');
+    //console.log('Choosing file...');
     this.fileInput.nativeElement.click(); // Activate file input
   }
 

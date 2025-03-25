@@ -31,7 +31,9 @@
                                 <!--<ion-icon name="stopwatch-outline"></ion-icon>-->
                                 <ion-label>{{ totalExercises }} {{ totalExercises === 1 ? 'exercise' : 'exercises' }}</ion-label>
                             </ion-chip>
-                            <ion-icon class="play-button" name="play" (click)="navToWorkout()"></ion-icon>                            
+                            <ion-button fill="clear" (click)="navToWorkout()" [disabled]="!checkDayValidity()">
+                                <ion-icon class="play-button-icon" name="play"></ion-icon>                            
+                            </ion-button>
                         </div>
                     </div>
                 </ion-card-header>   
@@ -46,7 +48,7 @@
             </ion-card>
         </div>
         <div>
-            <ion-button color="primary" size="block" (click)="navToPlan()">
+            <ion-button color="primary" size="block" (click)="navToNewPlan()">
                 <ion-icon name="add" slot="start" size="large"></ion-icon>
                 New Plan
             </ion-button>

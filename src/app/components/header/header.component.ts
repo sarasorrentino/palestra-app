@@ -39,19 +39,17 @@ export class HeaderComponent  implements OnInit {
 
   async logout() {
     const alert = await this.alertController.create({
-      header: 'Do you confirm to logout?',
+      header: 'Do you want to logout?',
       message: '',
       buttons: [
         {
-          text: 'Confirm',
-          role: 'destructive',
-          cssClass: 'secondary',
+          text: 'Logout',
           handler: () => {
             this.router.navigate(['welcome']);
             this.userStorage.resetCurrentUser();
             this.planStorage.resetCurrentPlan();
             this.planStorage.resetSelectedPlan();
-            console.log('Logged out');
+            //console.log('Logged out');
           }
         },
         {

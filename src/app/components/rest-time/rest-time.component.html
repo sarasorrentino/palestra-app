@@ -20,7 +20,7 @@
     <h1>{{ seconds }} sec</h1>
   </div>
   <div class="time-button">
-    <ion-icon *ngIf="!restTime" class="play-button" name="play" (click)="startTimer()"></ion-icon>                            
-    <ion-icon *ngIf="restTime" class="play-button" name="pause" (click)="stopTimer()"></ion-icon>                            
+    <ion-icon *ngIf="!getTimerStatus()" class="play-button" name="play" (click)="startTimer()"></ion-icon>                            
+    <ion-icon *ngIf="getTimerStatus()" class="play-button" name="pause" (click)="stopTimer()"></ion-icon>                            
   </div>
 </div>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { PlansStorageService } from 'src/app/services/plans-storage.service';
 import { StatsStorageService } from 'src/app/services/stats-storage.service';
 import { WorkoutStorageService } from 'src/app/services/workout-storage.service';
@@ -14,31 +14,7 @@ import { WorkoutStorageService } from 'src/app/services/workout-storage.service'
 })
 export class WorkoutPage implements OnInit {
 
-  alertButtons = [
-    {
-      text: 'Cancel',
-      role: 'destructive',
-    },
-    {
-      text: 'Confirm',
-      handler: (data: any) => {
-        if (data.newLoad) {
-          const newLoad = Number(data.newLoad);
-          const newDate = new Date().toISOString().split('T')[0];
-          
-          this.statsStorage.addRecord({
-            id: this.currentExercise.uid,
-            name: this.currentExercise.name,
-            newLoad: newLoad,
-            newDate: newDate
-          });
-          this.loadExercise = this.statsStorage.getRecordForExercise(this.currentExercise.uid);
-        }
-      }
-    }
-  ];
-
-  constructor(private alertController: AlertController, private planStorage: PlansStorageService, private http: HttpClient, private router: Router, private workoutStorage: WorkoutStorageService, private statsStorage: StatsStorageService) { }
+  constructor(private toastController: ToastController, private alertController: AlertController, private planStorage: PlansStorageService, private http: HttpClient, private router: Router, private workoutStorage: WorkoutStorageService, private statsStorage: StatsStorageService) { }
   
   selectedPlan: any = '';
   selectedDay: number = 0;
@@ -58,6 +34,7 @@ export class WorkoutPage implements OnInit {
   completedSeries = [];
   
   ngOnInit() {
+    this.workoutStorage.initialiseCurrentExerciseIndex();
     this.currentExerciseIndex = 0; // Reset currentExerciseIndex
 
     this.http.get<any[]>('/assets/database/exercises_db.json').subscribe(data => {
@@ -97,6 +74,8 @@ export class WorkoutPage implements OnInit {
       this.currentExerciseIndex++;
       this.workoutStorage.updateCurrentExerciseIndex(this.currentExerciseIndex);
       this.loadCurrentExercise();
+      console.log(this.currentExercise.restTime);
+      this.workoutStorage.stopRestTime();
     }
   }
 
@@ -105,6 +84,7 @@ export class WorkoutPage implements OnInit {
       this.currentExerciseIndex--;
       this.workoutStorage.updateCurrentExerciseIndex(this.currentExerciseIndex);
       this.loadCurrentExercise();
+      this.workoutStorage.stopRestTime();
     }
   }
 
@@ -142,6 +122,7 @@ export class WorkoutPage implements OnInit {
   /* -------------------------------------------------------------------
   // Duration timer management
   ------------------------------------------------------------------- */
+
   workoutTimer: number = 0;
   timerInterval: any;
   isPaused: boolean = false;
@@ -169,6 +150,10 @@ export class WorkoutPage implements OnInit {
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
 
+  /* -------------------------------------------------------------------
+  // Load alert
+  ------------------------------------------------------------------- */
+
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Insert new load',
@@ -177,6 +162,8 @@ export class WorkoutPage implements OnInit {
         {
           name: 'newLoad',
           type: 'number',
+          min: 10,
+          max: 100,
           placeholder: 'Enter new load',
           value: ''
         }
@@ -189,7 +176,7 @@ export class WorkoutPage implements OnInit {
         {
           text: 'Confirm',
           handler: (data) => {
-            if (data.newLoad) {
+            if(Number(data.newLoad) >= 0){ // Check if the input data is not negative
               const newLoad = Number(data.newLoad);
               const newDate = new Date().toISOString().split('T')[0];
 
@@ -201,6 +188,9 @@ export class WorkoutPage implements OnInit {
               });
               this.loadExercise = this.statsStorage.getRecordForExercise(this.currentExercise.uid);
             }
+            else {
+              this.showErrorToast("Error: Could not add a negative load.");
+            }
           }
         }
       ]
@@ -209,4 +199,13 @@ export class WorkoutPage implements OnInit {
     await alert.present();
   }
 
+  async showErrorToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: 'light'
+    });
+    toast.present();
+  }
 }

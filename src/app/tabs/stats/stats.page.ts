@@ -50,6 +50,12 @@ export class StatsPage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   createWorkoutDurationChart() {
+    
+    if (!this.workoutHistoryChartRef || !this.workoutHistoryChartRef.nativeElement) {
+      console.warn("Loading workout-history chart...");
+      return;
+    }
+
     if (this.workoutHistoryChart) {
       this.workoutHistoryChart.destroy();
     }
@@ -116,7 +122,7 @@ export class StatsPage implements OnInit, AfterViewInit, OnDestroy {
     const ctx = this.exerciseLoadsChartRef.nativeElement.getContext('2d');
     if (!ctx) return;
 
-    let exerciseId = this.getExerciseId();
+    let exerciseId = this.getExerciseId()
     let loads = this.userRecords.find((r: any) => r.id === exerciseId).loads || 0;
     let dates = this.userRecords.find((r: any) => r.id === exerciseId).dates || 0;
 
@@ -173,7 +179,7 @@ export class StatsPage implements OnInit, AfterViewInit, OnDestroy {
   }
   
   onExerciseChange() {
-    console.log(this.selectedExerciseName);
+    //console.log(this.selectedExerciseName);
     this.createExerciseLoadsChart();
   }
   

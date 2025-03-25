@@ -19,13 +19,13 @@ export class SummaryPage implements OnInit {
   totalExerciseNumber: number = 0;
 
   constructor(private planStorage: PlansStorageService, private router: Router, private workoutStorage: WorkoutStorageService) { 
-    this.selectedPlan = this.planStorage.getCurrentPlan();
-    this.selectedDay = this.planStorage.getSelectedDay()+1;
+    this.selectedPlan = this.planStorage.getSelectedPlan();
+    this.selectedDay = this.planStorage.getSelectedDay();
     this.workoutDuration = localStorage.getItem('duration');
   }
 
   ngOnInit() {
-    this.selectedPlan = this.planStorage.getCurrentPlan();
+    this.selectedPlan = this.planStorage.getSelectedPlan();
     this.selectedDay = this.planStorage.getSelectedDay();
     this.workoutDuration = localStorage.getItem('duration');
     this.workoutTime = this.workoutStorage.convertSecondsToHoursMinutes();

@@ -7,6 +7,17 @@ export class WorkoutStorageService {
 
   constructor() { }
   
+  restTimeStatus: boolean = false;
+
+  stopRestTime() {
+    this.restTimeStatus = false;
+  }
+
+  toggleRestTimeStatus() {
+    this.restTimeStatus = !this.restTimeStatus;
+    return this.restTimeStatus;
+  }
+
   initializeCompletedSeries(exercises: any) {
     let completedSeries = new Array(exercises.length).fill(1);
     localStorage.setItem('completedSeries', JSON.stringify(completedSeries));
@@ -14,6 +25,10 @@ export class WorkoutStorageService {
 
   currentExercise(exerciseUid: number) {
     localStorage.setItem('currentExercise', JSON.stringify(exerciseUid));
+  }
+
+  initialiseCurrentExerciseIndex(){
+    localStorage.setItem('currentExerciseIndex', JSON.stringify(0));
   }
 
   updateCurrentExerciseIndex(index: number){

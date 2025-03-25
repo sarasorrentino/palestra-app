@@ -14,22 +14,30 @@ export class RestTimeComponent {
 
   constructor(private workoutStorage: WorkoutStorageService) {}
   
-  @Input() seconds: number = 30; 
+  @Input() seconds: number = 30;
   maxSeconds: number = this.seconds;
   private interval: any;
 
-  restTime: boolean = false;
-
+  getTimerStatus() {
+    return this.workoutStorage.restTimeStatus;
+  }
+  
   startTimer() {
-    this.restTime = true;
+    this.workoutStorage.toggleRestTimeStatus();
     this.maxSeconds = this.seconds;
     if (this.interval) {
       clearInterval(this.interval);
     }
     this.interval = setInterval(() => {
-      if (this.seconds > 0) {
+      if (this.seconds > 0 && this.workoutStorage.restTimeStatus) {
         this.seconds--;
-      } else {
+      } 
+      else if (this.seconds > 0 && !this.workoutStorage.restTimeStatus) {
+        this.stopTimer();
+        this.onTimerEnd();
+        this.seconds = this.maxSeconds;
+      }
+      else {
         this.stopTimer();
         this.onTimerEnd();
         this.seconds = this.maxSeconds;
@@ -40,7 +48,7 @@ export class RestTimeComponent {
 
   stopTimer() {
     clearInterval(this.interval);
-    this.restTime = false;
+    this.workoutStorage.restTimeStatus = false;
   }
 
   resetTimer() {

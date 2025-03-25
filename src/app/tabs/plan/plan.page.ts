@@ -5,6 +5,7 @@ import { PlansStorageService } from 'src/app/services/plans-storage.service';
 import { HttpClient } from '@angular/common/http';
 import { delay } from 'rxjs';
 import { UserStorageService } from 'src/app/services/user-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-plan',
@@ -14,7 +15,7 @@ import { UserStorageService } from 'src/app/services/user-storage.service';
 })
 export class PlanPage implements OnInit {
 
-  constructor(private userStorage: UserStorageService, private planStorage: PlansStorageService, private http: HttpClient, private renderer: Renderer2) { }
+  constructor(private router: Router, private userStorage: UserStorageService, private planStorage: PlansStorageService, private http: HttpClient, private renderer: Renderer2) { }
 
   selectedPlan: any;
   days: any;
@@ -156,4 +157,7 @@ export class PlanPage implements OnInit {
     return this.exercises.length;
   }
 
+  navToWorkout() {
+    this.router.navigateByUrl('/countdown', { replaceUrl: true });
+  }
 }

@@ -7,6 +7,10 @@ ion-header div {
     background: var(--ion-background-color);
 }
 
+.header-play-button {
+    --padding-end: 0
+}
+
 ion-toolbar {
     --background: var(--ion-background-color);
     --border-color: none;
@@ -15,7 +19,8 @@ ion-toolbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0px 5%;
+    padding: 0 0.5rem;
+    padding-top: 1rem;
 }
 
 .header-ios ion-toolbar:last-of-type {
