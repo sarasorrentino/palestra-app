@@ -28,7 +28,7 @@ export class HeaderComponent  implements OnInit {
 
   ngOnInit() {
     this.userStorage.getCurrentObservableUser().subscribe(user => {
-      //this.currentUsername = this.userStorage.getCurrentUser().name;
+      this.currentUsername = this.userStorage.getCurrentUser().name;
       this.userStorage.loadProfileImage();
     }); 
 

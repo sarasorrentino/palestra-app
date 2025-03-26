@@ -84,6 +84,7 @@ export class ProfileDataPage implements OnInit {
   }
 
   login () {
+    this.userStorage.updateCurrentObservableUserName();
     this.router.navigate(['tabs/home']);
   }
 
