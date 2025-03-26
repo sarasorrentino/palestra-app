@@ -79,6 +79,7 @@ export class ProfilePage implements OnInit {
       this.userStorage.setCurrentUser(this.user.uid); // Update current user
       this.user = this.userStorage.getCurrentUser();
       this.changedUser = this.userStorage.getCurrentUser();
+      this.userStorage.updateCurrentObservableUserName();
     }
   
     reset() {

@@ -20,6 +20,15 @@ export class UserStorageService {
 
   private currentUser = new BehaviorSubject<number>(0);
   private profileImage = new BehaviorSubject<string>('');
+  private userName = new BehaviorSubject<string>(this.getUserName());
+
+  getCurrentObservableUserName() {
+    return this.userName.asObservable();
+  }
+
+  updateCurrentObservableUserName() {
+    this.userName.next(this.getUserName());
+  }
 
   users: any[] = []; // Temporary users list
   
@@ -52,7 +61,7 @@ export class UserStorageService {
         existingSelectedDays.push({uid: user.uid, selectedDay: 0});
         localStorage.setItem('selectedDays', JSON.stringify(existingSelectedDays));
       }
-      else {
+      else {
         console.log("Already existing user!!!");
       }
     }
@@ -72,6 +81,10 @@ export class UserStorageService {
     }
     existingRecords.push({uid: user.uid, records: exercisesRecords});
     localStorage.setItem('loadRecords', JSON.stringify(existingRecords));
+  }
+
+  getUserName() {
+    return this.getCurrentUser().name;
   }
 
   getUser(uid: number) {
